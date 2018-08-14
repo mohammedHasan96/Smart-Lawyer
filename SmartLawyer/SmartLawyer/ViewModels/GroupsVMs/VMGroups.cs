@@ -124,7 +124,8 @@ namespace SmartLawyer.ViewModels.GroupsVMs
                     dataSource = DataAccess.GroupsData();
                     GroupRoles = DataAccess.GroupRolesData();
                     Roles = DataAccess.RolesData();
-                });
+                })
+                { IsBackground = true };
 
 
                 inProgress.Start();
@@ -142,7 +143,8 @@ namespace SmartLawyer.ViewModels.GroupsVMs
                 }
                 RotateAngle = 0;
                 DataGridSource.ReFill(dataSource);
-            }).Start();
+            })
+            { IsBackground = true }.Start();
         }
 
         public void View()

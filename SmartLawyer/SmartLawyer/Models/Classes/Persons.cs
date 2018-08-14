@@ -3,7 +3,7 @@ using System.Collections.Generic;
                                 
 namespace SmartLawyer.Models.Classes
 {
-    public class PersonsModel
+    public class PersonsModel : ChecableViewModelBase
     {
         public long PeId { get; set; }
         public String PeName { get; set; }

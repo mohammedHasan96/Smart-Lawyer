@@ -75,11 +75,12 @@
             <Button Content="Close"
                     Margin="0,7,5,10"
                     Padding="20 3"
-                    Command="{Binding AdvancedSearchTogelCommand}" />
+                    Command="{Binding AdvancedSearchTogelCommand}" 
+                    Click="Button_Click"/>
             <Button Content="Search"
                     Margin="0,7,10,10"
                     Padding="20 3"
-                    Command="{Binding DoAdvancedSearchTogelCommand}" />
+                    Command="{Binding DoAdvancedSearchCommand}" />
         </StackPanel>
     </StackPanel>
 </UserControl>

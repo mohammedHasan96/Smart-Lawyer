@@ -9,7 +9,8 @@
         Title="VGroupsAdd"
         Height="530"
         Width="600"
-        SizeToContent="WidthAndHeight">
+        SizeToContent="WidthAndHeight"
+        ResizeMode="NoResize">
     <StackPanel>
         <StackPanel Orientation="Horizontal"
                     Margin="10 20 10 10">
@@ -21,25 +22,31 @@
         </StackPanel>
         <TextBlock Text="Rols"
                    Margin="10 10 0 10 " />
-        <DataGrid Margin="10 0"
+        <DataGrid Margin="0,0,10,0"
                   Height="250"
                   ItemsSource="{Binding DataGridSource}"
                   AutoGenerateColumns="False"
-                  CanUserAddRows="False">
+                  CanUserAddRows="False"
+                  HorizontalAlignment="Right"
+                  Width="572">
             <DataGrid.Columns>
-                <DataGridCheckBoxColumn Width="27"
-                                        Binding="{Binding IsChecked}">
-                    <DataGridCheckBoxColumn.Header>
+                <DataGridTemplateColumn MinWidth="27">
+                    <DataGridTemplateColumn.Header>
                         <CheckBox  Checked="CheckBox_Checked"
-                                   Unchecked="CheckBox_Unchecked"/>
-                    </DataGridCheckBoxColumn.Header>
-                </DataGridCheckBoxColumn>
+                                   Unchecked="CheckBox_Unchecked" />
+                    </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding IsChecked}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Visibility="Collapsed"
-                                    Binding="{Binding RoleId}"/>
+                                    Binding="{Binding RoleId}" />
                 <DataGridTextColumn Header="Role Name"
-                                    Binding="{Binding RoleName}"/>
+                                    Binding="{Binding RoleName}" />
                 <DataGridTextColumn Header="Role Description"
-                                    Binding="{Binding Description}"/>
+                                    Binding="{Binding Description}" />
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Orientation="Horizontal">

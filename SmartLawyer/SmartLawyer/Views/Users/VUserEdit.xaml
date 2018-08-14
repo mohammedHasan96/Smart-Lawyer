@@ -10,7 +10,8 @@
         Title="VUserEdit"
         Height="570"
         Width="800"
-        SizeToContent="WidthAndHeight">
+        SizeToContent="WidthAndHeight"
+        ResizeMode="NoResize">
     <StackPanel>
         <Grid Height="10" />
         <GroupBox Margin="10,0"

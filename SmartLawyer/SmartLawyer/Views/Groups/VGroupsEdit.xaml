@@ -9,7 +9,8 @@
         Title="VGroupsEdit"
         Height="530"
         Width="600"
-        SizeToContent="WidthAndHeight">
+        SizeToContent="WidthAndHeight"
+        ResizeMode="NoResize">
     <StackPanel>
 
         <StackPanel Orientation="Horizontal"
@@ -28,13 +29,17 @@
                   AutoGenerateColumns="False"
                   CanUserAddRows="False">
             <DataGrid.Columns>
-                <DataGridCheckBoxColumn Width="27"
-                                        Binding="{Binding IsChecked}">
-                    <DataGridCheckBoxColumn.Header>
+                <DataGridTemplateColumn MinWidth="27">
+                    <DataGridTemplateColumn.Header>
                         <CheckBox  Checked="CheckBox_Checked"
                                    Unchecked="CheckBox_Unchecked" />
-                    </DataGridCheckBoxColumn.Header>
-                </DataGridCheckBoxColumn>
+                    </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding IsChecked}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Visibility="Collapsed"
                                     Binding="{Binding RoleId}" />
                 <DataGridTextColumn Header="Role Name"

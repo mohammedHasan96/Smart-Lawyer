@@ -26,272 +26,266 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-    <StackPanel Orientation="Vertical"
-                Background="#f4ffffff">
-
-        <Popup PlacementTarget="{Binding ElementName=UCAC}"
-               Placement="Center"
-               IsOpen="{Binding DeletePopup}">
-            <!--<uc:UCUserDelete />-->
-        </Popup>
-        <Border BorderBrush="Gray"
-                BorderThickness="1"
-                Margin="5"
-                HorizontalAlignment="Left"
-                Visibility="{Binding ShowAdvancedSearch,Converter={conv:BoolToVisibility}}">
-            <ContentControl Content="{Binding AdvancedSearchContent}" />
-        </Border>
-        <StackPanel Visibility="{Binding ShowAdvancedSearch,Converter={conv:BoolToVisibility Invert=True}}"
-                    Orientation="Horizontal"
-                    Height="50"
-                    VerticalAlignment="Top">
-
-            <Grid Width="20" />
-            <TextBlock Text="Search"
-                       VerticalAlignment="Center" />
-            <Grid Width="20" />
-            <Border CornerRadius="15"
+    <DockPanel Background="#f4ffffff">
+        <StackPanel DockPanel.Dock="Top">
+            <Popup PlacementTarget="{Binding ElementName=UCAC}"
+                   Placement="Center"
+                   IsOpen="{Binding DeletePopup}">
+                <!--<uc:UCUserDelete />-->
+            </Popup>
+            <Border BorderBrush="Gray"
                     BorderThickness="1"
-                    BorderBrush="LightGray"
-                    Height="31"
-                    Padding="10,0">
-                <TextBox Height="30"
-                         Width="400"
-                         Text="{Binding SearchKey}"
-                         VerticalAlignment="Center"
-                         HorizontalAlignment="Left"
-                         BorderBrush="Transparent"
-                         Background="Transparent"
-                         VerticalContentAlignment="Center" />
+                    Margin="5"
+                    HorizontalAlignment="Left"
+                    Visibility="{Binding ShowAdvancedSearch,Converter={conv:BoolToVisibility}}">
+                <ContentControl Content="{Binding AdvancedSearchContent}" />
             </Border>
-            <Grid Width="10" />
-            <TextBlock Text="Advancced Search"
-                       VerticalAlignment="Center"
-                       Foreground="Blue"
-                       Cursor="Hand">
-                <TextBlock.InputBindings>
-                    <MouseBinding Command="{Binding AdvancedSearchTogelCommand}"
-                                  MouseAction="LeftClick" />
-                </TextBlock.InputBindings>
-            </TextBlock>
+            <StackPanel Visibility="{Binding ShowAdvancedSearch,Converter={conv:BoolToVisibility Invert=True}}"
+                        Orientation="Horizontal"
+                        Height="50"
+                        VerticalAlignment="Top">
+
+                <Grid Width="20" />
+                <TextBlock Text="Search"
+                           VerticalAlignment="Center" />
+                <Grid Width="20" />
+                <Border CornerRadius="15"
+                        BorderThickness="1"
+                        BorderBrush="LightGray"
+                        Height="31"
+                        Padding="10,0">
+                    <TextBox Height="30"
+                             Width="400"
+                             Text="{Binding SearchKey}"
+                             VerticalAlignment="Center"
+                             HorizontalAlignment="Left"
+                             BorderBrush="Transparent"
+                             Background="Transparent"
+                             VerticalContentAlignment="Center" />
+                </Border>
+                <Grid Width="10" />
+                <TextBlock Text="Advancced Search"
+                           VerticalAlignment="Center"
+                           Foreground="Blue"
+                           Cursor="Hand">
+                    <TextBlock.InputBindings>
+                        <MouseBinding Command="{Binding AdvancedSearchTogelCommand}"
+                                      MouseAction="LeftClick" />
+                    </TextBlock.InputBindings>
+                </TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        Height="60">
+                <Grid Width="10" />
+                <Button Width="55"
+                        Height="55"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Command="{Binding AddCommand}">
+                    <StackPanel>
+                        <Grid Height="2" />
+                        <Image Height="30"
+                               Width="30"
+                               VerticalAlignment="Top"
+                               Source="{conv:ImageSourceProvider Uri={conv:ResourcePath Path=add.png}}" />
+                        <Grid Height="3" />
+                        <TextBlock Text="{conv:NameToValue Name=AddButton}"
+                                   HorizontalAlignment="Center" />
+                    </StackPanel>
+                </Button>
+
+                <Grid Width="10" />
+                <Button Width="55"
+                        Height="55"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Command="{Binding EditCommand}">
+                    <StackPanel>
+                        <Grid Height="2" />
+                        <Image Height="30"
+                               Width="30"
+                               VerticalAlignment="Top"
+                               Source="{conv:ImageSourceProvider Uri={conv:ResourcePath Path=edit.png}}" />
+                        <Grid Height="3" />
+                        <TextBlock Text="Edit"
+                                   HorizontalAlignment="Center" />
+                    </StackPanel>
+                </Button>
+
+                <Grid Width="10" />
+                <Button Width="55"
+                        Height="55"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Command="{Binding DeleteCommand}">
+                    <StackPanel>
+                        <Grid Height="2" />
+                        <Image Height="30"
+                               Width="30"
+                               VerticalAlignment="Top"
+                               Source="{conv:ImageSourceProvider Uri={conv:ResourcePath Path=delete.png}}" />
+                        <Grid Height="3" />
+                        <TextBlock Text="Delete"
+                                   HorizontalAlignment="Center" />
+                    </StackPanel>
+                </Button>
+
+                <Grid Width="10" />
+                <Button Width="55"
+                        Height="55"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Command="{Binding ViewCommand}">
+                    <StackPanel>
+                        <Grid Height="2" />
+                        <Image Height="30"
+                               Width="30"
+                               VerticalAlignment="Top"
+                               Source="{conv:ImageSourceProvider Uri={conv:ResourcePath Path=view.png}}" />
+                        <Grid Height="3" />
+                        <TextBlock Text="View"
+                                   HorizontalAlignment="Center" />
+                    </StackPanel>
+                </Button>
+
+                <Grid Width="10" />
+                <Button Width="55"
+                        Height="55"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Command="{Binding ExportCommand}">
+                    <StackPanel>
+                        <Grid Height="2" />
+                        <Image Height="30"
+                               Width="30"
+                               VerticalAlignment="Top"
+                               Source="{conv:ImageSourceProvider Uri={conv:ResourcePath Path=excel.png}}" />
+                        <Grid Height="3" />
+                        <TextBlock Text="Export"
+                                   HorizontalAlignment="Center" />
+                    </StackPanel>
+                </Button>
+
+                <Grid Width="10" />
+                <Button Width="55"
+                        Height="55"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Command="{Binding ArchiveCommand}">
+                    <StackPanel>
+                        <Grid Height="2" />
+                        <Image Height="30"
+                               Width="30"
+                               VerticalAlignment="Top"
+                               Source="{conv:ImageSourceProvider Uri={conv:ResourcePath Path=archive.png}}" />
+                        <Grid Height="3" />
+                        <TextBlock Text="Archive"
+                                   HorizontalAlignment="Center" />
+                    </StackPanel>
+                </Button>
+
+                <Grid Width="10" />
+                <Button Width="55"
+                        Height="55"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Command="{Binding RefreshCommand}">
+                    <StackPanel>
+                        <Grid Height="2" />
+                        <Image Height="30"
+                               Width="30"
+                               VerticalAlignment="Top"
+                               Source="{conv:ImageSourceProvider Uri={conv:ResourcePath Path=refresh.png}}"
+                               RenderTransformOrigin="0.5,0.5">
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform />
+                                    <SkewTransform />
+                                    <RotateTransform Angle="{Binding RotateAngle}" />
+                                    <TranslateTransform />
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                        </Image>
+                        <Grid Height="3" />
+                        <TextBlock Text="refresh"
+                                   HorizontalAlignment="Center" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
         </StackPanel>
-        <StackPanel Orientation="Horizontal"
-                    Height="60">
-            <Grid Width="10" />
-            <Button Width="55"
-                    Height="55"
-                    Background="Transparent"
-                    BorderBrush="Transparent"
-                    Command="{Binding AddCommand}">
-                <StackPanel>
-                    <Grid Height="2" />
-                    <Image Height="30"
-                           Width="30"
-                           VerticalAlignment="Top"
-                           Source="{conv:ImageSourceProvider Uri={conv:ResourcePath Path=add.png}}" />
-                    <Grid Height="3" />
-                    <TextBlock Text="{conv:NameToValue Name=AddButton}"
-                               HorizontalAlignment="Center" />
-                </StackPanel>
-            </Button>
-
-            <Grid Width="10" />
-            <Button Width="55"
-                    Height="55"
-                    Background="Transparent"
-                    BorderBrush="Transparent"
-                    Command="{Binding EditCommand}">
-                <StackPanel>
-                    <Grid Height="2" />
-                    <Image Height="30"
-                           Width="30"
-                           VerticalAlignment="Top"
-                           Source="{conv:ImageSourceProvider Uri={conv:ResourcePath Path=edit.png}}" />
-                    <Grid Height="3" />
-                    <TextBlock Text="Edit"
-                               HorizontalAlignment="Center" />
-                </StackPanel>
-            </Button>
-
-            <Grid Width="10" />
-            <Button Width="55"
-                    Height="55"
-                    Background="Transparent"
-                    BorderBrush="Transparent"
-                    Command="{Binding DeleteCommand}">
-                <StackPanel>
-                    <Grid Height="2" />
-                    <Image Height="30"
-                           Width="30"
-                           VerticalAlignment="Top"
-                           Source="{conv:ImageSourceProvider Uri={conv:ResourcePath Path=delete.png}}" />
-                    <Grid Height="3" />
-                    <TextBlock Text="Delete"
-                               HorizontalAlignment="Center" />
-                </StackPanel>
-            </Button>
-
-            <Grid Width="10" />
-            <Button Width="55"
-                    Height="55"
-                    Background="Transparent"
-                    BorderBrush="Transparent"
-                    Command="{Binding ViewCommand}">
-                <StackPanel>
-                    <Grid Height="2" />
-                    <Image Height="30"
-                           Width="30"
-                           VerticalAlignment="Top"
-                           Source="{conv:ImageSourceProvider Uri={conv:ResourcePath Path=view.png}}" />
-                    <Grid Height="3" />
-                    <TextBlock Text="View"
-                               HorizontalAlignment="Center" />
-                </StackPanel>
-            </Button>
-
-            <Grid Width="10" />
-            <Button Width="55"
-                    Height="55"
-                    Background="Transparent"
-                    BorderBrush="Transparent"
-                    Command="{Binding ExportCommand}">
-                <StackPanel>
-                    <Grid Height="2" />
-                    <Image Height="30"
-                           Width="30"
-                           VerticalAlignment="Top"
-                           Source="{conv:ImageSourceProvider Uri={conv:ResourcePath Path=excel.png}}" />
-                    <Grid Height="3" />
-                    <TextBlock Text="Export"
-                               HorizontalAlignment="Center" />
-                </StackPanel>
-            </Button>
-
-            <Grid Width="10" />
-            <Button Width="55"
-                    Height="55"
-                    Background="Transparent"
-                    BorderBrush="Transparent"
-                    Command="{Binding ArchiveCommand}">
-                <StackPanel>
-                    <Grid Height="2" />
-                    <Image Height="30"
-                           Width="30"
-                           VerticalAlignment="Top"
-                           Source="{conv:ImageSourceProvider Uri={conv:ResourcePath Path=archive.png}}" />
-                    <Grid Height="3" />
-                    <TextBlock Text="Archive"
-                               HorizontalAlignment="Center" />
-                </StackPanel>
-            </Button>
-
-            <Grid Width="10" />
-            <Button Width="55"
-                    Height="55"
-                    Background="Transparent"
-                    BorderBrush="Transparent"
-                    Command="{Binding RefreshCommand}">
-                <StackPanel>
-                    <Grid Height="2" />
-                    <Image Height="30"
-                           Width="30"
-                           VerticalAlignment="Top"
-                           Source="{conv:ImageSourceProvider Uri={conv:ResourcePath Path=refresh.png}}"
-                           RenderTransformOrigin="0.5,0.5">
-                        <Image.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform />
-                                <SkewTransform />
-                                <RotateTransform Angle="{Binding RotateAngle}" />
-                                <TranslateTransform />
-                            </TransformGroup>
-                        </Image.RenderTransform>
-                    </Image>
-                    <Grid Height="3" />
-                    <TextBlock Text="refresh"
-                               HorizontalAlignment="Center" />
-                </StackPanel>
-            </Button>
-        </StackPanel>
-        <ContentControl>
-            <DockPanel>
-                <DataGrid Margin="5"
-                          DockPanel.Dock="Left"
-                          ItemsSource="{Binding DataGridSource}"
-                          SelectedItem="{Binding SelectedDataItem}"
-                          CanUserAddRows="False"
-                          CanUserDeleteRows="False"
-                          FontSize="15"
-                          AutoGenerateColumns="False"
-                          HorizontalAlignment="Left">
-                    <dxmvvm:Interaction.Behaviors>
-                        <dxmvvm:EventToCommand EventName="MouseLeftButtonUp"
-                                               Command="{Binding SelectIndexChangedCommand}">
-                            <dxmvvm:EventToCommand.EventArgsConverter>
-                                <conv:ListBoxEventArgsConverter />
-                            </dxmvvm:EventToCommand.EventArgsConverter>
-                        </dxmvvm:EventToCommand>
-                    </dxmvvm:Interaction.Behaviors>
-                    <DataGrid.Columns>
-                        <DataGridTemplateColumn Width="27"
-                                                IsReadOnly="False"
-                                                MinWidth="27">
-                            <DataGridTemplateColumn.Header>
-                                <StackPanel HorizontalAlignment="Center"
-                                            VerticalAlignment="Center">
-                                    <CheckBox HorizontalAlignment="Center"
-                                              VerticalAlignment="Center"
-                                              Unchecked="CheckBox_Unchecked"
-                                              Checked="CheckBox_Checked">
+        <DockPanel>
+            
+            <DataGrid Margin="5,5,5,5"
+                      DockPanel.Dock="Right"
+                      ItemsSource="{Binding GroupRolesSource}"
+                      CanUserAddRows="False"
+                      CanUserDeleteRows="False"
+                      IsReadOnly="True"
+                      FontSize="15"
+                      AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="RoleId"
+                                        Binding="{Binding RoleId}"
+                                        Visibility="Collapsed" />
+                    <DataGridTextColumn Header="Role Name"
+                                        Binding="{Binding RoleName}"
+                                        Width="150" />
+                    <DataGridTextColumn Header="Role Description"
+                                        Binding="{Binding Description}" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid Margin="5,5,5,5"
+                      DockPanel.Dock="Left"
+                      ItemsSource="{Binding DataGridSource}"
+                      SelectedItem="{Binding SelectedDataItem}"
+                      CanUserAddRows="False"
+                      CanUserDeleteRows="False"
+                      FontSize="15"
+                      AutoGenerateColumns="False">
+                <dxmvvm:Interaction.Behaviors>
+                    <dxmvvm:EventToCommand EventName="MouseLeftButtonUp"
+                                           Command="{Binding SelectIndexChangedCommand}">
+                        <dxmvvm:EventToCommand.EventArgsConverter>
+                            <conv:ListBoxEventArgsConverter />
+                        </dxmvvm:EventToCommand.EventArgsConverter>
+                    </dxmvvm:EventToCommand>
+                </dxmvvm:Interaction.Behaviors>
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Width="27"
+                                            IsReadOnly="False"
+                                            MinWidth="27">
+                        <DataGridTemplateColumn.Header>
+                            <StackPanel HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
+                                <CheckBox HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          Unchecked="CheckBox_Unchecked"
+                                          Checked="CheckBox_Checked">
+                                </CheckBox>
+                            </StackPanel>
+                        </DataGridTemplateColumn.Header>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel VerticalAlignment="Center"
+                                            HorizontalAlignment="Center">
+                                    <CheckBox IsChecked="{Binding IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                     </CheckBox>
                                 </StackPanel>
-                            </DataGridTemplateColumn.Header>
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel VerticalAlignment="Center"
-                                                HorizontalAlignment="Center">
-                                        <CheckBox IsChecked="{Binding IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                                        </CheckBox>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTextColumn Visibility="Collapsed"
-                                            Binding="{Binding GId}"
-                                            Header="GId"
-                                            IsReadOnly="True" />
-                        <DataGridTextColumn Binding="{Binding GName}"
-                                            Header="Group Name"
-                                            Width="170"
-                                            IsReadOnly="True" />
-                        <DataGridTextColumn Binding="{Binding GDescription}"
-                                            Header="Description"
-                                            Width="400"
-                                            IsReadOnly="True" />
-                    </DataGrid.Columns>
-                </DataGrid>
-                <DataGrid Margin="5"
-                          DockPanel.Dock="Right"
-                          ItemsSource="{Binding GroupRolesSource}"
-                          CanUserAddRows="False"
-                          CanUserDeleteRows="False"
-                          IsReadOnly="True"
-                          FontSize="15"
-                          AutoGenerateColumns="False"
-                          HorizontalAlignment="Left"
-                          VerticalAlignment="Top">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="RoleId"
-                                            Binding="{Binding RoleId}"
-                                            Visibility="Collapsed" />
-                        <DataGridTextColumn Header="Role Name"
-                                            Binding="{Binding RoleName}"
-                                            Width="150" />
-                        <DataGridTextColumn Header="Role Description"
-                                            Binding="{Binding Description}" />
-                    </DataGrid.Columns>
-                </DataGrid>
-            </DockPanel>
-        </ContentControl>
-    </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Visibility="Collapsed"
+                                        Binding="{Binding GId}"
+                                        Header="GId"
+                                        IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding GName}"
+                                        Header="Group Name"
+                                        IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding GDescription}"
+                                        Header="Description"
+                                        IsReadOnly="True" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+    </DockPanel>
 </UserControl>

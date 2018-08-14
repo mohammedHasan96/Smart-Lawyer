@@ -11,6 +11,7 @@ namespace SmartLawyer.ViewModels.Main
 {
     public interface VMManagmentSystem 
     {
+        #region Properties
         String Title { get; set; }
         ImageSource ImageTitle { get; set; }
         String SearchKey { get; set; }
@@ -20,6 +21,7 @@ namespace SmartLawyer.ViewModels.Main
         bool DeletePopup { get; set; }
         Brush ViewModelButtonColor { get; set; }
         object MainContentValue { get; set; }
+        #endregion
 
         #region Commands
         void Add();
@@ -31,12 +33,13 @@ namespace SmartLawyer.ViewModels.Main
         void Refresh();
         void AdvancedSearchTogel();
         void DoAdvancedSearch();
+        void CheckAll();
+        void UncheckAll();
         #endregion
     }
     public interface VMManagmentSystem<T> : VMManagmentSystem
     {
         ObservableCollection<T> DataGridSource { get; }
         T SelectedDataItem { get; set; }
-
     }
 }

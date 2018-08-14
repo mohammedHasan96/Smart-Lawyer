@@ -1,4 +1,5 @@
-﻿using SmartLawyer.Models;
+﻿using DevExpress.Mvvm.DataAnnotations;
+using SmartLawyer.Models;
 using SmartLawyer.Models.Classes;
 using SmartLawyer.Models.Values;
 using SmartLawyer.Utils;
@@ -21,12 +22,14 @@ namespace SmartLawyer.ViewModels.PersonVMs
     public class VMPersons : MarkupExtension, VMManagmentSystem<PersonsModel>
     {
 
-        public ObservableCollection<PersonsModel> DataGridSource { get; set; }
-            = new ObservableCollection<PersonsModel>();// = DataAccess.PersonsData();
+
         public virtual string Title { get; set; } = "PersonsTitle".GetDictionaryValue();
         public virtual ImageSource ImageTitle { get; set; } = "personstitle".ToImageSource();
         public virtual string SearchKey { get; set; }
         public virtual object AdvancedSearchContent { get; set; } = new UCPersonAdvancedSearch();
+        public ObservableCollection<PersonsModel> DataGridSource { get; set; }
+            = new ObservableCollection<PersonsModel>();// = DataAccess.PersonsData();
+        [BindableProperty(OnPropertyChangedMethodName = nameof(SelectedConstantChanged), OnPropertyChangingMethodName = nameof(SelectedConstantChanging))]
         public virtual PersonsModel SelectedDataItem { get; set; }
         public virtual bool ShowAdvancedSearch { get; set; }
         public virtual double RotateAngle { get; set; }
@@ -48,6 +51,16 @@ namespace SmartLawyer.ViewModels.PersonVMs
         {
 
         }
+
+        protected void SelectedConstantChanged(PersonsModel oldValue)
+        {
+
+        }
+        protected void SelectedConstantChanging(PersonsModel newValue)
+        {
+
+        }
+
         public void Delete()
         {
 
@@ -55,6 +68,7 @@ namespace SmartLawyer.ViewModels.PersonVMs
 
         public void DoAdvancedSearch()
         {
+
         }
 
         public void Edit()
@@ -79,7 +93,8 @@ namespace SmartLawyer.ViewModels.PersonVMs
                 Thread inProgress = new Thread(() =>
                 {
                     dataSource = DataAccess.PersonsData();
-                });
+                })
+                { IsBackground = true };
                 inProgress.Start();
                 while (inProgress.IsAlive)
                 {
@@ -94,14 +109,29 @@ namespace SmartLawyer.ViewModels.PersonVMs
                     Thread.Sleep(50);
                 }
                 RotateAngle = 0;
-                //DataGridSource = dataSource;
-            }).Start();
+                DataGridSource.ReFill(dataSource);
+            })
+            { IsBackground = true }.Start();
         }
+        public void CheckAll()
+        {
+            foreach (var item in DataGridSource)
+            {
+                item.IsChecked = true;
+            }
+        }
+        public void UncheckAll()
+        {
+            foreach (var item in DataGridSource)
+            {
+                item.IsChecked = false;
+            }
+        }
+
         public void View()
         {
             VPersonView view = new VPersonView();
             view.ShowDialog();
         }
-
     }
 }

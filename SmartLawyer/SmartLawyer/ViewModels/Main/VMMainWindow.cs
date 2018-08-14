@@ -21,6 +21,7 @@ using DevExpress.Mvvm;
 using SmartLawyer.ViewModels.Main;
 using SmartLawyer.ViewModels.GroupsVMs;
 using SmartLawyer.ViewModels.SystemConstantsVMs;
+using SmartLawyer.ViewModels.UsersVMs;
 
 namespace SmartLawyer.ViewModels
 {

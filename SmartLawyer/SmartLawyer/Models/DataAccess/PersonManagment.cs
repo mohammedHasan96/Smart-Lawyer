@@ -15,16 +15,8 @@ namespace SmartLawyer.Models
     {
         public static List<PersonsModel> PersonsData()
         {
-
-            return SQLSelectAs<PersonsModel>($@"SELECT * FROM {PersonsTable.TableName}").ToList();
-
-            //var conn = OpenConnection();
-            //var cmd = conn.CreateCommand();
-            //cmd.CommandText = $@"SELECT * FROM {PersonsTable.TableName}";
-            //var adapter = new MySqlDataAdapter((MySqlCommand)cmd);
-            //var dTable = new DataTable();
-            //adapter.Fill(dTable);
-            //return dTable.DefaultView;
+            var query = $@"SELECT * FROM {PersonsTable.TableName}";
+            return SQLSelectAs<PersonsModel>(query, typeof(PersonsTable)).ToList();
         }
 
         public static DataTable GetPerson(long personId)

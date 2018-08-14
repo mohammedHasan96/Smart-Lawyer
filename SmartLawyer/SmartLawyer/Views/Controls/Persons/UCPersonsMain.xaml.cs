@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SmartLawyer.ViewModels.PersonVMs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,17 @@ namespace SmartLawyer.Views.Controls.Persons
         public UCPersonsMain()
         {
             InitializeComponent();
+        }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            (DataContext as VMPersons).UncheckAll();
+        }
+
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            (DataContext as VMPersons).CheckAll();
         }
     }
 }

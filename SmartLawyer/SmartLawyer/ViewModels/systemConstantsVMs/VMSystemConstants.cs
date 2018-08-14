@@ -19,7 +19,7 @@ namespace SmartLawyer.ViewModels.SystemConstantsVMs
     public class VMSystemConstants : VMManagmentSystem<CodesModel>
     {
         public ObservableCollection<CodesModel> DataGridSource { get; } = new ObservableCollection<CodesModel>();
-        public virtual List<CodesModel> ConstantsCollection { get; } = new List<CodesModel>();
+        public virtual ObservableCollection<CodesModel> ConstantsCollection { get; } = new ObservableCollection<CodesModel>();
         public virtual string Title { get; set; } = "SystemConstantsTitle".GetDictionaryValue();
         public virtual ImageSource ImageTitle { get; set; } = "systemconstantstitle".ToImageSource();
         public virtual string SearchKey { get; set; }
@@ -34,21 +34,22 @@ namespace SmartLawyer.ViewModels.SystemConstantsVMs
         public virtual object MainContentValue { get; set; } = new UCSystemConstantsMain();
         public virtual String ConstantValue { get; set; }
         public virtual String ConstantDesc { get; set; }
-        public virtual List<CodesModel> SystemConstants{ get; set; } = new List<CodesModel>();
+        public virtual List<CodesModel> SystemConstants { get; set; } = new List<CodesModel>();
 
         public void SelectIndexChanged()
         {
             ConstantValue = SelectedDataItem.CName;
             ConstantDesc = SelectedDataItem.CDesc;
         }
-        
+
         protected void SelectedConstantChanged(CodesModel oldValue)
         {
 
         }
         protected void SelectedConstantChanging(CodesModel newValue)
         {
-            DataGridSource.ReFill(SystemConstants.Where(x => x.CMasterId == newValue.CId));
+            if (newValue != null)
+                DataGridSource.ReFill(SystemConstants.Where(x => x.CMasterId == newValue.CId));
         }
 
         public void Add()
@@ -83,11 +84,18 @@ namespace SmartLawyer.ViewModels.SystemConstantsVMs
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
-                    DataAccess.DeleteCode(SelectedDataItem.CId);
-                    DataGridSource.Remove(SelectedDataItem);
+                    var deleteList = DataGridSource.Where(x => x.IsChecked).ToList();
+                    foreach (var item in deleteList)
+                    {
+                        DataAccess.DeleteCode(item.CId);
+                        DataGridSource.Remove(item);
+                    }
+
+
                 }
             }
         }
+
 
         public void DoAdvancedSearch()
         {
@@ -120,7 +128,8 @@ namespace SmartLawyer.ViewModels.SystemConstantsVMs
                 Thread inProgress = new Thread(() =>
                 {
                     SystemConstants = DataAccess.CodesData();
-                });
+                })
+                { IsBackground = true };
                 inProgress.Start();
                 while (inProgress.IsAlive)
                 {
@@ -135,18 +144,30 @@ namespace SmartLawyer.ViewModels.SystemConstantsVMs
                     Thread.Sleep(50);
                 }
                 RotateAngle = 0;
-                ConstantsCollection.Clear();
-                foreach (var item in SystemConstants)
-                {
-                    if (item.CMasterId == 0)
-                        ConstantsCollection.Add(item);
-                }
-            }).Start();
+                ConstantsCollection.ReFill(SystemConstants.Where(x => x.CMasterId == 0));
+            })
+            { IsBackground = true }.Start();
         }
 
         public void View()
         {
 
+        }
+
+        public void CheckAll()
+        {
+            foreach (var item in DataGridSource)
+            {
+                item.IsChecked = true;
+            }
+        }
+
+        public void UncheckAll()
+        {
+            foreach (var item in DataGridSource)
+            {
+                item.IsChecked = false;
+            }
         }
     }
 }

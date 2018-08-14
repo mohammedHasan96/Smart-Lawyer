@@ -59,10 +59,9 @@
             </ItemsControl>
         </ScrollViewer>
         <ContentControl DockPanel.Dock="Right">
-            <ScrollViewer>
-                <!--<uc:UCGridDataView DataContext="{Binding SelectedViewModel}" />-->
-                <ContentControl DataContext="{Binding SelectedViewModel}" Content="{Binding MainContentValue}" />
-            </ScrollViewer>
+            <!--<uc:UCGridDataView DataContext="{Binding SelectedViewModel}" />-->
+            <ContentControl DataContext="{Binding SelectedViewModel}"
+                            Content="{Binding MainContentValue}" />
         </ContentControl>
     </DockPanel>
 </Window>

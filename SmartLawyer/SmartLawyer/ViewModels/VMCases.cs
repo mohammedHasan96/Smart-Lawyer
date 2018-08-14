@@ -73,5 +73,15 @@ namespace SmartLawyer.ViewModels
         public void DoAdvancedSearch()
         {
         }
+
+        public void CheckAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UncheckAll()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

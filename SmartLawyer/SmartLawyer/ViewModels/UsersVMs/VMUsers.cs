@@ -24,19 +24,12 @@ using DevExpress.Mvvm.POCO;
 using SmartLawyer.Models.Values;
 using System.Windows.Markup;
 
-namespace SmartLawyer.ViewModels
+namespace SmartLawyer.ViewModels.UsersVMs
 {
     public class VMUsers : MarkupExtension, VMManagmentSystem<UsersModel>
     {
-
-        //public override string Title { get; set; } = "UsersTitle".GetDictionaryValue();
-        //public override ImageSource ImageTitle { get; set; } = "userstitle".ToImageSource();
-        //public override double RotateAngle { get; set; }
-        //public override  ObservableCollection<UsersModel> DataGridSource { get; set; } //= DataAccess.UsersData();
-        //public override object AdvancedSearchContent { get; set; } = new UCUserAdvancedSearch();
-
-        public static VMUsers Create()
-            => ViewModelSource.Create(() => new VMUsers());
+        //public static VMUsers Create()
+        //    => ViewModelSource.Create(() => new VMUsers());
 
         public virtual string Title { get; set; } = "UsersTitle".GetDictionaryValue();
         public virtual ImageSource ImageTitle { get; set; } = "userstitle".ToImageSource();
@@ -89,7 +82,8 @@ namespace SmartLawyer.ViewModels
                 Thread inProgress = new Thread(() =>
                 {
                     dataSource = DataAccess.UsersData();
-                });
+                })
+                { IsBackground = true };
 
 
                 inProgress.Start();
@@ -107,7 +101,8 @@ namespace SmartLawyer.ViewModels
                 }
                 RotateAngle = 0;
                 DataGridSource.ReFill(dataSource);
-            });
+            })
+            { IsBackground = true };
             refrechThread.Start();
         }
         public void View()
@@ -131,5 +126,21 @@ namespace SmartLawyer.ViewModels
 
         public override object ProvideValue(IServiceProvider serviceProvider)
             => this;
+
+        public void CheckAll()
+        {
+            foreach (var item in DataGridSource)
+            {
+                item.IsChecked = true;
+            }
+        }
+
+        public void UncheckAll()
+        {
+            foreach (var item in DataGridSource)
+            {
+                item.IsChecked = false;
+            }
+        }
     }
 }

@@ -1,7 +1,9 @@
-﻿using System;
+﻿using SmartLawyer.ViewModels.PersonVMs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,6 +25,29 @@ namespace SmartLawyer.Views.Controls.Persons
         public UCPersonAdvancedSearch()
         {
             InitializeComponent();
+            new Thread(() =>
+            {
+                while (Parent == null)
+                {
+                    Thread.Sleep(100);
+                }
+                App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                {
+                    DataContext = (Parent as ContentControl).DataContext;
+                });
+            })
+            { IsBackground = true }.Start();
+
+        }
+        //public UCPersonAdvancedSearch(object dataContext)
+        //{
+        //    DataContext = dataContext;
+        //    InitializeComponent();
+        //}
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //if (DataContext == null)
         }
     }
 }
