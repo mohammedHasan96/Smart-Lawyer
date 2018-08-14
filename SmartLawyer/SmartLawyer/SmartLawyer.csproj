@@ -178,7 +178,7 @@
     <Compile Include="ViewModels\PersonsVMs\VMPersons.cs" />
     <Compile Include="ViewModels\PersonsVMs\VMPersonAdd.cs" />
     <Compile Include="ViewModels\PersonsVMs\VMPersonView.cs" />
-    <Compile Include="ViewModels\systemConstantsVMs\VMSystemConstants.cs" />
+    <Compile Include="ViewModels\SystemConstantsVMs\VMSystemConstants.cs" />
     <Compile Include="ViewModels\UsersVMs\VMUersView.cs" />
     <Compile Include="ViewModels\UsersVMs\VMUserAdd.cs" />
     <Compile Include="ViewModels\UsersVMs\VMUserEdit.cs" />

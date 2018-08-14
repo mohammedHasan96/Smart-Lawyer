@@ -20,7 +20,7 @@ using Classes = SmartLawyer.Models.Classes;
 using DevExpress.Mvvm;
 using SmartLawyer.ViewModels.Main;
 using SmartLawyer.ViewModels.GroupsVMs;
-using SmartLawyer.ViewModels.systemConstantsVMs;
+using SmartLawyer.ViewModels.SystemConstantsVMs;
 
 namespace SmartLawyer.ViewModels
 {

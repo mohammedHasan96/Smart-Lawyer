@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 
-namespace SmartLawyer.ViewModels.systemConstantsVMs
+namespace SmartLawyer.ViewModels.SystemConstantsVMs
 {
     public class VMSystemConstants : VMManagmentSystem<CodesModel>
     {
@@ -38,8 +38,8 @@ namespace SmartLawyer.ViewModels.systemConstantsVMs
 
         public void SelectIndexChanged()
         {
-            ConstantValue = ((CodesModel)SelectedDataItem).CName;
-            ConstantDesc = ((CodesModel)SelectedDataItem).CDesc;
+            ConstantValue = SelectedDataItem.CName;
+            ConstantDesc = SelectedDataItem.CDesc;
         }
         
         protected void SelectedConstantChanged(CodesModel oldValue)
@@ -84,6 +84,7 @@ namespace SmartLawyer.ViewModels.systemConstantsVMs
                 MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
                     DataAccess.DeleteCode(SelectedDataItem.CId);
+                    DataGridSource.Remove(SelectedDataItem);
                 }
             }
         }
