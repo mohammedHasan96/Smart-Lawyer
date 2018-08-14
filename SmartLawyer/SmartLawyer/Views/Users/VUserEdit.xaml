@@ -1,0 +1,191 @@
+﻿<Window x:Name="Window"
+        x:Class="SmartLawyer.Views.Users.VUserEdit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SmartLawyer.Views.Users"
+        xmlns:conv="clr-namespace:SmartLawyer.Converters"
+        mc:Ignorable="d"
+        Title="VUserEdit"
+        Height="570"
+        Width="800"
+        SizeToContent="WidthAndHeight">
+    <StackPanel>
+        <Grid Height="10" />
+        <GroupBox Margin="10,0"
+                  Padding="10"
+                  Header="User Info">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Margin="10,3"
+                               Text="Username" />
+                    <TextBlock Margin="10,8"
+                               Text="Password" />
+                    <TextBlock Margin="10,3"
+                               Text="User State" />
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <TextBox Margin="10,0"
+                             Width="250"
+                             TabIndex="0"
+                             Text="{Binding Username}" />
+                    <TextBox Margin="10,10"
+                             Width="250"
+                             TabIndex="2"
+                             Text="{Binding Password}" />
+                    <Border Margin="10,-2"
+                            BorderBrush="LightGray"
+                            BorderThickness="1"
+                            Padding="4"
+                            Width="126"
+                            HorizontalAlignment="Left">
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton Content="Active"
+                                         TabIndex="4"
+                                         IsChecked="{Binding UserState}" />
+                            <Grid Width="5" />
+                            <RadioButton Content="Inactive"
+                                         TabIndex="5"
+                                         IsChecked="{Binding UserState, Converter={conv:InversBool}}" />
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Margin="10,3"
+                               Text="User Type" />
+                    <TextBlock Margin="10,8"
+                               Text="Confirm Password" />
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <ComboBox Margin="10,0"
+                              Width="250"
+                              TabIndex="1"
+                              Text="{Binding SelectedUserType}"
+                              ItemsSource="{Binding UserType}" />
+                    <TextBox Margin="10,10"
+                             Width="250"
+                             TabIndex="3"
+                             Text="{Binding ConfPass}" />
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+        <StackPanel Orientation="Horizontal"
+                    Margin="0,8">
+            <GroupBox Margin="10,0,1,0"
+                      Padding="6"
+                      Header="Person Info"
+                      HorizontalAlignment="Left">
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Margin="10,3"
+                                   Text="Full Name" />
+                        <TextBlock Margin="10,8"
+                                   Text="Personal ID" />
+                        <Grid Height="5" />
+                        <TextBlock Margin="10,3"
+                                   Text="Date Of Birth" />
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <TextBox Margin="10,0"
+                                 Width="250"
+                                 TabIndex="6"
+                                 Text="{Binding FullName}" />
+                        <TextBox Margin="10,10"
+                                 Width="250"
+                                 TabIndex="7"
+                                 Text="{Binding PersonalId}" />
+                        <DatePicker Width="250"
+                                    TabIndex="8"
+                                    Text="{Binding DateOfBirth}" />
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Margin="5,0,10,0"
+                      Padding="6"
+                      Header="Contact Info"
+                      HorizontalAlignment="Right">
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Margin="10,3"
+                                   Text="Email Address" />
+                        <TextBlock Margin="10,7"
+                                   Text="Phone No" />
+                        <Grid Height="5" />
+                        <TextBlock Margin="10,0"
+                                   Text="Mobile No" />
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <TextBox Margin="10,0"
+                                 Width="250"
+                                 TabIndex="9"
+                                 Text="{Binding EmailAdress}" />
+                        <TextBox Margin="10,10"
+                                 Width="250"
+                                 TabIndex="10"
+                                 Text="{Binding PhoneNo}" />
+                        <TextBox Width="250"
+                                 TabIndex="11"
+                                 Text="{Binding MobileNo}" />
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+        <Border BorderBrush="LightGray"
+                BorderThickness="1"
+                Padding="10"
+                Margin="10,0">
+            <StackPanel>
+                <TextBlock Text="Groups" />
+                <StackPanel Orientation="Horizontal">
+                    <ListBox Width="160"
+                             Height="170"
+                             Margin="0,10"
+                             ItemsSource="{Binding SuggestedGroups}" />
+                    <StackPanel VerticalAlignment="Center">
+                        <StackPanel Margin="8">
+                            <Image Width="25"
+                                   Height="25"
+                                   Source="{conv:ImageSourceProvider Uri={conv:ResourcePath Path=forward.png}}" />
+                            <Grid Height="10" />
+
+                            <Button Height="30"
+                                    Content="Add" />
+                            <Grid Height="10" />
+                            <Button Height="30"
+                                    Content="Remove"
+                                    Padding="4" />
+                            <Grid Height="10" />
+                            <Image Width="25"
+                                   Height="25"
+                                   Source="{conv:ImageSourceProvider Uri={conv:ResourcePath Path=backward.png}}" />
+                        </StackPanel>
+                    </StackPanel>
+                    <ListBox Width="160"
+                             Height="170"
+                             ItemsSource="{Binding AddedGroups}" />
+                    <Border Margin="10"
+                            Width="350">
+                        <DataGrid Margin="0,0,10,0"
+                                  ItemsSource="{Binding GroupRols}" />
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Margin="10">
+            <Button Content="Close"
+                    Padding="20,3"
+                    FontSize="14"
+                    Command="{Binding CloseCommand}"
+                    CommandParameter="{Binding ElementName=Window}" />
+            <Button Content="Done"
+                    Padding="20,3"
+                    Margin="5,0,0,0"
+                    FontSize="14"
+                    Command="{Binding DoneCommand}"
+                    CommandParameter="{Binding ElementName=Window}" />
+        </StackPanel>
+    </StackPanel>
+</Window>

@@ -1,0 +1,85 @@
+﻿<UserControl x:Class="SmartLawyer.Views.Controls.Persons.UCPersonAdvancedSearch"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:SmartLawyer.Views.Controls.Persons"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             Height="210"
+             Width="760"
+             Background="White">
+    <StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <GroupBox Header="Person Info"
+                      Margin="10"
+                      Padding="5">
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel>
+                        <TextBlock Text="Full Name"
+                                   Margin="5,6" />
+                        <TextBlock Text="Personal ID"
+                                   Margin="5" />
+                        <TextBlock Text="Date Of Birth"
+                                   Margin="5,6" />
+                        <TextBlock Text="Person Type"
+                                   Margin="5,6" />
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBox Width="250"
+                                 Margin="5" />
+                        <TextBox Width="250"
+                                 Margin="5" />
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="5,0,0,0"
+                                    VerticalAlignment="Center">
+                            <DatePicker Width="109"
+                                        TabIndex="8" />
+                            <TextBlock Text="To"
+                                       Margin="10,0"
+                                       VerticalAlignment="Center" />
+                            <DatePicker Width="109"
+                                        TabIndex="8" />
+                        </StackPanel>
+                        <ComboBox Width="250"
+                                  Margin="5" />
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="Person Info"
+                      Margin="10"
+                      Padding="5">
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel>
+                        <TextBlock Text="Email Adress"
+                                   Margin="5,6" />
+                        <TextBlock Text="phone No"
+                                   Margin="5" />
+                        <TextBlock Text="Mobile No"
+                                   Margin="5,6" />
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBox Width="250"
+                                 Margin="5" />
+                        <TextBox Width="250"
+                                 Margin="5" />
+                        <TextBox Width="250"
+                                 Margin="5" />
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+            <Button Content="Close"
+                    Margin="0,7,5,10"
+                    Padding="20 3"
+                    Command="{Binding AdvancedSearchTogelCommand}" />
+            <Button Content="Search"
+                    Margin="0,7,10,10"
+                    Padding="20 3"
+                    Command="{Binding DoAdvancedSearchTogelCommand}" />
+        </StackPanel>
+    </StackPanel>
+</UserControl>

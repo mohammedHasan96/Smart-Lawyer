@@ -1,0 +1,78 @@
+﻿<UserControl x:Class="SmartLawyer.Views.Controls.Main.UCMainTemplate"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:SmartLawyer.Views.Controls.Main"
+             xmlns:conv="clr-namespace:SmartLawyer.Converters"
+             mc:Ignorable="d"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <!-- This style is used for buttons, to remove the WPF default 'animated' mouse over effect -->
+        <Style x:Key="MyButtonStyle"
+               TargetType="Button">
+            <Setter Property="OverridesDefaultStyle"
+                    Value="True" />
+            <Setter Property="Margin"
+                    Value="0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border"
+                                BorderThickness="0 1"
+                                BorderBrush="White"
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <StackPanel>
+        <Button Width="140"
+                Height="140"
+                Style="{StaticResource MyButtonStyle}"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                BorderBrush="White"
+                BorderThickness="0,1"
+                Command="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl},
+                                      Path=DataContext.ShowViewModelCommand}"
+                Background="{Binding ViewModelButtonColor}"
+                CommandParameter="{Binding}">
+            <dxmvvm:Interaction.Behaviors>
+                <dxmvvm:EventToCommand EventName="MouseEnter"
+                                       Command="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl},
+                                                         Path=DataContext.MouseEnterCommand}">
+                    <dxmvvm:EventToCommand.EventArgsConverter>
+                        <conv:ButtonEventArgsConverter />
+                    </dxmvvm:EventToCommand.EventArgsConverter>
+                </dxmvvm:EventToCommand>
+                <dxmvvm:EventToCommand EventName="MouseLeave"
+                                       Command="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl},
+                                                         Path=DataContext.MouseLeaveCommand}">
+                    <dxmvvm:EventToCommand.EventArgsConverter>
+                        <conv:ButtonEventArgsConverter />
+                    </dxmvvm:EventToCommand.EventArgsConverter>
+                </dxmvvm:EventToCommand>
+            </dxmvvm:Interaction.Behaviors>
+
+            <StackPanel>
+                <Image Source="{Binding ImageTitle}"
+                       Width="50"
+                       Height="50"
+                       Margin="0 10 0 0" />
+                <TextBlock Text="{Binding Title}"
+                           FontSize="16"
+                           Foreground="White"
+                           TextAlignment="Center"
+                           Margin="0 5 0 10" />
+            </StackPanel>
+        </Button>
+    </StackPanel>
+</UserControl>

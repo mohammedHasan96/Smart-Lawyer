@@ -1,0 +1,221 @@
+﻿<UserControl x:Class="SmartLawyer.Views.Controls.Users.UCUsersMain"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:SmartLawyer.Views.Controls.Users"
+             xmlns:vms="clr-namespace:SmartLawyer.ViewModels"
+             xmlns:conv="clr-namespace:SmartLawyer.Converters"
+             xmlns:uc="clr-namespace:SmartLawyer.Views.Controls.Users"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DataContext="{vms:VMUsers}"
+             d:DesignWidth="800">
+    <StackPanel Orientation="Vertical"
+                Background="#f4ffffff">
+
+        <Popup PlacementTarget="{Binding ElementName=UCAC}"
+               Placement="Center"
+               IsOpen="{Binding DeletePopup}">
+            <uc:UCUserDelete />
+        </Popup>
+        <Border BorderBrush="Gray"
+                BorderThickness="1"
+                Margin="5"
+                HorizontalAlignment="Left"
+                Visibility="{Binding ShowAdvancedSearch,Converter={conv:BoolToVisibility}}">
+            <ContentControl Content="{Binding AdvancedSearchContent}" />
+        </Border>
+        <StackPanel Visibility="{Binding ShowAdvancedSearch,Converter={conv:BoolToVisibility Invert=True}}"
+                    Orientation="Horizontal"
+                    Height="50"
+                    VerticalAlignment="Top">
+
+            <Grid Width="20" />
+            <TextBlock Text="Search"
+                       VerticalAlignment="Center" />
+            <Grid Width="20" />
+            <Border CornerRadius="15"
+                    BorderThickness="1"
+                    BorderBrush="LightGray"
+                    Height="31"
+                    Padding="10,0">
+                <TextBox Height="30"
+                         Width="400"
+                         Text="{Binding SearchKey}"
+                         VerticalAlignment="Center"
+                         HorizontalAlignment="Left"
+                         BorderBrush="Transparent"
+                         Background="Transparent"
+                         VerticalContentAlignment="Center" />
+            </Border>
+            <Grid Width="10" />
+            <TextBlock Text="Advancced Search"
+                       VerticalAlignment="Center"
+                       Foreground="Blue"
+                       Cursor="Hand">
+                <TextBlock.InputBindings>
+                    <MouseBinding Command="{Binding AdvancedSearchTogelCommand}"
+                                  MouseAction="LeftClick" />
+                </TextBlock.InputBindings>
+            </TextBlock>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal"
+                    Height="60">
+            <Grid Width="10" />
+            <Button Width="55"
+                    Height="55"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Command="{Binding AddCommand}">
+                <StackPanel>
+                    <Grid Height="2" />
+                    <Image Height="30"
+                           Width="30"
+                           VerticalAlignment="Top"
+                           Source="{conv:ImageSourceProvider Uri={conv:ResourcePath Path=add.png}}" />
+                    <Grid Height="3" />
+                    <TextBlock Text="{conv:NameToValue Name=AddButton}"
+                               HorizontalAlignment="Center" />
+                </StackPanel>
+            </Button>
+
+            <Grid Width="10" />
+            <Button Width="55"
+                    Height="55"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Command="{Binding EditCommand}">
+                <StackPanel>
+                    <Grid Height="2" />
+                    <Image Height="30"
+                           Width="30"
+                           VerticalAlignment="Top"
+                           Source="{conv:ImageSourceProvider Uri={conv:ResourcePath Path=edit.png}}" />
+                    <Grid Height="3" />
+                    <TextBlock Text="Edit"
+                               HorizontalAlignment="Center" />
+                </StackPanel>
+            </Button>
+
+            <Grid Width="10" />
+            <Button Width="55"
+                    Height="55"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Command="{Binding DeleteCommand}">
+                <StackPanel>
+                    <Grid Height="2" />
+                    <Image Height="30"
+                           Width="30"
+                           VerticalAlignment="Top"
+                           Source="{conv:ImageSourceProvider Uri={conv:ResourcePath Path=delete.png}}" />
+                    <Grid Height="3" />
+                    <TextBlock Text="Delete"
+                               HorizontalAlignment="Center" />
+                </StackPanel>
+            </Button>
+
+            <Grid Width="10" />
+            <Button Width="55"
+                    Height="55"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Command="{Binding ViewCommand}">
+                <StackPanel>
+                    <Grid Height="2" />
+                    <Image Height="30"
+                           Width="30"
+                           VerticalAlignment="Top"
+                           Source="{conv:ImageSourceProvider Uri={conv:ResourcePath Path=view.png}}" />
+                    <Grid Height="3" />
+                    <TextBlock Text="View"
+                               HorizontalAlignment="Center" />
+                </StackPanel>
+            </Button>
+
+            <Grid Width="10" />
+            <Button Width="55"
+                    Height="55"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Command="{Binding ExportCommand}">
+                <StackPanel>
+                    <Grid Height="2" />
+                    <Image Height="30"
+                           Width="30"
+                           VerticalAlignment="Top"
+                           Source="{conv:ImageSourceProvider Uri={conv:ResourcePath Path=excel.png}}" />
+                    <Grid Height="3" />
+                    <TextBlock Text="Export"
+                               HorizontalAlignment="Center" />
+                </StackPanel>
+            </Button>
+
+            <Grid Width="10" />
+            <Button Width="55"
+                    Height="55"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Command="{Binding ArchiveCommand}">
+                <StackPanel>
+                    <Grid Height="2" />
+                    <Image Height="30"
+                           Width="30"
+                           VerticalAlignment="Top"
+                           Source="{conv:ImageSourceProvider Uri={conv:ResourcePath Path=archive.png}}" />
+                    <Grid Height="3" />
+                    <TextBlock Text="Archive"
+                               HorizontalAlignment="Center" />
+                </StackPanel>
+            </Button>
+
+            <Grid Width="10" />
+            <Button Width="55"
+                    Height="55"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Command="{Binding RefreshCommand}">
+                <StackPanel>
+                    <Grid Height="2" />
+                    <Image Height="30"
+                           Width="30"
+                           VerticalAlignment="Top"
+                           Source="{conv:ImageSourceProvider Uri={conv:ResourcePath Path=refresh.png}}"
+                           RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform />
+                                <SkewTransform />
+                                <RotateTransform Angle="{Binding RotateAngle}" />
+                                <TranslateTransform />
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                    <Grid Height="3" />
+                    <TextBlock Text="refresh"
+                               HorizontalAlignment="Center" />
+                </StackPanel>
+            </Button>
+        </StackPanel>
+        <DataGrid Margin="5"
+                  ItemsSource="{Binding DataGridSource}"
+                  SelectedItem="{Binding SelectedDataItem}"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  IsReadOnly="True"
+                  FontSize="15"
+                  AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn Width="27">
+                    <DataGridCheckBoxColumn.Header>
+                        <CheckBox IsChecked="{Binding CheckAll}" />
+                    </DataGridCheckBoxColumn.Header>
+                </DataGridCheckBoxColumn>
+                <DataGridTextColumn Visibility="Collapsed" />
+                <DataGridTextColumn Header="User Name" />
+                <DataGridTextColumn Header="Role Description" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
+</UserControl>
