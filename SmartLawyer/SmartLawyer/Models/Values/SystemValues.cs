@@ -15,5 +15,17 @@ namespace SmartLawyer.Models.Values
             public static String Default { get; set; } = "#feca57";
             public static String MouseOver { get; set; } = "#cea344";
         }
+        public static class MasterSystemConstants
+        {
+            public static int PersonType { get; set; } = 19;
+            public static int CourtType { get; set; } = 1;
+            public static int CourtLocation { get; set; } = 2;
+        }
+        public static class Communications
+        {
+            public static String Phone { get; set; } = "PhoneNo";
+            public static String Mobile { get; set; } = "MobileNo";
+            public static String Emial { get; set; } = "EmailAddress";
+        }
     }
 }

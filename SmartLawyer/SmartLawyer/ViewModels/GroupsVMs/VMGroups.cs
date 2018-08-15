@@ -48,8 +48,13 @@ namespace SmartLawyer.ViewModels.GroupsVMs
             }
             VGroupsAdd add = new VGroupsAdd(Roles);
             if (add.ShowDialog() == true)
-                //Refresh();
-                return;
+            {
+                DataGridSource.Add((add.DataContext as VMGroupsAdd).AddedGroup);
+                foreach (var item in (add.DataContext as VMGroupsAdd).AddedGroupRoles)
+                {
+                    GroupRoles.Add(item);
+                }
+            }
         }
 
         public void AdvancedSearchTogel()
@@ -166,7 +171,6 @@ namespace SmartLawyer.ViewModels.GroupsVMs
 
         }
 
-        Random random = new Random();
         public void CheckAll()
         {
             foreach (var item in DataGridSource)

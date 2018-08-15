@@ -3,7 +3,7 @@ using System.Collections.Generic;
                                 
 namespace SmartLawyer.Models.Classes
 {
-    public class UsersModel : ChecableViewModelBase
+    public class UsersModel : CheckableViewModelBase
     {
         public long UPIdFk { get; set; }
         public String UEmail { get; set; }

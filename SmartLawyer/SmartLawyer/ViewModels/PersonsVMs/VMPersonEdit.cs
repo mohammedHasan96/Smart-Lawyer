@@ -1,4 +1,6 @@
 ﻿using DevExpress.Mvvm.POCO;
+using SmartLawyer.Models.Classes;
+using SmartLawyer.Utils;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,8 +13,8 @@ namespace SmartLawyer.ViewModels.PersonsVMs
 {
     public class VMPersonEdit
     {
-        public static VMPersonEdit Create()
-            => ViewModelSource.Create(() => new VMPersonEdit());
+        public static VMPersonEdit Create(List<CodesModel> PersonTypes)
+            => ViewModelSource.Create(() => new VMPersonEdit(PersonTypes));
         public virtual String FullName { get; set; }
         public virtual String PersonalId { get; set; }
         public virtual DateTime DateOfBirth { get; set; }
@@ -20,8 +22,12 @@ namespace SmartLawyer.ViewModels.PersonsVMs
         public virtual String PhoneNo { get; set; }
         public virtual String MobileNo { get; set; }
         public virtual object SelectedPersonType { get; set; }
-        public ObservableCollection<int> PersonTypeSource { get; set; }
+        public ObservableCollection<CodesModel> PersonTypeSource { get; set; }
 
+        public VMPersonEdit(List<CodesModel> PersonTypes)
+        {
+            PersonTypeSource.ReFill(PersonTypes);
+        }
         public void Edit(Window window)
         {
             window.DialogResult = true;

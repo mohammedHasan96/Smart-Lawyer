@@ -3,7 +3,7 @@ using System.Collections.Generic;
                                 
 namespace SmartLawyer.Models.Classes
 {
-    public class CodesModel : ChecableViewModelBase
+    public class CodesModel : CheckableViewModelBase
     {
         public long CId { get; set; }
         public int CMasterId { get; set; }

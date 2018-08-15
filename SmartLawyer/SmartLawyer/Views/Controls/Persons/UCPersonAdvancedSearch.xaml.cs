@@ -37,7 +37,6 @@ namespace SmartLawyer.Views.Controls.Persons
                 });
             })
             { IsBackground = true }.Start();
-
         }
         //public UCPersonAdvancedSearch(object dataContext)
         //{

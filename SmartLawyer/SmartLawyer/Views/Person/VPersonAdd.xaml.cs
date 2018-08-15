@@ -1,4 +1,5 @@
-﻿using SmartLawyer.ViewModels.PersonsVMs;
+﻿using SmartLawyer.Models.Classes;
+using SmartLawyer.ViewModels.PersonsVMs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +21,13 @@ namespace SmartLawyer.Views.Person
     /// </summary>
     public partial class VPersonAdd : Window
     {
-        public VPersonAdd()
+        private VPersonAdd()
+        { 
+            InitializeComponent();
+        }
+        public VPersonAdd(List<CodesModel> PersonTypes)
         {
-            DataContext = VMPersonAdd.Create();
+            DataContext = VMPersonAdd.Create(PersonTypes);
             InitializeComponent();
         }
     }

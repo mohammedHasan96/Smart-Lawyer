@@ -238,11 +238,20 @@
                 <DataGridTextColumn Binding="{Binding PeType}"
                                     Header="Person Type"
                                     IsReadOnly="True" />
-                <DataGridTextColumn Binding="{Binding PeAddress}"
+                <DataGridTextColumn Binding="{Binding Address}"
                                     Header="Person Adress"
                                     IsReadOnly="True" />
                 <DataGridTextColumn Binding="{Binding PeIdentity}"
                                     Header="Personal Identity"
+                                    IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding PhoneNo}"
+                                    Header="Phone Number"
+                                    IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding MobileNo}"
+                                    Header="Mobile Number"
+                                    IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding Email}"
+                                    Header="Email Address"
                                     IsReadOnly="True" />
             </DataGrid.Columns>
         </DataGrid>

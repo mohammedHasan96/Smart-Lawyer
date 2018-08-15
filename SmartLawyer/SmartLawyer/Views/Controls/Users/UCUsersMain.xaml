@@ -9,7 +9,6 @@
              xmlns:uc="clr-namespace:SmartLawyer.Views.Controls.Users"
              mc:Ignorable="d"
              d:DesignHeight="450"
-             d:DataContext="{vms:VMUsers}"
              d:DesignWidth="800">
     <DockPanel  Background="#f4ffffff">
 

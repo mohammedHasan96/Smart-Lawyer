@@ -38,8 +38,12 @@ namespace SmartLawyer.ViewModels.SystemConstantsVMs
 
         public void SelectIndexChanged()
         {
-            ConstantValue = SelectedDataItem.CName;
-            ConstantDesc = SelectedDataItem.CDesc;
+            if (SelectedDataItem != null)
+            {
+                ConstantValue = SelectedDataItem.CName;
+                ConstantDesc = SelectedDataItem.CDesc;
+            }
+
         }
 
         protected void SelectedConstantChanged(CodesModel oldValue)

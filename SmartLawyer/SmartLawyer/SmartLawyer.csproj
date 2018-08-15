@@ -91,6 +91,7 @@
     <Compile Include="Converters\TabSizeConverter.cs" />
     <Compile Include="Models\Case.cs" />
     <Compile Include="Models\Classes\AppealsSlander.cs" />
+    <Compile Include="Models\Classes\CheckableViewModelBase.cs" />
     <Compile Include="Models\Classes\Codes.cs" />
     <Compile Include="Models\Classes\Contract.cs" />
     <Compile Include="Models\Classes\ContractParty.cs" />
@@ -125,6 +126,8 @@
     <Compile Include="Models\DataAccess\GroupsManagment.cs" />
     <Compile Include="Models\DataAccess\MainDataAccess.cs" />
     <Compile Include="Models\DataAccess\PersonManagment.cs" />
+    <Compile Include="Models\DataAccess\PersonsAdressManagment.cs" />
+    <Compile Include="Models\DataAccess\PersonsCommunicationManagment.cs" />
     <Compile Include="Models\DataAccess\RolsManagment.cs" />
     <Compile Include="Models\DataAccess\UsersManagement.cs" />
     <Compile Include="Models\Person.cs" />

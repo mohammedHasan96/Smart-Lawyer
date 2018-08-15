@@ -23,19 +23,24 @@
                         <TextBlock Text="Personal ID"
                                    Margin="5" />
                         <TextBlock Text="Date Of Birth"
-                                   Margin="5,6" />
+                                   Margin="5,10,5,6" />
                         <TextBlock Text="Person Type"
-                                   Margin="5,6" />
+                                   Margin="5,10,5,5" />
                     </StackPanel>
                     <StackPanel>
                         <TextBox Width="250"
-                                 Margin="5" />
+                                 Margin="5"
+                                 Text="{Binding FullName}" />
                         <TextBox Width="250"
-                                 Margin="5" />
-                        <TextBox Width="250"
-                                 Margin="5" />
+                                 Margin="5"
+                                 Text="{Binding PersonalId}" />
+                        <DatePicker Width="250"
+                                    Margin="5"
+                                    Text="{Binding DateOfBirth}" />
                         <ComboBox Width="250"
-                                  Margin="5" />
+                                  Margin="5"
+                                  SelectedItem="{Binding SelectedPersonType}"
+                                  ItemsSource="{Binding PersonTypeSource}" />
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
@@ -53,11 +58,14 @@
                     </StackPanel>
                     <StackPanel>
                         <TextBox Width="250"
-                                 Margin="5" />
+                                 Margin="5"
+                                 Text="{Binding EmailAdress}" />
                         <TextBox Width="250"
-                                 Margin="5" />
+                                 Margin="5"
+                                 Text="{Binding PhoneNo}" />
                         <TextBox Width="250"
-                                 Margin="5" />
+                                 Margin="5"
+                                 Text="{Binding MobileNo}" />
                     </StackPanel>
                 </StackPanel>
             </GroupBox>

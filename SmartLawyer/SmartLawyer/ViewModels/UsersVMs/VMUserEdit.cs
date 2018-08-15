@@ -21,7 +21,7 @@ namespace SmartLawyer.ViewModels.UsersVMs
 
         public VMUserEdit(UsersModel user)
         {
-            PersonsModel person = DataAccess.GetPerson(user.UPIdFk).Rows[0].ToPersons();
+            PersonsModel person = DataAccess.GetPersonById(user.UPIdFk).FirstOrDefault();
             PresentUser(user);
             PresentPerson(person);
         }

@@ -222,7 +222,8 @@
                       CanUserDeleteRows="False"
                       IsReadOnly="True"
                       FontSize="15"
-                      AutoGenerateColumns="False">
+                      AutoGenerateColumns="False"
+                      Width="400">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="RoleId"
                                         Binding="{Binding RoleId}"
