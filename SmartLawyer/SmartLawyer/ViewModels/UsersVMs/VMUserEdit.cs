@@ -61,25 +61,25 @@ namespace SmartLawyer.ViewModels.UsersVMs
 
         public void Done(Window window)
         {
-            Person person = new Person()
-            {
-                FullName = this.FullName,
-                DateOfBirth = this.DateOfBirth,
-                EmailAdress = this.EmailAdress,
-                MobileNo = this.MobileNo,
-                PhoneNo = this.PhoneNo
-            };
-            User user = new User()
-            {
-                PersonData = person,
-                Username = this.Username,
-                Password = this.Password,
-                UserState = this.UserState,
-                UserType = this.SelectedUserType,
-                UserGroups = this.AddedGroups.ToList<int>()
-            };
-            //DataAccess.UpdateUser(user.UserID, user);
-            window.Close();
+            //Person person = new Person()
+            //{
+            //    FullName = this.FullName,
+            //    DateOfBirth = this.DateOfBirth,
+            //    EmailAdress = this.EmailAdress,
+            //    MobileNo = this.MobileNo,
+            //    PhoneNo = this.PhoneNo
+            //};
+            //User user = new User()
+            //{
+            //    PersonData = person,
+            //    Username = this.Username,
+            //    Password = this.Password,
+            //    UserState = this.UserState,
+            //    UserType = this.SelectedUserType,
+            //    UserGroups = this.AddedGroups.ToList<int>()
+            //};
+            ////DataAccess.UpdateUser(user.UserID, user);
+            //window.Close();
         }
 
         public void Close(Window window)

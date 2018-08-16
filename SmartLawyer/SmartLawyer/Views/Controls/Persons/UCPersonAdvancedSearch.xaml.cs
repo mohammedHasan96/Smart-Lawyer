@@ -17,27 +17,37 @@ using System.Windows.Shapes;
 
 namespace SmartLawyer.Views.Controls.Persons
 {
+
+  
+
     /// <summary>
     /// Interaction logic for UCPersonAdvancedSearch.xaml
     /// </summary>
     public partial class UCPersonAdvancedSearch : UserControl
     {
+
+
         public UCPersonAdvancedSearch()
         {
-            InitializeComponent();
-            new Thread(() =>
-            {
-                while (Parent == null)
-                {
-                    Thread.Sleep(100);
-                }
-                App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
-                {
-                    DataContext = (Parent as ContentControl).DataContext;
-                });
-            })
-            { IsBackground = true }.Start();
+
+            InitializeComponent(); 
+            //new Thread(() =>
+            //{
+            //    while (Parent == null)
+            //    {
+            //        Thread.Sleep(100);
+            //    }
+            //    App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+            //    {
+            //        DataContext = (Parent as ContentControl).DataContext;
+            //    });
+            //})
+            //{ IsBackground = true }.Start();
         }
+
+
+
+
         //public UCPersonAdvancedSearch(object dataContext)
         //{
         //    DataContext = dataContext;
@@ -48,5 +58,7 @@ namespace SmartLawyer.Views.Controls.Persons
         {
             //if (DataContext == null)
         }
+
+       
     }
 }

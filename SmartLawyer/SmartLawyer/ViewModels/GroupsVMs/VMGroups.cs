@@ -76,8 +76,15 @@ namespace SmartLawyer.ViewModels.GroupsVMs
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
-                    DataAccess.DeleteGroup(((GroupsModel)SelectedDataItem).GId);
-                    DataAccess.DeleteGroupRoles(((GroupsModel)SelectedDataItem).GId);
+                    foreach (var item in DataGridSource)
+                    {
+                        if (item.IsChecked)
+                        {
+                            DataAccess.DeleteGroup(SelectedDataItem.GId);
+                            DataAccess.DeleteGroupRoles(SelectedDataItem.GId);
+                        }
+                    }
+                    DataGridSource.ReFill(DataGridSource.Where(x => !x.IsChecked).ToList());
                 }
             }
         }
@@ -106,8 +113,11 @@ namespace SmartLawyer.ViewModels.GroupsVMs
                 //}
                 VGroupsEdit edit = new VGroupsEdit(Roles, item);
                 if (edit.ShowDialog() == true)
-                    //Refresh();
-                    return;
+                {
+                    var dataContext = edit.DataContext as VMGroupsEdit;
+                    DataGridSource.Remove(SelectedDataItem);
+                    DataGridSource.Add(dataContext.EditGroup);
+                }
             }
         }
 
@@ -127,8 +137,8 @@ namespace SmartLawyer.ViewModels.GroupsVMs
                 Thread inProgress = new Thread(() =>
                 {
                     dataSource = DataAccess.GroupsData();
-                    GroupRoles = DataAccess.GroupRolesData();
-                    Roles = DataAccess.RolesData();
+                        GroupRoles = DataAccess.GroupRolesData();
+                        Roles = DataAccess.RolesData();
                 })
                 { IsBackground = true };
 
@@ -162,10 +172,10 @@ namespace SmartLawyer.ViewModels.GroupsVMs
             if (group != null)
             {
                 GroupRolesSource.Clear();
-                var roles = GroupRoles.Where(x => x.GroupId == group.GId);
+                var roles = GroupRoles.Where(x => x.GrolrGIdFk == group.GId);
                 foreach (var item in roles)
                 {
-                    GroupRolesSource.Add(Roles.Where(x => x.RoleId == item.RoleId).First());
+                    GroupRolesSource.Add(Roles.Where(x => x.RoleId == item.GrolrRoleIdFk).First());
                 }
             }
 

@@ -7,9 +7,9 @@ namespace SmartLawyer.Models.Classes
     {
         public int FeId { get; set; }
         public String FeValue { get; set; }
-        public int FeDeIdFk { get; set; }
+        public String FeDeIdFk { get; set; }
         public int FeFileIdFk { get; set; }
-        public long FeCurrencyTypeCfk { get; set; }
-        public long FeNoticIdFk { get; set; }
+        public String FeCurrencyTypeCfk { get; set; }
+        public String FeNoticIdFk { get; set; }
     }
 }

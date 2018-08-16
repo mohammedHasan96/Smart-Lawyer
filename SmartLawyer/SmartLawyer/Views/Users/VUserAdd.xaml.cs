@@ -21,7 +21,7 @@ namespace SmartLawyer.Views
     /// </summary>
     public partial class VUserAdd : Window
     {
-        public VUserAdd()
+        public VUserAdd(List<RolesModel> Roles, List<GroupRolesModel> GroupRoles, List<CodesModel> SystemConstants)
         {
             InitializeComponent();
         }

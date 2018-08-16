@@ -89,7 +89,6 @@
     <Compile Include="Converters\ListBoxEventArgsConverter.cs" />
     <Compile Include="Converters\NameToValue.cs" />
     <Compile Include="Converters\TabSizeConverter.cs" />
-    <Compile Include="Models\Case.cs" />
     <Compile Include="Models\Classes\AppealsSlander.cs" />
     <Compile Include="Models\Classes\CheckableViewModelBase.cs" />
     <Compile Include="Models\Classes\Codes.cs" />
@@ -130,8 +129,6 @@
     <Compile Include="Models\DataAccess\PersonsCommunicationManagment.cs" />
     <Compile Include="Models\DataAccess\RolsManagment.cs" />
     <Compile Include="Models\DataAccess\UsersManagement.cs" />
-    <Compile Include="Models\Person.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="Models\Values\AppealsSlander.cs" />
     <Compile Include="Models\Values\Codes.cs" />
     <Compile Include="Models\Values\Contract.cs" />
@@ -185,7 +182,6 @@
     <Compile Include="ViewModels\UsersVMs\VMUersView.cs" />
     <Compile Include="ViewModels\UsersVMs\VMUserAdd.cs" />
     <Compile Include="ViewModels\UsersVMs\VMUserEdit.cs" />
-    <Compile Include="ViewModels\VMCases.cs" />
     <Compile Include="ViewModels\Main\VMManagmentSystems.cs" />
     <Compile Include="ViewModels\UsersVMs\VMUsers.cs" />
     <Compile Include="ViewModels\Main\VMMainWindow.cs" />

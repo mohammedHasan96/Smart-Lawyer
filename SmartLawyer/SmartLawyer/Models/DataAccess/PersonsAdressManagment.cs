@@ -42,8 +42,8 @@ namespace SmartLawyer.Models
                 [PersonsAddressTable.PeAdPerIdFk] = personAddress.PeAdPerIdFk
             }, $"{PersonsAddressTable.PeAdId}={AddressId}");
 
-        public static int DeletePersonAddress(int AddressId)
-            => Delete(PersonsAddressTable.TableName, $"{PersonsAddressTable.PeAdId}={AddressId}");
+        public static int DeletePersonAddress(long AddressId)
+            => Delete(PersonsAddressTable.TableName, $"{PersonsAddressTable.PeAdPerIdFk}={AddressId}");
 
         public static List<PersonsAddressModel> SearchPersonsAddress(String searchKey)
         {

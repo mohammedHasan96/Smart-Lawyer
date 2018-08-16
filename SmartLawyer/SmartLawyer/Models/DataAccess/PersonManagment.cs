@@ -37,7 +37,7 @@ namespace SmartLawyer.Models
             return changedCount;
         }
 
-        public static int UpdatePerson(int PersonId, PersonsModel person)
+        public static int UpdatePerson(long PersonId, PersonsModel person)
             => Update(PersonsTable.TableName, new ParamtersMap
             {
                 [PersonsTable.PeName] = person.PeName,
@@ -46,7 +46,7 @@ namespace SmartLawyer.Models
                 [PersonsTable.PeType] = person.PeType
             }, $"{PersonsTable.PeId}={PersonId}");
 
-        public static int DeletePerson(int PersonId)
+        public static int DeletePerson(long PersonId)
             => Delete(PersonsTable.TableName, $"{PersonsTable.PeId}={PersonId}");
 
         public static List<PersonsModel> SearchPersons(String searchKey)

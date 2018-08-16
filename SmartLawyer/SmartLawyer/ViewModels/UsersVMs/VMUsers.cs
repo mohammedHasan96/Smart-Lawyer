@@ -35,7 +35,7 @@ namespace SmartLawyer.ViewModels.UsersVMs
         public virtual ImageSource ImageTitle { get; set; } = "userstitle".ToImageSource();
         public virtual string SearchKey { get; set; }
         public virtual object AdvancedSearchContent { get; set; } = new UCUserAdvancedSearch();
-        public ObservableCollection<UsersModel> DataGridSource { get; set; } 
+        public ObservableCollection<UsersModel> DataGridSource { get; set; }
             = new ObservableCollection<UsersModel>();//= DataAccess.UsersData();
         public virtual UsersModel SelectedDataItem { get; set; }
         public virtual bool ShowAdvancedSearch { get; set; }
@@ -44,11 +44,21 @@ namespace SmartLawyer.ViewModels.UsersVMs
         public virtual Brush ViewModelButtonColor { get; set; } = (Brush)(new BrushConverter().ConvertFromString(SystemValues.MyColors.Default));
         public virtual object MainContentValue { get; set; } = new UCUsersMain();
 
+        public List<GroupRolesModel> GroupRoles { get; private set; } = new List<GroupRolesModel>();
+        public List<RolesModel> Roles { get; private set; } = new List<RolesModel>();
+        List<PersonsModel> Persons = new List<PersonsModel>();
+        List<PersonsAddressModel> PersonsAddress = new List<PersonsAddressModel>();
+        List<PersonsCommunicationModel> PersonsCommunication = new List<PersonsCommunicationModel>();
+        List<CodesModel> PersonsTypes = new List<CodesModel>();
+        List<CodesModel> SystemConstants = new List<CodesModel>();
+
         public void Add()
         {
-            VUserAdd add = new VUserAdd();
+            VUserAdd add = new VUserAdd(Roles, GroupRoles, SystemConstants);
             if (add.ShowDialog() == true)
-                Refresh();
+            {
+
+            }
         }
         public void Archive()
         {
@@ -78,10 +88,12 @@ namespace SmartLawyer.ViewModels.UsersVMs
         {
             refrechThread = new Thread(() =>
             {
-                List<UsersModel> dataSource = null;
+                List<UsersModel> Users = null;
                 Thread inProgress = new Thread(() =>
                 {
-                    dataSource = DataAccess.UsersData();
+                    Users = DataAccess.UsersData();
+                    GroupRoles = DataAccess.GroupRolesData();
+                    Roles = DataAccess.RolesData();
                 })
                 { IsBackground = true };
 
@@ -100,7 +112,7 @@ namespace SmartLawyer.ViewModels.UsersVMs
                     Thread.Sleep(50);
                 }
                 RotateAngle = 0;
-                DataGridSource.ReFill(dataSource);
+                DataGridSource.ReFill(Users);
             })
             { IsBackground = true };
             refrechThread.Start();

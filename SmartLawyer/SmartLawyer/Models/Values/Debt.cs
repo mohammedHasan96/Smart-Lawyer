@@ -17,8 +17,10 @@ namespace SmartLawyer.Models.Values
         public static ColumnInfo DeDebtorFk { get; } = ("de_debtor_fk", typeof(int));
         public static ColumnInfo RelatedIssueIdFk { get; } = ("related_issue_id_fk", typeof(long));
         public static ColumnInfo CreatedAt { get; } = ("created_at", typeof(DateTime));
-        public static ColumnInfo CreatedBy { get; } = ("created_by", typeof(DateTime));
+        public static ColumnInfo DebDateTo { get; } = ("deb_date_to", typeof(DateTime));
+        public static ColumnInfo DebDateFrom { get; } = ("deb_date_from", typeof(DateTime));
+        public static ColumnInfo UpdatedBy { get; } = ("updated_by", typeof(long));
         public static ColumnInfo UpdatedAt { get; } = ("updated_at", typeof(DateTime));
-        public static ColumnInfo UpdatedBy { get; } = ("updated_by", typeof(DateTime));
+        public static ColumnInfo CeatedBy { get; } = ("ceated_by", typeof(long));
     }
 }

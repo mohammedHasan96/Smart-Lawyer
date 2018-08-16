@@ -27,27 +27,27 @@ namespace SmartLawyer.Models
         {
             var changedCount = Insert(out insertId, PersonsCommunicationTable.TableName, new ParamtersMap
             {
-                [PersonsCommunicationTable.CoName] = personAddress.CoName,
+                [PersonsCommunicationTable.CoNameCfk] = personAddress.CoNameCfk,
                 [PersonsCommunicationTable.CoPeIdFk] = personAddress.CoPeIdFk,
                 [PersonsCommunicationTable.CoValue] = personAddress.CoValue
             });
             return changedCount;
         }
 
-        public static int UpdatePersonCommunication(int CommunicationId, PersonsCommunicationModel personAddress)
+        public static int UpdatePersonCommunication(int CommunicationId, PersonsCommunicationModel personComm)
             => Update(PersonsCommunicationTable.TableName, new ParamtersMap
             {
-                [PersonsCommunicationTable.CoName] = personAddress.CoName,
-                [PersonsCommunicationTable.CoPeIdFk] = personAddress.CoPeIdFk,
-                [PersonsCommunicationTable.CoValue] = personAddress.CoValue
+                [PersonsCommunicationTable.CoNameCfk] = personComm.CoNameCfk,
+                [PersonsCommunicationTable.CoPeIdFk] = personComm.CoPeIdFk,
+                [PersonsCommunicationTable.CoValue] = personComm.CoValue
             }, $"{PersonsCommunicationTable.CoId}={CommunicationId}");
 
-        public static int DeletePersonCommunication(int CommunicationId)
-            => Delete(PersonsCommunicationTable.TableName, $"{PersonsCommunicationTable.CoId}={CommunicationId}");
+        public static int DeletePersonCommunication(long PersonId)
+            => Delete(PersonsCommunicationTable.TableName, $"{PersonsCommunicationTable.CoPeIdFk}={PersonId}");
 
         public static List<PersonsCommunicationModel> SearchPersonsCommunication(String searchKey)
         {
-            var query = $@"SELECT * FROM {PersonsCommunicationTable.TableName} WHERE {PersonsCommunicationTable.CoName} LIKE '%{searchKey}%' OR {PersonsCommunicationTable.CoValue} LIKE '%{searchKey}%'";
+            var query = $@"SELECT * FROM {PersonsCommunicationTable.TableName} WHERE {PersonsCommunicationTable.CoNameCfk} LIKE '%{searchKey}%' OR {PersonsCommunicationTable.CoValue} LIKE '%{searchKey}%'";
             return SQLSelectAs<PersonsCommunicationModel>(query, typeof(PersonsCommunicationTable)).ToList();
         }
     }

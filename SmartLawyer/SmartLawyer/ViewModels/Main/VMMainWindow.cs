@@ -40,13 +40,12 @@ namespace SmartLawyer.ViewModels
         public VMMainWindow()
         {
             ViewModels.Add(ViewModelSource.Create(() => new VMUsers()));
-            ViewModels.Add(ViewModelSource.Create(() => new VMCases()));
             ViewModels.Add(ViewModelSource.Create(() => new VMPersons()));
             ViewModels.Add(ViewModelSource.Create(() => new VMGroups()));
             ViewModels.Add(ViewModelSource.Create(() => new VMSystemConstants()));
 
             SelectedViewModel = ViewModels.FirstOrDefault();
-            SelectedViewModel.ViewModelButtonColor = (Brush)(new BrushConverter().ConvertFromString(Values.SystemValues.MyColors.Selected));
+            SelectedViewModel.ViewModelButtonColor = new BrushConverter().ConvertFromString(Values.SystemValues.MyColors.Selected) as Brush;
         }
 
         public void En()
@@ -63,16 +62,16 @@ namespace SmartLawyer.ViewModels
         {
             if (parameter != SelectedViewModel)
             {
-                SelectedViewModel.ViewModelButtonColor = (Brush)(new BrushConverter().ConvertFromString(Values.SystemValues.MyColors.Default));
+                SelectedViewModel.ViewModelButtonColor = new BrushConverter().ConvertFromString(Values.SystemValues.MyColors.Default) as Brush;
                 SelectedViewModel = parameter as VMManagmentSystem;
-                SelectedViewModel.ViewModelButtonColor = (Brush)(new BrushConverter().ConvertFromString(Values.SystemValues.MyColors.Selected));
+                SelectedViewModel.ViewModelButtonColor = new BrushConverter().ConvertFromString(Values.SystemValues.MyColors.Selected) as Brush;
                 Title = SelectedViewModel.Title;
             }
         }
         public void MouseEnter(VMManagmentSystem obj)
         {
             if (obj != SelectedViewModel)
-                obj.ViewModelButtonColor = (Brush)(new BrushConverter().ConvertFromString(Values.SystemValues.MyColors.MouseOver));
+                obj.ViewModelButtonColor = new BrushConverter().ConvertFromString(Values.SystemValues.MyColors.MouseOver) as Brush;
         }
         public void MouseLeave(VMManagmentSystem obj)
         {

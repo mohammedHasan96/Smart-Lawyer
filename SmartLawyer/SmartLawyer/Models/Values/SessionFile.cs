@@ -10,5 +10,7 @@ namespace SmartLawyer.Models.Values
         public static ColumnInfo Name { get; } = ("name", typeof(String));
         public static ColumnInfo CratedAt { get; } = ("crated_at", typeof(DateTime));
         public static ColumnInfo SessionId { get; } = ("session_id", typeof(int));
+        public static ColumnInfo SeFiNotic { get; } = ("se_fi_notic", typeof(String));
+        public static ColumnInfo SeFiDocType { get; } = ("se_fi_doc_type", typeof(String));
     }
 }

@@ -21,6 +21,7 @@ namespace SmartLawyer.ViewModels.GroupsVMs
         public virtual String GroupDescription { get; set; }
         public ObservableCollection<RolesModel> DataGridSource { get; }
             = new ObservableCollection<RolesModel>();
+        public GroupsModel EditGroup ;
 
         public VMGroupsEdit(List<RolesModel> roles,GroupsModel group)
         {
@@ -41,11 +42,12 @@ namespace SmartLawyer.ViewModels.GroupsVMs
 
         public void Edit(Window window)
         {
-            var groupChangeValue = DataAccess.UpdateGroup(Group.GId, new GroupsModel()
+            EditGroup = new GroupsModel()
             {
                 GName = GroupName,
                 GDescription = GroupDescription
-            });
+            };
+            var groupChangeValue = DataAccess.UpdateGroup(Group.GId, EditGroup);
             if (groupChangeValue == 1)
             {
                 DataAccess.DeleteGroupRoles(Group.GId);
@@ -53,7 +55,7 @@ namespace SmartLawyer.ViewModels.GroupsVMs
                 {
                     if (item.IsChecked)
                     {
-                        DataAccess.InsertGroupeRole(out var id, new GroupRolesModel() { RoleId = item.RoleId, GroupId = Group.GId });
+                        DataAccess.InsertGroupeRole(out var id, new GroupRolesModel() { GrolrGIdFk = item.RoleId, GrolrRoleIdFk = Group.GId });
                     }
                 }
                 window.DialogResult = true;

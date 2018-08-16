@@ -7,7 +7,7 @@ namespace SmartLawyer.Models.Values
     {
         public static readonly String TableName = "groups";
         public static ColumnInfo GId { get; } = ("g_id", typeof(int));
-        public static ColumnInfo GName { get; } = ("g_name", typeof(int));
-        public static ColumnInfo GDescription { get; } = ("g_description", typeof(int));
+        public static ColumnInfo GName { get; } = ("g_name", typeof(String));
+        public static ColumnInfo GDescription { get; } = ("g_description", typeof(String));
     }
 }

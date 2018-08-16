@@ -6,9 +6,9 @@ namespace SmartLawyer.Models.Classes
     public class PersonsCommunicationModel
     {
         public int CoId { get; set; }
-        public String CoName { get; set; }
+        public int CoNameCfk { get; set; }
         public String CoValue { get; set; }
-        public int CoType { get; set; }
         public long CoPeIdFk { get; set; }
+        public int CoIsMain { get; set; }
     }
 }

@@ -19,7 +19,7 @@ namespace SmartLawyer.Models
 
         public static List<GroupRolesModel> GetGroupRoleByGroupId(int groupId)
         {
-            var query = $@"SELECT * FROM {GroupRolesTable.TableName} WHERE {GroupRolesTable.GroupId} = {groupId}";
+            var query = $@"SELECT * FROM {GroupRolesTable.TableName} WHERE {GroupRolesTable.GrolrGIdFk} = {groupId}";
             return SQLSelectAs<GroupRolesModel>(query, typeof(GroupRolesTable)).ToList();
         }
 
@@ -27,8 +27,8 @@ namespace SmartLawyer.Models
         {
             var changedCount = Insert(out var ID, GroupRolesTable.TableName, new ParamtersMap
             {
-                [GroupRolesTable.GroupId] = groupRole.GroupId,
-                [GroupRolesTable.RoleId] = groupRole.RoleId
+                [GroupRolesTable.GrolrGIdFk] = groupRole.GrolrGIdFk,
+                [GroupRolesTable.GrolrRoleIdFk] = groupRole.GrolrRoleIdFk
             });
             insertId = ID;
             return changedCount;
@@ -37,16 +37,16 @@ namespace SmartLawyer.Models
         public static int UpdateGroupRole(int RoleId, GroupRolesModel groupRole)
             => Update(GroupRolesTable.TableName, new ParamtersMap
             {
-                [GroupRolesTable.GroupId] = groupRole.GroupId,
-                [GroupRolesTable.RoleId] = groupRole.RoleId
-            }, $"{GroupRolesTable.RoleId}={RoleId}");
+                [GroupRolesTable.GrolrGIdFk] = groupRole.GrolrGIdFk,
+                [GroupRolesTable.GrolrRoleIdFk] = groupRole.GrolrRoleIdFk
+            }, $"{GroupRolesTable.GrolrRoleIdFk}={RoleId}");
 
         public static int DeleteGroupRoles(int GroupId)
-            => Delete(GroupRolesTable.TableName, $"{GroupRolesTable.GroupId}={GroupId}");
+            => Delete(GroupRolesTable.TableName, $"{GroupRolesTable.GrolrGIdFk}={GroupId}");
 
         public static List<GroupRolesModel> SearchGroupRoles(String searchKey)
         {
-            var query = $@"SELECT * FROM {GroupRolesTable.TableName} WHERE {GroupRolesTable.GroupId} LIKE '%{searchKey}%' OR {GroupRolesTable.RoleId} LIKE '%{searchKey}%'";
+            var query = $@"SELECT * FROM {GroupRolesTable.TableName} WHERE {GroupRolesTable.GrolrGIdFk} LIKE '%{searchKey}%' OR {GroupRolesTable.GrolrRoleIdFk} LIKE '%{searchKey}%'";
             return SQLSelectAs<GroupRolesModel>(query, typeof(GroupRolesTable)).ToList();
         }
     }

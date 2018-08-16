@@ -9,10 +9,5 @@ namespace SmartLawyer.Models.Classes
         public String PeAdCity { get; set; }
         public String PeAdStreetName { get; set; }
         public int PeAdPerIdFk { get; set; }
-
-        public override string ToString()
-        {
-            return $"{PeAdCity}-{PeAdStreetName}";
-        }
     }
 }

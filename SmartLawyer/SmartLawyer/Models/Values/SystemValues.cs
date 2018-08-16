@@ -20,6 +20,9 @@ namespace SmartLawyer.Models.Values
             public static int PersonType { get; set; } = 19;
             public static int CourtType { get; set; } = 1;
             public static int CourtLocation { get; set; } = 2;
+            public static int CommunicationType { get; set; } = 22;
+            public static int NotificationType { get; set; } = 25;
+
         }
         public static class Communications
         {

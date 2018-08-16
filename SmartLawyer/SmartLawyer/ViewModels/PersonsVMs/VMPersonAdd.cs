@@ -44,8 +44,8 @@ namespace SmartLawyer.ViewModels.PersonsVMs
             {
                 AddedCommunication.Add(new PersonsCommunicationModel()
                 {
-                    CoName = SystemValues.Communications.Phone,
-                    CoValue = EmailAdress
+                    //CoName = SystemValues.Communications.Phone,
+                    //CoValue = EmailAdress
 
                 });
             }
@@ -53,8 +53,8 @@ namespace SmartLawyer.ViewModels.PersonsVMs
             {
                 AddedCommunication.Add(new PersonsCommunicationModel()
                 {
-                    CoName = SystemValues.Communications.Mobile,
-                    CoValue = EmailAdress
+                    //CoName = SystemValues.Communications.Mobile,
+                    //CoValue = EmailAdress
 
                 });
             }
@@ -62,8 +62,8 @@ namespace SmartLawyer.ViewModels.PersonsVMs
             {
                 AddedCommunication.Add(new PersonsCommunicationModel()
                 {
-                    CoName = SystemValues.Communications.Emial,
-                    CoValue = EmailAdress
+                    //CoName = SystemValues.Communications.Emial,
+                    //CoValue = EmailAdress
                 });
             }
             AddedPerson = new PersonsModel()

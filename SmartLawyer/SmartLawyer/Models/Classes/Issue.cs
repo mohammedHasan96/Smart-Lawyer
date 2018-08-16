@@ -18,10 +18,11 @@ namespace SmartLawyer.Models.Classes
         public long IssueNumberRelationIssue { get; set; }
         public int IssueTypeRelationIssueCfk { get; set; }
         public DateTime CreatedAt { get; set; }
-        public DateTime CreatedBy { get; set; }
-        public DateTime UpdatedAt { get; set; }
-        public DateTime UpdatedBy { get; set; }
         public String IssueOrederNumber { get; set; }
         public String IssueNoticLoseWin { get; set; }
+        public int CreatedBy { get; set; }
+        public DateTime UpdatedAt { get; set; }
+        public int UpdatedBy { get; set; }
+        public int IssueAddress { get; set; }
     }
 }

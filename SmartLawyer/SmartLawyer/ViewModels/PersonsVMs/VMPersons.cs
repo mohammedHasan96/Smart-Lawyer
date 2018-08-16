@@ -15,6 +15,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Media;
 
@@ -23,11 +24,22 @@ namespace SmartLawyer.ViewModels.PersonVMs
     public class VMPersons : MarkupExtension, VMManagmentSystem<PersonsModel>
     {
 
+        public VMPersons()
+        {
+            AdvancedSearchContent = new UCPersonAdvancedSearch
+            {
+                DataContext = this
+            };
+        }
+
+
+        
+
 
         public virtual string Title { get; set; } = "PersonsTitle".GetDictionaryValue();
         public virtual ImageSource ImageTitle { get; set; } = "personstitle".ToImageSource();
         public virtual string SearchKey { get; set; }
-        public virtual object AdvancedSearchContent { get; set; } = new UCPersonAdvancedSearch();
+        public virtual object AdvancedSearchContent { get; set; }
         public ObservableCollection<PersonsModel> DataGridSource { get; set; }
             = new ObservableCollection<PersonsModel>();// = DataAccess.PersonsData();
         [BindableProperty(OnPropertyChangedMethodName = nameof(SelectedConstantChanged), OnPropertyChangingMethodName = nameof(SelectedConstantChanging))]
@@ -42,6 +54,7 @@ namespace SmartLawyer.ViewModels.PersonVMs
         List<PersonsAddressModel> PersonsAddress = new List<PersonsAddressModel>();
         List<PersonsCommunicationModel> PersonsCommunication = new List<PersonsCommunicationModel>();
         List<CodesModel> PersonsTypes = new List<CodesModel>();
+        List<CodesModel> CommTypes = new List<CodesModel>();
 
         public void Add()
         {
@@ -54,6 +67,7 @@ namespace SmartLawyer.ViewModels.PersonVMs
                     PersonsCommunication.Add(item);
                 }
                 Persons.Add(dataContext.AddedPerson);
+                DataGridSource.Add(dataContext.AddedPerson);
             }
         }
         public void AdvancedSearchTogel()
@@ -76,7 +90,25 @@ namespace SmartLawyer.ViewModels.PersonVMs
 
         public void Delete()
         {
-
+            if (SelectedDataItem != null)
+            {
+                if (MessageBox.Show("Are you sure you want to delete all selected Groups??",
+                "Delete",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    foreach (var item in DataGridSource)
+                    {
+                        if (item.IsChecked)
+                        {
+                            DataAccess.DeletePerson(item.PeId);
+                            DataAccess.DeletePersonCommunication(item.PeId);
+                            DataAccess.DeletePersonAddress(item.PeId);
+                        }
+                    }
+                    DataGridSource.ReFill(DataGridSource.Where(x => !x.IsChecked).ToList());
+                }
+            }
         }
 
         public void DoAdvancedSearch()
@@ -101,8 +133,14 @@ namespace SmartLawyer.ViewModels.PersonVMs
             };
             VPersonEdit edit = new VPersonEdit(person, PersonsTypes);
             if (edit.ShowDialog() == true)
-                //Refresh();
-                return;
+            {
+                var dataContext = edit.DataContext as VMPersonEdit;
+                DataGridSource.Remove(SelectedDataItem);
+                DataGridSource.Add(dataContext.AddedPerson);
+                SelectedDataItem = dataContext.AddedPerson;
+                PersonsCommunication.AddRange(dataContext.AddedCommunication);
+            }
+
         }
         public void Export()
         {
@@ -121,13 +159,14 @@ namespace SmartLawyer.ViewModels.PersonVMs
                     PersonsAddress = DataAccess.PersonsAddressData();
                     PersonsCommunication = DataAccess.PersonsCommunicationData();
                     PersonsTypes = DataAccess.CodesData(SystemValues.MasterSystemConstants.PersonType);
+                    CommTypes = DataAccess.CodesData(SystemValues.MasterSystemConstants.CommunicationType);
                     foreach (var item in Persons)
                     {
                         item.Address = PersonsAddress.Where(x => x.PeAdId == item.PeId).FirstOrDefault()?.ToString();
                         var communication = PersonsCommunication.Where(x => x.CoPeIdFk == item.PeId);
-                        item.PhoneNo = communication.Where(x => x.CoName.Equals("PhoneNo")).FirstOrDefault()?.CoValue;
-                        item.PhoneNo = communication.Where(x => x.CoName.Equals("MobileNo")).FirstOrDefault()?.CoValue;
-                        item.PhoneNo = communication.Where(x => x.CoName.Equals("EmailAddress")).FirstOrDefault()?.CoValue;
+                        //item.PhoneNo = communication.Where(x => x.CoName.Equals(SystemValues.Communications.Phone)).FirstOrDefault()?.CoValue;
+                        //item.MobileNo = communication.Where(x => x.CoName.Equals(SystemValues.Communications.Mobile)).FirstOrDefault()?.CoValue;
+                        //item.Email = communication.Where(x => x.CoName.Equals(SystemValues.Communications.Emial)).FirstOrDefault()?.CoValue;
                     }
                 })
                 { IsBackground = true };

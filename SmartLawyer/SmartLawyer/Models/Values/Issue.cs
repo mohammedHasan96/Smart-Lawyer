@@ -19,10 +19,11 @@ namespace SmartLawyer.Models.Values
         public static ColumnInfo IssueNumberRelationIssue { get; } = ("issue_number_relation_issue", typeof(long));
         public static ColumnInfo IssueTypeRelationIssueCfk { get; } = ("issue_type_relation_issue_cfk", typeof(int));
         public static ColumnInfo CreatedAt { get; } = ("created_at", typeof(DateTime));
-        public static ColumnInfo CreatedBy { get; } = ("created_by", typeof(DateTime));
-        public static ColumnInfo UpdatedAt { get; } = ("updated_at", typeof(DateTime));
-        public static ColumnInfo UpdatedBy { get; } = ("updated_by", typeof(DateTime));
         public static ColumnInfo IssueOrederNumber { get; } = ("issue_oreder_number", typeof(String));
         public static ColumnInfo IssueNoticLoseWin { get; } = ("issue_notic_lose_win", typeof(String));
+        public static ColumnInfo CreatedBy { get; } = ("created_by", typeof(int));
+        public static ColumnInfo UpdatedAt { get; } = ("updated_at", typeof(DateTime));
+        public static ColumnInfo UpdatedBy { get; } = ("updated_by", typeof(int));
+        public static ColumnInfo IssueAddress { get; } = ("issue_address", typeof(int));
     }
 }

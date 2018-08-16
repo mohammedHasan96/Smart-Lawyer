@@ -16,8 +16,10 @@ namespace SmartLawyer.Models.Classes
         public int DeDebtorFk { get; set; }
         public long RelatedIssueIdFk { get; set; }
         public DateTime CreatedAt { get; set; }
-        public DateTime CreatedBy { get; set; }
+        public DateTime DebDateTo { get; set; }
+        public DateTime DebDateFrom { get; set; }
+        public long UpdatedBy { get; set; }
         public DateTime UpdatedAt { get; set; }
-        public DateTime UpdatedBy { get; set; }
+        public long CeatedBy { get; set; }
     }
 }

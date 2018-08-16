@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-                                
+
 namespace SmartLawyer.Models.Classes
 {
     public class PersonsModel : CheckableViewModelBase

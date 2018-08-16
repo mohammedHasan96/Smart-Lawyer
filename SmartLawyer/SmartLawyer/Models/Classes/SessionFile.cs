@@ -9,5 +9,7 @@ namespace SmartLawyer.Models.Classes
         public String Name { get; set; }
         public DateTime CratedAt { get; set; }
         public int SessionId { get; set; }
+        public String SeFiNotic { get; set; }
+        public String SeFiDocType { get; set; }
     }
 }

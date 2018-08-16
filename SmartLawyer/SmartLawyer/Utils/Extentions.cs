@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -20,7 +21,7 @@ namespace SmartLawyer.Utils
     {
 
         public static void ReFill<T>(this ObservableCollection<T> dst, IEnumerable<T> items)
-        {
+        {   
             App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
             {
                 dst.Clear();
@@ -39,6 +40,14 @@ namespace SmartLawyer.Utils
             return active ? 1 : 0;
         }
 
+        public static string MD5(this string value)
+        {
+            var bytes = Encoding.UTF8.GetBytes(value);
+            var hash = System.Security.Cryptography.MD5.Create().ComputeHash(bytes);
+            return BitConverter.ToString(hash).Replace("-", "");
+        }
+
+
         public static String GetPasswordHashSha1(this String password)
         {
             var data = Encoding.ASCII.GetBytes(password);
@@ -51,12 +60,26 @@ namespace SmartLawyer.Utils
             return encoding.GetString(sha1data);
         }
 
+        public static string ComputeHash(this Stream src)
+        {
+            var md5 = System.Security.Cryptography.MD5.Create();
+            var ms = new MemoryStream();
+            var stream = new CryptoStream(ms, md5, CryptoStreamMode.Write);
+            src.CopyTo(stream);
+            stream.FlushFinalBlock();
+            var hash = ms.ToArray();
+            return BitConverter.ToString(hash).Replace("-", "");
+        }
+
         public static String GetPasswordHashMd5(this String password)
         {
             var data = Encoding.ASCII.GetBytes(password);
 
             var md5 = new MD5CryptoServiceProvider();
             var md5data = md5.ComputeHash(data);
+
+
+
 
             ASCIIEncoding encoding = new ASCIIEncoding();
 
@@ -82,16 +105,12 @@ namespace SmartLawyer.Utils
 
         public static String GetPasswordHashSHA256(this String password)
         {
-            using (SHA256 sha256Hash = SHA256.Create())
+            using (var sha256Hash = SHA256.Create())
             {
-                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
-
-                // Convert byte array to a string   
-                StringBuilder builder = new StringBuilder();
+                var bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
+                var builder = new StringBuilder();
                 for (int i = 0; i < bytes.Length; i++)
-                {
                     builder.Append(bytes[i].ToString("x2"));
-                }
                 return builder.ToString();
             }
         }
