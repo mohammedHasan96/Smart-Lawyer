@@ -80,8 +80,8 @@ namespace SmartLawyer.ViewModels.GroupsVMs
                     {
                         if (item.IsChecked)
                         {
-                            DataAccess.DeleteGroup(SelectedDataItem.GId);
-                            DataAccess.DeleteGroupRoles(SelectedDataItem.GId);
+                            DataAccess.DeleteGroup(item.GId);
+                            DataAccess.DeleteGroupRoles(item.GId);
                         }
                     }
                     DataGridSource.ReFill(DataGridSource.Where(x => !x.IsChecked).ToList());
@@ -98,13 +98,30 @@ namespace SmartLawyer.ViewModels.GroupsVMs
         {
             if (SelectedDataItem != null)
             {
-                var item = (GroupsModel)SelectedDataItem;
+                var item = SelectedDataItem;
                 for (int i = 0; i < Roles.Count; i++)
                 {
                     if (GroupRolesSource.Contains(Roles[i]))
+                    {
+                        var groupRoles = GroupRoles.Where(x => x.GrolrRoleIdFk == Roles[i].RoleId && x.GrolrGIdFk == item.GId).FirstOrDefault();
                         Roles[i].IsChecked = true;
+                        Roles[i].GroleAdd = groupRoles.GroleAdd;
+                        Roles[i].GroleEdit = groupRoles.GroleEdit;
+                        Roles[i].GroleDelete = groupRoles.GroleDelete;
+                        Roles[i].GroleExport = groupRoles.GroleExport;
+                        Roles[i].GrolePrint = groupRoles.GrolePrint;
+                        Roles[i].GroleView = groupRoles.GroleView;
+                    }
                     else
+                    {
                         Roles[i].IsChecked = false;
+                        Roles[i].GroleAdd = false.ToIntState();
+                        Roles[i].GroleEdit = false.ToIntState();
+                        Roles[i].GroleDelete = false.ToIntState();
+                        Roles[i].GroleExport = false.ToIntState();
+                        Roles[i].GrolePrint = false.ToIntState();
+                        Roles[i].GroleView = false.ToIntState();
+                    }
 
                 }
                 //foreach (var role in GroupRolesSource)
@@ -175,7 +192,8 @@ namespace SmartLawyer.ViewModels.GroupsVMs
                 var roles = GroupRoles.Where(x => x.GrolrGIdFk == group.GId);
                 foreach (var item in roles)
                 {
-                    GroupRolesSource.Add(Roles.Where(x => x.RoleId == item.GrolrRoleIdFk).First());
+                    var role = Roles.Where(x => x.RoleId == item.GrolrRoleIdFk).FirstOrDefault();
+                    GroupRolesSource.Add(role.FillRoles(item));
                 }
             }
 

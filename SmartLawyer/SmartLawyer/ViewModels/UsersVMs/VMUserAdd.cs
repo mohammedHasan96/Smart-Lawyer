@@ -54,7 +54,7 @@ namespace SmartLawyer.ViewModels.UsersVMs
                 UEmail = EmailAdress,
                 UUserName = Username,
                 UPassword = Password.GetPasswordHashSHA256(),
-                UIsActive = UserState.ToActiveState(),
+                UIsActive = UserState.ToIntState(),
                 UpdatedBy = Values.SystemValues.LoginUser
             };
             var userChangeValue = DataAccess.InsertUser(out var userInsertId, user);

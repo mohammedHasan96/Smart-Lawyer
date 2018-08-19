@@ -85,6 +85,7 @@
     <Compile Include="Converters\BoolToVisibility.cs" />
     <Compile Include="Converters\ButtonEventArgsConverter.cs" />
     <Compile Include="Converters\CheckBoxEventArgsConverter.cs" />
+    <Compile Include="Converters\IntegerToBoolConverter.cs" />
     <Compile Include="Converters\InversBool.cs" />
     <Compile Include="Converters\ListBoxEventArgsConverter.cs" />
     <Compile Include="Converters\NameToValue.cs" />
@@ -120,7 +121,6 @@
     <Compile Include="Models\Classes\Witnessees.cs" />
     <Compile Include="Models\DataAccess\CodesManagment.cs" />
     <Compile Include="Models\DataAccess\ColumnInfo.cs" />
-    <Compile Include="Models\DataAccess\CasesManagment.cs" />
     <Compile Include="Models\DataAccess\GroupRolesManagment.cs" />
     <Compile Include="Models\DataAccess\GroupsManagment.cs" />
     <Compile Include="Models\DataAccess\MainDataAccess.cs" />
@@ -182,58 +182,57 @@
     <Compile Include="ViewModels\UsersVMs\VMUersView.cs" />
     <Compile Include="ViewModels\UsersVMs\VMUserAdd.cs" />
     <Compile Include="ViewModels\UsersVMs\VMUserEdit.cs" />
-    <Compile Include="ViewModels\Main\VMManagmentSystems.cs" />
     <Compile Include="ViewModels\UsersVMs\VMUsers.cs" />
     <Compile Include="ViewModels\Main\VMMainWindow.cs" />
-    <Compile Include="Views\Controls\Groups\UCGroupsMain.xaml.cs">
+    <Compile Include="Views\UserControls\Groups\UCGroupsMain.xaml.cs">
       <DependentUpon>UCGroupsMain.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Controls\Main\UCMainTemplate.xaml.cs">
+    <Compile Include="Views\UserControls\Main\UCMainTemplate.xaml.cs">
       <DependentUpon>UCMainTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Controls\Persons\UCPersonAdvancedSearch.xaml.cs">
+    <Compile Include="Views\UserControls\Persons\UCPersonAdvancedSearch.xaml.cs">
       <DependentUpon>UCPersonAdvancedSearch.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Controls\Main\UCGridDataView.xaml.cs">
+    <Compile Include="Views\UserControls\Main\UCGridDataView.xaml.cs">
       <DependentUpon>UCGridDataView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Controls\Persons\UCPersonsMain.xaml.cs">
+    <Compile Include="Views\UserControls\Persons\UCPersonsMain.xaml.cs">
       <DependentUpon>UCPersonsMain.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Controls\SystemConstants\UCSystemConstantsMain.xaml.cs">
+    <Compile Include="Views\UserControls\SystemConstants\UCSystemConstantsMain.xaml.cs">
       <DependentUpon>UCSystemConstantsMain.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Controls\Users\UCUserAdvancedSearch.xaml.cs">
+    <Compile Include="Views\UserControls\Users\UCUserAdvancedSearch.xaml.cs">
       <DependentUpon>UCUserAdvancedSearch.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Controls\Users\UCUserDelete.xaml.cs">
+    <Compile Include="Views\UserControls\Users\UCUserDelete.xaml.cs">
       <DependentUpon>UCUserDelete.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Controls\Users\UCUsersMain.xaml.cs">
+    <Compile Include="Views\UserControls\Users\UCUsersMain.xaml.cs">
       <DependentUpon>UCUsersMain.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Groups\VGroupsAdd.xaml.cs">
+    <Compile Include="Views\Windows\Groups\VGroupsAdd.xaml.cs">
       <DependentUpon>VGroupsAdd.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Groups\VGroupsEdit.xaml.cs">
+    <Compile Include="Views\Windows\Groups\VGroupsEdit.xaml.cs">
       <DependentUpon>VGroupsEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Person\VPersonAdd.xaml.cs">
+    <Compile Include="Views\Windows\Person\VPersonAdd.xaml.cs">
       <DependentUpon>VPersonAdd.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Person\VPersonEdit.xaml.cs">
+    <Compile Include="Views\Windows\Person\VPersonEdit.xaml.cs">
       <DependentUpon>VPersonEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Person\VPersonView.xaml.cs">
+    <Compile Include="Views\Windows\Person\VPersonView.xaml.cs">
       <DependentUpon>VPersonView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Users\VUserAdd.xaml.cs">
+    <Compile Include="Views\Windows\Users\VUserAdd.xaml.cs">
       <DependentUpon>VUserAdd.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Users\VUserEdit.xaml.cs">
+    <Compile Include="Views\Windows\Users\VUserEdit.xaml.cs">
       <DependentUpon>VUserEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Users\VUserView.xaml.cs">
+    <Compile Include="Views\Windows\Users\VUserView.xaml.cs">
       <DependentUpon>VUserView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
@@ -250,71 +249,71 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\Controls\Groups\UCGroupsMain.xaml">
+    <Page Include="Views\UserControls\Groups\UCGroupsMain.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Controls\Main\UCMainTemplate.xaml">
+    <Page Include="Views\UserControls\Main\UCMainTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Controls\Persons\UCPersonAdvancedSearch.xaml">
+    <Page Include="Views\UserControls\Persons\UCPersonAdvancedSearch.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Controls\Main\UCGridDataView.xaml">
+    <Page Include="Views\UserControls\Main\UCGridDataView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Controls\Persons\UCPersonsMain.xaml">
+    <Page Include="Views\UserControls\Persons\UCPersonsMain.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Controls\SystemConstants\UCSystemConstantsMain.xaml">
+    <Page Include="Views\UserControls\SystemConstants\UCSystemConstantsMain.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Controls\Users\UCUserAdvancedSearch.xaml">
+    <Page Include="Views\UserControls\Users\UCUserAdvancedSearch.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Controls\Users\UCUserDelete.xaml">
+    <Page Include="Views\UserControls\Users\UCUserDelete.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Controls\Users\UCUsersMain.xaml">
+    <Page Include="Views\UserControls\Users\UCUsersMain.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Groups\VGroupsAdd.xaml">
+    <Page Include="Views\Windows\Groups\VGroupsAdd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Groups\VGroupsEdit.xaml">
+    <Page Include="Views\Windows\Groups\VGroupsEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Person\VPersonAdd.xaml">
+    <Page Include="Views\Windows\Person\VPersonAdd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Person\VPersonEdit.xaml">
+    <Page Include="Views\Windows\Person\VPersonEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Person\VPersonView.xaml">
+    <Page Include="Views\Windows\Person\VPersonView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Users\VUserAdd.xaml">
+    <Page Include="Views\Windows\Users\VUserAdd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Users\VUserEdit.xaml">
+    <Page Include="Views\Windows\Users\VUserEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Users\VUserView.xaml">
+    <Page Include="Views\Windows\Users\VUserView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

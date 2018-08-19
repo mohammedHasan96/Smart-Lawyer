@@ -21,24 +21,38 @@ namespace SmartLawyer.Utils
     {
 
         public static void ReFill<T>(this ObservableCollection<T> dst, IEnumerable<T> items)
-        {   
+        {
             App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
             {
                 dst.Clear();
                 foreach (var item in items)
                     dst.Add(item);
             });
-            
+
         }
         public static bool ToBool(this int i)
         {
             return i == 1 ? true : false;
         }
 
-        public static int ToActiveState(this bool active)
+        public static int ToIntState(this bool active)
         {
             return active ? 1 : 0;
         }
+
+        public static RolesModel FillRoles(this RolesModel role, GroupRolesModel groupRoles)
+            => new RolesModel()
+            {
+                RoleId = role.RoleId,
+                Description = role.Description,
+                RoleName = role.RoleName,
+                GroleAdd = groupRoles.GroleAdd,
+                GroleEdit = groupRoles.GroleEdit,
+                GroleDelete = groupRoles.GroleDelete,
+                GroleView = groupRoles.GroleView,
+                GrolePrint = groupRoles.GrolePrint,
+                GroleExport = groupRoles.GroleExport
+            };
 
         public static string MD5(this string value)
         {

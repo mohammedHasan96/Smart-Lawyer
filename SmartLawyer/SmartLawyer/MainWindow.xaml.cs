@@ -37,14 +37,28 @@ namespace SmartLawyer
             //        GDescription = $"Group Description {random.Next(100000, 900000)}{random.Next(100000, 900000)}{random.Next(100000, 900000)}"
             //    });
             //    var r = random.Next(0, 12);
+            //    List<int> ids = new List<int>();
             //    for (int iw = 0; iw < r; iw++)
             //    {
+            //        var id = random.Next(1, 19);
+            //        while (ids.Contains(id))
+            //        {
+            //            id = random.Next(1, 19);
+            //        }
+            //        ids.Add(id);    
             //        var roleChangeValue = DataAccess.InsertGroupeRole(out var w, new GroupRolesModel()
             //        {
-            //            GroupId = (int)groupInsertId,
-            //            RoleId = random.Next(1, 19)
+            //            GrolrGIdFk = (int)groupInsertId,
+            //            GrolrRoleIdFk = id,
+            //            GroleAdd= random.Next(2),
+            //            GroleEdit= random.Next(2),
+            //            GroleDelete= random.Next(2),
+            //            GroleView= random.Next(2),
+            //            GrolePrint= random.Next(2),
+            //            GroleExport= random.Next(2)
             //        });
             //    }
+            //    ids.Clear();
             //}
             //DataAccess.DeleteGroupRoles(11);
             DataContext = VMMainWindow.Create();

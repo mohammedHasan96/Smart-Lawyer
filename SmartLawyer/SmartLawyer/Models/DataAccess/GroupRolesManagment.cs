@@ -28,7 +28,13 @@ namespace SmartLawyer.Models
             var changedCount = Insert(out var ID, GroupRolesTable.TableName, new ParamtersMap
             {
                 [GroupRolesTable.GrolrGIdFk] = groupRole.GrolrGIdFk,
-                [GroupRolesTable.GrolrRoleIdFk] = groupRole.GrolrRoleIdFk
+                [GroupRolesTable.GrolrRoleIdFk] = groupRole.GrolrRoleIdFk,
+                [GroupRolesTable.GroleAdd] = groupRole.GroleAdd,
+                [GroupRolesTable.GroleEdit] = groupRole.GroleEdit,
+                [GroupRolesTable.GroleDelete] = groupRole.GroleDelete,
+                [GroupRolesTable.GrolePrint] = groupRole.GrolePrint,
+                [GroupRolesTable.GroleView] = groupRole.GroleView,
+                [GroupRolesTable.GroleExport] = groupRole.GroleExport
             });
             insertId = ID;
             return changedCount;
@@ -38,7 +44,13 @@ namespace SmartLawyer.Models
             => Update(GroupRolesTable.TableName, new ParamtersMap
             {
                 [GroupRolesTable.GrolrGIdFk] = groupRole.GrolrGIdFk,
-                [GroupRolesTable.GrolrRoleIdFk] = groupRole.GrolrRoleIdFk
+                [GroupRolesTable.GrolrRoleIdFk] = groupRole.GrolrRoleIdFk,
+                [GroupRolesTable.GroleAdd] = groupRole.GroleAdd,
+                [GroupRolesTable.GroleEdit] = groupRole.GroleEdit,
+                [GroupRolesTable.GroleDelete] = groupRole.GroleDelete,
+                [GroupRolesTable.GrolePrint] = groupRole.GrolePrint,
+                [GroupRolesTable.GroleView] = groupRole.GroleView,
+                [GroupRolesTable.GroleExport] = groupRole.GroleExport
             }, $"{GroupRolesTable.GrolrRoleIdFk}={RoleId}");
 
         public static int DeleteGroupRoles(int GroupId)

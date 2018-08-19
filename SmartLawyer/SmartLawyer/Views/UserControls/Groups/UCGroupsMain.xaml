@@ -214,7 +214,6 @@
             </StackPanel>
         </StackPanel>
         <DockPanel>
-            
             <DataGrid Margin="5,5,5,5"
                       DockPanel.Dock="Right"
                       ItemsSource="{Binding GroupRolesSource}"
@@ -223,7 +222,7 @@
                       IsReadOnly="True"
                       FontSize="15"
                       AutoGenerateColumns="False"
-                      Width="400">
+                      Width="700">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="RoleId"
                                         Binding="{Binding RoleId}"
@@ -232,7 +231,80 @@
                                         Binding="{Binding RoleName}"
                                         Width="150" />
                     <DataGridTextColumn Header="Role Description"
-                                        Binding="{Binding Description}" />
+                                        Binding="{Binding Description}"
+                                        Width="*" />
+                    <DataGridTemplateColumn Header="Add"
+                                            Width="55"
+                                            IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel VerticalAlignment="Center"
+                                            HorizontalAlignment="Center">
+                                    <CheckBox IsChecked="{Binding GroleAdd, Converter={conv:IntegerToBoolConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Edit"
+                                            Width="55"
+                                            IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel VerticalAlignment="Center"
+                                            HorizontalAlignment="Center">
+                                    <CheckBox IsChecked="{Binding GroleEdit, Converter={conv:IntegerToBoolConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Delete"
+                                            Width="55"
+                                            IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel VerticalAlignment="Center"
+                                            HorizontalAlignment="Center">
+                                    <CheckBox IsChecked="{Binding GroleDelete, Converter={conv:IntegerToBoolConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="View"
+                                            Width="55"
+                                            IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel VerticalAlignment="Center"
+                                            HorizontalAlignment="Center">
+                                    <CheckBox IsChecked="{Binding GroleView, Converter={conv:IntegerToBoolConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Export"
+                                            Width="55"
+                                            IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel VerticalAlignment="Center"
+                                            HorizontalAlignment="Center">
+                                    <CheckBox IsChecked="{Binding GroleExport, Converter={conv:IntegerToBoolConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Print"
+                                            Width="55"
+                                            IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel VerticalAlignment="Center"
+                                            HorizontalAlignment="Center">
+                                    <CheckBox IsChecked="{Binding GrolePrint, Converter={conv:IntegerToBoolConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
             <DataGrid Margin="5,5,5,5"
@@ -284,7 +356,8 @@
                                         IsReadOnly="True" />
                     <DataGridTextColumn Binding="{Binding GDescription}"
                                         Header="Description"
-                                        IsReadOnly="True" />
+                                        IsReadOnly="True"
+                                        Width="*" />
                 </DataGrid.Columns>
             </DataGrid>
         </DockPanel>

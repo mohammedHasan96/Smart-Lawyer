@@ -76,7 +76,7 @@ namespace SmartLawyer.ViewModels
         public void MouseLeave(VMManagmentSystem obj)
         {
             if (obj != SelectedViewModel)
-                obj.ViewModelButtonColor = (Brush)(new BrushConverter().ConvertFromString(Values.SystemValues.MyColors.Default));
+                obj.ViewModelButtonColor = new BrushConverter().ConvertFromString(Values.SystemValues.MyColors.Default) as Brush;
         }
 
     }
