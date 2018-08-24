@@ -22,10 +22,9 @@ namespace SmartLawyer.Models
             var query = $@"SELECT * FROM {GroupRolesTable.TableName} WHERE {GroupRolesTable.GrolrGIdFk} = {groupId}";
             return SQLSelectAs<GroupRolesModel>(query, typeof(GroupRolesTable)).ToList();
         }
-#warning out thing
         public static int InsertGroupeRole(out long insertId, GroupRolesModel groupRole)
         {
-            var changedCount = Insert(out var ID, GroupRolesTable.TableName, new ParamtersMap
+            var changedCount = Insert(out insertId, GroupRolesTable.TableName, new ParamtersMap
             {
                 [GroupRolesTable.GrolrGIdFk] = groupRole.GrolrGIdFk,
                 [GroupRolesTable.GrolrRoleIdFk] = groupRole.GrolrRoleIdFk,
@@ -36,7 +35,6 @@ namespace SmartLawyer.Models
                 [GroupRolesTable.GroleView] = groupRole.GroleView,
                 [GroupRolesTable.GroleExport] = groupRole.GroleExport
             });
-            insertId = ID;
             return changedCount;
         }
 

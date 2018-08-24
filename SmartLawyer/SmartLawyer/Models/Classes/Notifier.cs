@@ -7,5 +7,6 @@ namespace SmartLawyer.Models.Classes
     {
         public int NotrPIdFk { get; set; }
         public int NotrNotIdFk { get; set; }
+        public int NotrPType { get; set; }
     }
 }

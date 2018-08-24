@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -22,6 +23,8 @@ namespace SmartLawyer.ViewModels.GroupsVMs
             = new ObservableCollection<RolesModel>();
         public GroupsModel AddedGroup = null;
         public List<GroupRolesModel> AddedGroupRoles = new List<GroupRolesModel>();
+        public virtual bool IsInProgress { get; set; } = false;
+
 
         public VMGroupsAdd(List<RolesModel> roles)
         {
@@ -30,51 +33,60 @@ namespace SmartLawyer.ViewModels.GroupsVMs
         public void Close(Window window)
         {
             window.DialogResult = false;
-            window.Close();
+            window.Close(); 
         }
 
         public void Add(Window window)
         {
-            if (GroupName == null)
+            IsInProgress = true;
+            new Thread(() =>
             {
-                MessageBox.Show("Group Name Cant be Empty !!");
-                return;
-            }
-            if (GroupDescription == null)
-                GroupDescription = "";
-            AddedGroup = new GroupsModel()
-            {
-                GName = GroupName,
-                GDescription = GroupDescription
-            };
-            var groupChangeValue = DataAccess.InsertGroup(out var groupInsertId, AddedGroup);
-            AddedGroup.GId = (int)groupInsertId;
-            if (groupChangeValue == 1)
-            {
-                foreach (var item in DataGridSource)
+                if (GroupName == null)
                 {
-                    if (item.IsChecked)
-                    {
-                        var groupRole = new GroupRolesModel()
-                        {
-                            GrolrGIdFk = item.RoleId,
-                            GrolrRoleIdFk = (int)groupInsertId,
-                            GroleAdd = item.GroleAdd,
-                            GroleEdit = item.GroleEdit,
-                            GroleDelete = item.GroleDelete,
-                            GroleView = item.GroleView,
-                            GrolePrint = item.GrolePrint,
-                            GroleExport = item.GroleExport
-                        };
-                        DataAccess.InsertGroupeRole(out var id, groupRole);
-                        AddedGroupRoles.Add(groupRole);
-                    }
+                    MessageBox.Show("Group Name Cant be Empty !!");
+                    return;
                 }
-                window.DialogResult = true;
-                window.Close();
-            }
-            else
-                MessageBox.Show("Field to add Group !!");
+                if (GroupDescription == null)
+                    GroupDescription = "";
+                AddedGroup = new GroupsModel()
+                {
+                    GName = GroupName,
+                    GDescription = GroupDescription
+                };
+                var groupChangeValue = DataAccess.InsertGroup(out var groupInsertId, AddedGroup);
+                AddedGroup.GId = (int)groupInsertId;
+                if (groupChangeValue == 1)
+                {
+                    foreach (var item in DataGridSource)
+                    {
+                        if (item.RoleSelected())
+                        {
+                            var groupRole = new GroupRolesModel()
+                            {
+                                GrolrRoleIdFk = item.RoleId,
+                                GrolrGIdFk = (int)groupInsertId,
+                                GroleAdd = item.GroleAdd,
+                                GroleEdit = item.GroleEdit,
+                                GroleDelete = item.GroleDelete,
+                                GroleView = item.GroleView,
+                                GrolePrint = item.GrolePrint,
+                                GroleExport = item.GroleExport
+                            };
+                            DataAccess.InsertGroupeRole(out var id, groupRole);
+                            AddedGroupRoles.Add(groupRole);
+                        }
+                    }
+                    IsInProgress = true;
+                    App.Current.Dispatcher.Invoke((Action)delegate
+                    {
+                        window.DialogResult = true;
+                        window.Close();
+                    });
+                }
+                else
+                    MessageBox.Show("Field to add Group !!");
+            }) { IsBackground = true }.Start();
+            
         }
 
         public void CheckAll()

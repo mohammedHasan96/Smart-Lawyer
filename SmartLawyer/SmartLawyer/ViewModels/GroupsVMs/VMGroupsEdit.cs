@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -21,6 +22,8 @@ namespace SmartLawyer.ViewModels.GroupsVMs
         public virtual String GroupDescription { get; set; }
         public ObservableCollection<RolesModel> DataGridSource { get; }
             = new ObservableCollection<RolesModel>();
+        public virtual bool IsInProgress { get; set; } = false;
+
         public GroupsModel EditGroup;
 
         public VMGroupsEdit(List<RolesModel> roles, GroupsModel group)
@@ -42,38 +45,47 @@ namespace SmartLawyer.ViewModels.GroupsVMs
 
         public void Edit(Window window)
         {
-            EditGroup = new GroupsModel()
+            IsInProgress = true;
+            new Thread(() =>
             {
-                GName = GroupName,
-                GDescription = GroupDescription
-            };
-            EditGroup.GId = Group.GId;
-            var groupChangeValue = DataAccess.UpdateGroup(Group.GId, EditGroup);
-            if (groupChangeValue == 1)
-            {
-                var r = DataAccess.DeleteGroupRoles(Group.GId);
-                foreach (var item in DataGridSource)
+                EditGroup = new GroupsModel()
                 {
-                    if (item.RoleSelected())
+                    GName = GroupName,
+                    GDescription = GroupDescription
+                };
+                EditGroup.GId = Group.GId;
+                var groupChangeValue = DataAccess.UpdateGroup(Group.GId, EditGroup);
+                if (groupChangeValue == 1)
+                {
+                    var r = DataAccess.DeleteGroupRoles(Group.GId);
+                    foreach (var item in DataGridSource)
                     {
-                        DataAccess.InsertGroupeRole(out var id, new GroupRolesModel()
+                        if (item.RoleSelected())
                         {
-                            GrolrRoleIdFk = item.RoleId,
-                            GrolrGIdFk = Group.GId,
-                            GroleAdd = item.GroleAdd,
-                            GroleEdit = item.GroleEdit,
-                            GroleDelete = item.GroleDelete,
-                            GroleView = item.GroleView,
-                            GrolePrint = item.GrolePrint,
-                            GroleExport = item.GroleExport
-                        });
+                            DataAccess.InsertGroupeRole(out var id, new GroupRolesModel()
+                            {
+                                GrolrRoleIdFk = item.RoleId,
+                                GrolrGIdFk = Group.GId,
+                                GroleAdd = item.GroleAdd,
+                                GroleEdit = item.GroleEdit,
+                                GroleDelete = item.GroleDelete,
+                                GroleView = item.GroleView,
+                                GrolePrint = item.GrolePrint,
+                                GroleExport = item.GroleExport
+                            });
+                        }
                     }
+                    IsInProgress = false;
+                    App.Current.Dispatcher.Invoke((Action)delegate
+                    {
+                        window.DialogResult = true;
+                        window.Close();
+                    });
                 }
-                window.DialogResult = true;
-                window.Close();
-            }
-            else
-                MessageBox.Show("Field to Edit Group !!");
+                else
+                    MessageBox.Show("Field to Edit Group !!");
+            })
+            { IsBackground = true }.Start();
         }
 
         public void CheckAll()

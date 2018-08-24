@@ -243,7 +243,8 @@
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Center"
                                                 HorizontalAlignment="Center">
-                                        <CheckBox IsChecked="{Binding GroleAdd, Converter={conv:IntegerToBoolConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                        <CheckBox IsHitTestVisible="False"
+                                                  IsChecked="{Binding GroleAdd, Converter={conv:IntegerToBoolConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -255,7 +256,8 @@
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Center"
                                                 HorizontalAlignment="Center">
-                                        <CheckBox IsChecked="{Binding GroleEdit, Converter={conv:IntegerToBoolConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                        <CheckBox IsHitTestVisible="False"
+                                                  IsChecked="{Binding GroleEdit, Converter={conv:IntegerToBoolConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -267,7 +269,8 @@
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Center"
                                                 HorizontalAlignment="Center">
-                                        <CheckBox IsChecked="{Binding GroleDelete, Converter={conv:IntegerToBoolConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                        <CheckBox IsHitTestVisible="False"
+                                                  IsChecked="{Binding GroleDelete, Converter={conv:IntegerToBoolConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -279,7 +282,8 @@
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Center"
                                                 HorizontalAlignment="Center">
-                                        <CheckBox IsChecked="{Binding GroleView, Converter={conv:IntegerToBoolConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                        <CheckBox IsHitTestVisible="False"
+                                                  IsChecked="{Binding GroleView, Converter={conv:IntegerToBoolConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -291,7 +295,8 @@
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Center"
                                                 HorizontalAlignment="Center">
-                                        <CheckBox IsChecked="{Binding GroleExport, Converter={conv:IntegerToBoolConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                        <CheckBox IsHitTestVisible="False"
+                                                  IsChecked="{Binding GroleExport, Converter={conv:IntegerToBoolConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -303,7 +308,8 @@
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Center"
                                                 HorizontalAlignment="Center">
-                                        <CheckBox IsChecked="{Binding GrolePrint, Converter={conv:IntegerToBoolConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                        <CheckBox IsHitTestVisible="False"
+                                                  IsChecked="{Binding GrolePrint, Converter={conv:IntegerToBoolConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

@@ -71,10 +71,10 @@ namespace SmartLawyer.ViewModels.PersonsVMs
                 PeName = FullName,
                 PeIdentity = PersonalId,
                 PeType = (int)SelectedPersonType.CId,
-                PhoneNo = PhoneNo,
-                MobileNo = MobileNo,
-                Email = EmailAdress,
-                Address = ""
+                //PhoneNo = PhoneNo,
+                //MobileNo = MobileNo,
+                //Email = EmailAdress,
+                //Address = ""
             };
             var personValueChange = DataAccess.InsertPerson(out var personId, AddedPerson);
             foreach (var item in AddedCommunication)

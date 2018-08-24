@@ -43,9 +43,9 @@ namespace SmartLawyer.ViewModels.PersonsVMs
             FullName = person.PeName;
             PersonalId = person.PeIdentity;
             SelectedPersonType.CId = person.PeType;
-            PhoneNo = person.PhoneNo;
-            MobileNo = person.MobileNo;
-            EmailAdress = person.Email;
+            //PhoneNo = person.PhoneNo;
+            //MobileNo = person.MobileNo;
+            //EmailAdress = person.Email;
           }
         public void Edit(Window window)
         {
@@ -83,10 +83,10 @@ namespace SmartLawyer.ViewModels.PersonsVMs
                 PeName = FullName,
                 PeIdentity = PersonalId,
                 PeType = (int)SelectedPersonType.CId,
-                PhoneNo = PhoneNo,
-                MobileNo = MobileNo,
-                Email = EmailAdress,
-                Address = ""
+                //PhoneNo = PhoneNo,
+                //MobileNo = MobileNo,
+                //Email = EmailAdress,
+                //Address = ""
             };
             var personValueChange = DataAccess.UpdatePerson(AddedPerson.PeId, AddedPerson);
             //foreach (var item in AddedCommunication)

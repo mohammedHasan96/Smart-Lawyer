@@ -46,6 +46,12 @@ namespace SmartLawyer.ViewModels.GroupsVMs
             foreach (var item in Roles)
             {
                 item.IsChecked = false;
+                item.GroleAdd = false.ToIntState();
+                item.GroleEdit = false.ToIntState();
+                item.GroleDelete = false.ToIntState();
+                item.GroleExport = false.ToIntState();
+                item.GrolePrint = false.ToIntState();
+                item.GroleView = false.ToIntState();
             }
             VGroupsAdd add = new VGroupsAdd(Roles);
             if (add.ShowDialog() == true)
@@ -56,6 +62,7 @@ namespace SmartLawyer.ViewModels.GroupsVMs
                     GroupRoles.Add(item);
                 }
             }
+            GroupRolesSource.Clear();
         }
 
         public void AdvancedSearchTogel()
@@ -132,10 +139,6 @@ namespace SmartLawyer.ViewModels.GroupsVMs
                         Roles[i].GroleView = false.ToIntState();
                     }
                 }
-                //foreach (var role in GroupRolesSource)
-                //{
-                //    Roles[Roles.IndexOf(role)].Checked = true;
-                //}
                 VGroupsEdit edit = new VGroupsEdit(Roles, item);
                 if (edit.ShowDialog() == true)
                 {
@@ -145,6 +148,7 @@ namespace SmartLawyer.ViewModels.GroupsVMs
                     GroupRoles.RemoveAll(x => x.GrolrGIdFk == item.GId);
                     GroupRoles.AddRange(dataContext.DataGridSource.Where(x => x.RoleSelected()).Select(x => x.ToGroupRoles(item.GId)));
                 }
+                GroupRolesSource.Clear();
             }
         }
 
@@ -158,6 +162,7 @@ namespace SmartLawyer.ViewModels.GroupsVMs
 
         public void Refresh()
         {
+            GroupRoles.Clear();
             new Thread(() =>
             {
                 List<GroupsModel> dataSource = null;
@@ -206,7 +211,8 @@ namespace SmartLawyer.ViewModels.GroupsVMs
                 foreach (var item in roles)
                 {
                     var role = Roles.Where(x => x.RoleId == item.GrolrRoleIdFk).FirstOrDefault();
-                    GroupRolesSource.Add(role.FillRoles(item));
+                    if (role != null)
+                        GroupRolesSource.Add(role.FillRoles(item));
                 }
             }
 

@@ -46,7 +46,7 @@ namespace SmartLawyer.ViewModels.UsersVMs
 
         public List<GroupRolesModel> GroupRoles { get; private set; } = new List<GroupRolesModel>();
         public List<RolesModel> Roles { get; private set; } = new List<RolesModel>();
-        public bool IsInProgress { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public bool IsInProgress { get; set; }
 
         List<PersonsModel> Persons = new List<PersonsModel>();
         List<PersonsAddressModel> PersonsAddress = new List<PersonsAddressModel>();

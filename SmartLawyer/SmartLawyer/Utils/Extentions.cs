@@ -54,10 +54,10 @@ namespace SmartLawyer.Utils
                 GroleExport = groupRoles.GroleExport
             };
 
-        public static GroupRolesModel ToGroupRoles(this RolesModel role, int id)
+        public static GroupRolesModel ToGroupRoles(this RolesModel role, int groupId)
             => new GroupRolesModel()
             {
-                GrolrGIdFk= id,
+                GrolrGIdFk= groupId,
                 GrolrRoleIdFk = role.RoleId,
                 GroleAdd = role.GroleAdd,
                 GroleEdit = role.GroleEdit,
@@ -183,20 +183,20 @@ namespace SmartLawyer.Utils
         {
             PersonsModel person = new PersonsModel();
 
-            if (!item[PersonsTable.PeName].GetType().Name.Equals("DBNull"))
-                person.PeName = item[PersonsTable.PeName].ToString();
+            //if (!item[PersonsTable.PeName].GetType().Name.Equals("DBNull"))
+            //    person.PeName = item[PersonsTable.PeName].ToString();
 
-            if (!item[PersonsTable.PeId].GetType().Name.Equals("DBNull"))
-                person.PeId = Convert.ToInt64(item[PersonsTable.PeId]);
+            //if (!item[PersonsTable.PeId].GetType().Name.Equals("DBNull"))
+            //    person.PeId = Convert.ToInt64(item[PersonsTable.PeId]);
 
-            if (!item[PersonsTable.PeAddress].GetType().Name.Equals("DBNull"))
-                person.PeAddress = Convert.ToInt64(item[PersonsTable.PeAddress]);
+            //if (!item[PersonsTable.PeAddress].GetType().Name.Equals("DBNull"))
+            //    person.PeAddress = Convert.ToInt64(item[PersonsTable.PeAddress]);
 
-            if (!item[PersonsTable.PeIdentity].GetType().Name.Equals("DBNull"))
-                person.PeIdentity = Convert.ToInt32(item[PersonsTable.PeIdentity]);
+            //if (!item[PersonsTable.PeIdentity].GetType().Name.Equals("DBNull"))
+            //    person.PeIdentity = Convert.ToInt32(item[PersonsTable.PeIdentity]);
 
-            if (!item[PersonsTable.PeType].GetType().Name.Equals("DBNull"))
-                person.PeType = Convert.ToInt32(item[PersonsTable.PeType]);
+            //if (!item[PersonsTable.PeType].GetType().Name.Equals("DBNull"))
+            //    person.PeType = Convert.ToInt32(item[PersonsTable.PeType]);
 
             return person;
         }

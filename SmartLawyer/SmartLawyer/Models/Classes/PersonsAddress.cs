@@ -8,6 +8,7 @@ namespace SmartLawyer.Models.Classes
         public int PeAdId { get; set; }
         public String PeAdCity { get; set; }
         public String PeAdStreetName { get; set; }
-        public int PeAdPerIdFk { get; set; }
+        public long PeAdPerIdFk { get; set; }
+        public int AdType { get; set; }
     }
 }

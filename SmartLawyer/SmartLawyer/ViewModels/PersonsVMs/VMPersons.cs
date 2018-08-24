@@ -49,7 +49,7 @@ namespace SmartLawyer.ViewModels.PersonVMs
         public virtual bool DeletePopup { get; set; }
         public virtual Brush ViewModelButtonColor { get; set; } = (Brush)(new BrushConverter().ConvertFromString(SystemValues.MyColors.Default));
         public virtual object MainContentValue { get; set; } = new UCPersonsMain();
-        public bool IsInProgress { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public bool IsInProgress { get; set; }
 
         List<PersonsModel> Persons = new List<PersonsModel>();
         List<PersonsAddressModel> PersonsAddress = new List<PersonsAddressModel>();
@@ -121,16 +121,16 @@ namespace SmartLawyer.ViewModels.PersonVMs
         {
             var person = new PersonsModel()
             {
-                Email = SelectedDataItem.Email,
-                MobileNo = SelectedDataItem.MobileNo,
-                PeId = SelectedDataItem.PeId,
-                Address = SelectedDataItem.Address,
-                IsChecked = SelectedDataItem.IsChecked,
-                PeAddress = SelectedDataItem.PeAddress,
-                PeIdentity = SelectedDataItem.PeIdentity,
-                PeName = SelectedDataItem.PeName,
-                PeType = SelectedDataItem.PeType,
-                PhoneNo = SelectedDataItem.PhoneNo
+                //Email = SelectedDataItem.Email,
+                //MobileNo = SelectedDataItem.MobileNo,
+                //PeId = SelectedDataItem.PeId,
+                //Address = SelectedDataItem.Address,
+                //IsChecked = SelectedDataItem.IsChecked,
+                //PeAddress = SelectedDataItem.PeAddress,
+                //PeIdentity = SelectedDataItem.PeIdentity,
+                //PeName = SelectedDataItem.PeName,
+                //PeType = SelectedDataItem.PeType,
+                //PhoneNo = SelectedDataItem.PhoneNo
             };
             VPersonEdit edit = new VPersonEdit(person, PersonsTypes);
             if (edit.ShowDialog() == true)
@@ -163,7 +163,7 @@ namespace SmartLawyer.ViewModels.PersonVMs
                     CommTypes = DataAccess.CodesData(SystemValues.MasterSystemConstants.CommunicationType);
                     foreach (var item in Persons)
                     {
-                        item.Address = PersonsAddress.Where(x => x.PeAdId == item.PeId).FirstOrDefault()?.ToString();
+                        //item.Address = PersonsAddress.Where(x => x.PeAdId == item.PeId).FirstOrDefault()?.ToString();
                         var communication = PersonsCommunication.Where(x => x.CoPeIdFk == item.PeId);
                         //item.PhoneNo = communication.Where(x => x.CoName.Equals(SystemValues.Communications.Phone)).FirstOrDefault()?.CoValue;
                         //item.MobileNo = communication.Where(x => x.CoName.Equals(SystemValues.Communications.Mobile)).FirstOrDefault()?.CoValue;

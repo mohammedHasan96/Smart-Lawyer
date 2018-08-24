@@ -6,13 +6,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SmartLawyer.Views.Groups"
         xmlns:conv="clr-namespace:SmartLawyer.Converters"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
         Title="VGroupsEdit"
         Height="530"
         Width="800"
         SizeToContent="WidthAndHeight"
         ResizeMode="NoResize">
-    <Border BorderBrush="Gray"
+    <Grid>
+        <Border BorderBrush="Gray"
             BorderThickness="1"
             Margin="5"
             Padding="0 0 0 10">
@@ -140,4 +142,10 @@
             </StackPanel>
         </StackPanel>
     </Border>
+        <DockPanel Background="#99ffffff"
+                   Visibility="{Binding IsInProgress, Converter={conv:BoolToVisibility}}">
+            <Controls:ProgressRing Foreground="Gray"
+                                   IsActive="{Binding IsInProgress}" />
+        </DockPanel>
+    </Grid>
 </Window>
