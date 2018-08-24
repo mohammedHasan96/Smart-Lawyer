@@ -15,5 +15,8 @@ namespace SmartLawyer.Models.Classes
         public int GroleDelete { get; set; }
         public int GrolePrint { get; set; }
         public int GroleExport { get; set; }
+
+        public bool RoleSelected()
+            => (GroleAdd + GroleDelete + GroleEdit + GroleExport + GrolePrint + GroleView) > 0 ? true : false;
     }
 }

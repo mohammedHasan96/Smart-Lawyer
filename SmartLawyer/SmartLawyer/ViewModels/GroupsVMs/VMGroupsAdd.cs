@@ -55,7 +55,17 @@ namespace SmartLawyer.ViewModels.GroupsVMs
                 {
                     if (item.IsChecked)
                     {
-                        var groupRole = new GroupRolesModel() { GrolrGIdFk = item.RoleId, GrolrRoleIdFk = (int)groupInsertId };
+                        var groupRole = new GroupRolesModel()
+                        {
+                            GrolrGIdFk = item.RoleId,
+                            GrolrRoleIdFk = (int)groupInsertId,
+                            GroleAdd = item.GroleAdd,
+                            GroleEdit = item.GroleEdit,
+                            GroleDelete = item.GroleDelete,
+                            GroleView = item.GroleView,
+                            GrolePrint = item.GrolePrint,
+                            GroleExport = item.GroleExport
+                        };
                         DataAccess.InsertGroupeRole(out var id, groupRole);
                         AddedGroupRoles.Add(groupRole);
                     }

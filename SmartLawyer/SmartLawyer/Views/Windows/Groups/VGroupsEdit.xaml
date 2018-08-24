@@ -29,7 +29,7 @@
                        Margin="10 10 0 10 " />
             <DataGrid Margin="10,5"
                       DockPanel.Dock="Right"
-                      ItemsSource="{Binding GroupRolesSource}"
+                      ItemsSource="{Binding DataGridSource}"
                       CanUserAddRows="False"
                       CanUserDeleteRows="False"
                       IsReadOnly="True"

@@ -35,6 +35,7 @@ namespace SmartLawyer.ViewModels.SystemConstantsVMs
         public virtual String ConstantValue { get; set; }
         public virtual String ConstantDesc { get; set; }
         public virtual List<CodesModel> SystemConstants { get; set; } = new List<CodesModel>();
+        public bool IsInProgress { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public void SelectIndexChanged()
         {
@@ -88,14 +89,14 @@ namespace SmartLawyer.ViewModels.SystemConstantsVMs
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
+                    IsInProgress = true;
                     var deleteList = DataGridSource.Where(x => x.IsChecked).ToList();
                     foreach (var item in deleteList)
                     {
                         DataAccess.DeleteCode(item.CId);
                         DataGridSource.Remove(item);
                     }
-
-
+                    IsInProgress = false;
                 }
             }
         }

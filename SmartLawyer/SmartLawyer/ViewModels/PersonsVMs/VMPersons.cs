@@ -49,6 +49,7 @@ namespace SmartLawyer.ViewModels.PersonVMs
         public virtual bool DeletePopup { get; set; }
         public virtual Brush ViewModelButtonColor { get; set; } = (Brush)(new BrushConverter().ConvertFromString(SystemValues.MyColors.Default));
         public virtual object MainContentValue { get; set; } = new UCPersonsMain();
+        public bool IsInProgress { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         List<PersonsModel> Persons = new List<PersonsModel>();
         List<PersonsAddressModel> PersonsAddress = new List<PersonsAddressModel>();

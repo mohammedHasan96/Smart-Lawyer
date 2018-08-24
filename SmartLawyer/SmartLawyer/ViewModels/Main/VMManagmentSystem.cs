@@ -9,7 +9,7 @@ using System.Windows.Media;
 
 namespace SmartLawyer.ViewModels.Main
 {
-    public interface VMManagmentSystem 
+    public interface VMManagmentSystem
     {
         #region Properties
         String Title { get; set; }
@@ -21,6 +21,7 @@ namespace SmartLawyer.ViewModels.Main
         bool DeletePopup { get; set; }
         Brush ViewModelButtonColor { get; set; }
         object MainContentValue { get; set; }
+        bool IsInProgress { get; set; }
         #endregion
 
         #region Commands

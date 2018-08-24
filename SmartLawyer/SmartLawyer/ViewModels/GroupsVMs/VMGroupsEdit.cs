@@ -14,16 +14,16 @@ namespace SmartLawyer.ViewModels.GroupsVMs
 {
     public class VMGroupsEdit
     {
-        public static VMGroupsEdit Create(List<RolesModel> roles,GroupsModel group)
-            => ViewModelSource.Create(() => new VMGroupsEdit(roles,group));
+        public static VMGroupsEdit Create(List<RolesModel> roles, GroupsModel group)
+            => ViewModelSource.Create(() => new VMGroupsEdit(roles, group));
         public virtual GroupsModel Group { get; set; }
         public virtual String GroupName { get; set; }
         public virtual String GroupDescription { get; set; }
         public ObservableCollection<RolesModel> DataGridSource { get; }
             = new ObservableCollection<RolesModel>();
-        public GroupsModel EditGroup ;
+        public GroupsModel EditGroup;
 
-        public VMGroupsEdit(List<RolesModel> roles,GroupsModel group)
+        public VMGroupsEdit(List<RolesModel> roles, GroupsModel group)
         {
             Group = group;
             PresentGroup(group);
@@ -47,15 +47,26 @@ namespace SmartLawyer.ViewModels.GroupsVMs
                 GName = GroupName,
                 GDescription = GroupDescription
             };
+            EditGroup.GId = Group.GId;
             var groupChangeValue = DataAccess.UpdateGroup(Group.GId, EditGroup);
             if (groupChangeValue == 1)
             {
-                DataAccess.DeleteGroupRoles(Group.GId);
+                var r = DataAccess.DeleteGroupRoles(Group.GId);
                 foreach (var item in DataGridSource)
                 {
-                    if (item.IsChecked)
+                    if (item.RoleSelected())
                     {
-                        DataAccess.InsertGroupeRole(out var id, new GroupRolesModel() { GrolrGIdFk = item.RoleId, GrolrRoleIdFk = Group.GId });
+                        DataAccess.InsertGroupeRole(out var id, new GroupRolesModel()
+                        {
+                            GrolrRoleIdFk = item.RoleId,
+                            GrolrGIdFk = Group.GId,
+                            GroleAdd = item.GroleAdd,
+                            GroleEdit = item.GroleEdit,
+                            GroleDelete = item.GroleDelete,
+                            GroleView = item.GroleView,
+                            GrolePrint = item.GrolePrint,
+                            GroleExport = item.GroleExport
+                        });
                     }
                 }
                 window.DialogResult = true;

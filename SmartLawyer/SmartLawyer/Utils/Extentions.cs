@@ -54,6 +54,20 @@ namespace SmartLawyer.Utils
                 GroleExport = groupRoles.GroleExport
             };
 
+        public static GroupRolesModel ToGroupRoles(this RolesModel role, int id)
+            => new GroupRolesModel()
+            {
+                GrolrGIdFk= id,
+                GrolrRoleIdFk = role.RoleId,
+                GroleAdd = role.GroleAdd,
+                GroleEdit = role.GroleEdit,
+                GroleDelete = role.GroleDelete,
+                GroleView = role.GroleView,
+                GrolePrint = role.GrolePrint,
+                GroleExport = role.GroleExport
+            };
+
+
         public static string MD5(this string value)
         {
             var bytes = Encoding.UTF8.GetBytes(value);

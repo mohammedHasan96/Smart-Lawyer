@@ -45,17 +45,17 @@ namespace SmartLawyer
             //        {
             //            id = random.Next(1, 19);
             //        }
-            //        ids.Add(id);    
+            //        ids.Add(id);
             //        var roleChangeValue = DataAccess.InsertGroupeRole(out var w, new GroupRolesModel()
             //        {
             //            GrolrGIdFk = (int)groupInsertId,
             //            GrolrRoleIdFk = id,
-            //            GroleAdd= random.Next(2),
-            //            GroleEdit= random.Next(2),
-            //            GroleDelete= random.Next(2),
-            //            GroleView= random.Next(2),
-            //            GrolePrint= random.Next(2),
-            //            GroleExport= random.Next(2)
+            //            GroleAdd = random.Next(2),
+            //            GroleEdit = random.Next(2),
+            //            GroleDelete = random.Next(2),
+            //            GroleView = random.Next(2),
+            //            GrolePrint = random.Next(2),
+            //            GroleExport = random.Next(2)
             //        });
             //    }
             //    ids.Clear();

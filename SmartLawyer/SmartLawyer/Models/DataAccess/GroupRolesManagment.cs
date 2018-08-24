@@ -22,7 +22,7 @@ namespace SmartLawyer.Models
             var query = $@"SELECT * FROM {GroupRolesTable.TableName} WHERE {GroupRolesTable.GrolrGIdFk} = {groupId}";
             return SQLSelectAs<GroupRolesModel>(query, typeof(GroupRolesTable)).ToList();
         }
-
+#warning out thing
         public static int InsertGroupeRole(out long insertId, GroupRolesModel groupRole)
         {
             var changedCount = Insert(out var ID, GroupRolesTable.TableName, new ParamtersMap

@@ -36,6 +36,7 @@ namespace SmartLawyer.ViewModels.GroupsVMs
         public virtual object MainContentValue { get; set; } = new UCGroupsMain();
         public ObservableCollection<RolesModel> GroupRolesSource { get; }
             = new ObservableCollection<RolesModel>();
+        public virtual bool IsInProgress { get; set; } = false;
 
         public List<GroupRolesModel> GroupRoles { get; private set; } = new List<GroupRolesModel>();
         public List<RolesModel> Roles { get; private set; } = new List<RolesModel>();
@@ -76,15 +77,22 @@ namespace SmartLawyer.ViewModels.GroupsVMs
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
-                    foreach (var item in DataGridSource)
+                    IsInProgress = true;
+                    new Thread(() =>
                     {
-                        if (item.IsChecked)
+                        foreach (var item in DataGridSource)
                         {
-                            DataAccess.DeleteGroup(item.GId);
-                            DataAccess.DeleteGroupRoles(item.GId);
+                            if (item.IsChecked)
+                            {
+                                DataAccess.DeleteGroup(item.GId);
+                                DataAccess.DeleteGroupRoles(item.GId);
+                            }
                         }
-                    }
-                    DataGridSource.ReFill(DataGridSource.Where(x => !x.IsChecked).ToList());
+                        DataGridSource.ReFill(DataGridSource.Where(x => !x.IsChecked).ToList());
+                        IsInProgress = false;
+                    })
+                    { IsBackground = true }.Start();
+                    GroupRolesSource.Clear();
                 }
             }
         }
@@ -101,7 +109,8 @@ namespace SmartLawyer.ViewModels.GroupsVMs
                 var item = SelectedDataItem;
                 for (int i = 0; i < Roles.Count; i++)
                 {
-                    if (GroupRolesSource.Contains(Roles[i]))
+                    var role = GroupRolesSource.Where(x => x.RoleId == Roles[i].RoleId).FirstOrDefault();
+                    if (role != null)
                     {
                         var groupRoles = GroupRoles.Where(x => x.GrolrRoleIdFk == Roles[i].RoleId && x.GrolrGIdFk == item.GId).FirstOrDefault();
                         Roles[i].IsChecked = true;
@@ -122,7 +131,6 @@ namespace SmartLawyer.ViewModels.GroupsVMs
                         Roles[i].GrolePrint = false.ToIntState();
                         Roles[i].GroleView = false.ToIntState();
                     }
-
                 }
                 //foreach (var role in GroupRolesSource)
                 //{
@@ -134,6 +142,8 @@ namespace SmartLawyer.ViewModels.GroupsVMs
                     var dataContext = edit.DataContext as VMGroupsEdit;
                     DataGridSource.Remove(SelectedDataItem);
                     DataGridSource.Add(dataContext.EditGroup);
+                    GroupRoles.RemoveAll(x => x.GrolrGIdFk == item.GId);
+                    GroupRoles.AddRange(dataContext.DataGridSource.Where(x => x.RoleSelected()).Select(x => x.ToGroupRoles(item.GId)));
                 }
             }
         }
@@ -153,9 +163,10 @@ namespace SmartLawyer.ViewModels.GroupsVMs
                 List<GroupsModel> dataSource = null;
                 Thread inProgress = new Thread(() =>
                 {
+                    IsInProgress = true;
                     dataSource = DataAccess.GroupsData();
-                        GroupRoles = DataAccess.GroupRolesData();
-                        Roles = DataAccess.RolesData();
+                    GroupRoles = DataAccess.GroupRolesData();
+                    Roles = DataAccess.RolesData();
                 })
                 { IsBackground = true };
 
@@ -175,8 +186,10 @@ namespace SmartLawyer.ViewModels.GroupsVMs
                 }
                 RotateAngle = 0;
                 DataGridSource.ReFill(dataSource);
+                IsInProgress = false;
             })
             { IsBackground = true }.Start();
+            GroupRolesSource.Clear();
         }
 
         public void View()
