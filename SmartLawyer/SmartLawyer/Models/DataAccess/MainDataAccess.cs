@@ -43,7 +43,7 @@ namespace SmartLawyer.Models
             });
         }
 
-        static void testUpdate(int targetID)
+        static void TestUpdate(int targetID)
         {
 
             /*

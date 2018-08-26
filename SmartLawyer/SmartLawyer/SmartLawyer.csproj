@@ -116,6 +116,7 @@
     <Compile Include="Models\Classes\AppealsSlander.cs" />
     <Compile Include="Models\Classes\CheckableViewModelBase.cs" />
     <Compile Include="Models\Classes\Codes.cs" />
+    <Compile Include="Models\Classes\CommModel.cs" />
     <Compile Include="Models\Classes\Contract.cs" />
     <Compile Include="Models\Classes\ContractParty.cs" />
     <Compile Include="Models\Classes\Deal.cs" />

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -45,34 +46,47 @@ namespace SmartLawyer.ViewModels.PersonsVMs
         }
         public void Add(Window window)
         {
+            IsInProgress = true;
+            new Thread(() =>
+            {
+                AddedPerson = new PersonsModel()
+                {
+                    PeName = FullName,
+                    PeIdentity = PersonalId,
+                    PeType = (int)SelectedPersonType.CId,
+                    PeAddress = ""
+                    //PhoneNo = PhoneNo,
+                    //MobileNo = MobileNo,
+                    //Email = EmailAdress,
+                    //Address = ""
+                };
+                var personValueChange = DataAccess.InsertPerson(out var personId, AddedPerson);
+                AddedPerson.PeId = personId;
+                foreach (var item in CommunicationSource)
+                {
+                    item.CoPeIdFk = personId;
+                    var commValueChange = DataAccess.InsertPersonCommunication(out var id, item);
+                    AddedCommunication.Add(item);
+                }
+                var address = new PersonsAddressModel()
+                {
+                    PeAdCity = City,
+                    PeAdStreetName = Adress,
+                    PeAdPerIdFk = AddedPerson.PeId
+                };
+                DataAccess.InsertPersonAddress(out var adressId, address);
+                AddedAddress.Add(address);
+                IsInProgress = false;
+                App.Current.Dispatcher.Invoke(() =>
+                {
+                    window.DialogResult = true;
+                    window.Close();
+                });
 
-            AddedPerson = new PersonsModel()
-            {
-                PeName = FullName,
-                PeIdentity = PersonalId,
-                PeType = (int)SelectedPersonType.CId,
-                PeAddress = ""
-                //PhoneNo = PhoneNo,
-                //MobileNo = MobileNo,
-                //Email = EmailAdress,
-                //Address = ""
-            };
-            var personValueChange = DataAccess.InsertPerson(out var personId, AddedPerson);
-            AddedPerson.PeId = personId;
-            foreach (var item in CommunicationSource)
-            {
-                item.CoPeIdFk = personId;
-                var commValueChange = DataAccess.InsertPersonCommunication(out var id, item);
-                AddedCommunication.Add(item);
-            }
-            DataAccess.InsertPersonAddress(out var adressId, new PersonsAddressModel()
-            {
-                PeAdCity = City,
-                PeAdStreetName = Adress,
-                PeAdPerIdFk = AddedPerson.PeId
-            });
-            window.DialogResult = true;
-            window.Close();
+            })
+            { IsBackground = true }.Start();
+
+
         }
 
         public void Close(Window window)

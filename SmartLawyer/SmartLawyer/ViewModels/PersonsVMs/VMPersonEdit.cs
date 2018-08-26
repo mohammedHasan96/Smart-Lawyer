@@ -26,11 +26,11 @@ namespace SmartLawyer.ViewModels.PersonsVMs
         public virtual CodesModel SelectedPersonType { get; set; }
         public ObservableCollection<CodesModel> PersonTypeSource { get; }
             = new ObservableCollection<CodesModel>();
-        public ObservableCollection<PersonsCommunicationModel> CommunicationSource { get; }
-           = new ObservableCollection<PersonsCommunicationModel>();
+        public ObservableCollection<CommModel> CommunicationSource { get; }
+           = new ObservableCollection<CommModel>();
         public ObservableCollection<CodesModel> CommunicationCodeSource { get; }
             = new ObservableCollection<CodesModel>();
-        public virtual PersonsCommunicationModel SelectedCommItem { get; set; }
+        public virtual CommModel SelectedCommItem { get; set; }
         public virtual bool IsInProgress { get; set; }
         public PersonsModel EditedPerson { get; set; }
         public List<PersonsAddressModel> AddedAddress { get; set; } = new List<PersonsAddressModel>();
@@ -38,23 +38,29 @@ namespace SmartLawyer.ViewModels.PersonsVMs
 
         public VMPersonEdit(PersonsModel person, List<CodesModel> PersonTypes, List<CodesModel> CommTypes, List<PersonsCommunicationModel> PersonCommunications)
         {
+            //SystemValues.CommTypes = CommTypes;
             PersonTypeSource.ReFill(PersonTypes);
             EditedPerson = person;
             PresentPerson(person);
             CommunicationCodeSource.ReFill(CommTypes);
-            CommunicationSource.ReFill(PersonCommunications);
+            foreach (var item in PersonCommunications)
+            {
+                CommunicationSource.Add((item, CommTypes));
+            }
+            //CommunicationSource.ReFill(PersonCommunications);
         }
 
         void PresentPerson(PersonsModel person)
         {
-            SelectedPersonType = new CodesModel();
+            var adress = person.PeAddress.Split(new String[] { "-" }, StringSplitOptions.RemoveEmptyEntries);
+            SelectedPersonType = PersonTypeSource.Where(x => x.CId == person.PeType).FirstOrDefault();
             FullName = person.PeName;
             PersonalId = person.PeIdentity;
-            SelectedPersonType.CId = person.PeType;
-
-            //PhoneNo = person.PhoneNo;
-            //MobileNo = person.MobileNo;
-            //EmailAdress = person.Email;
+            if (adress != null && adress.Length == 2)
+            {
+                City = adress[0];
+                Adress = adress[1];
+            }
         }
         public void Edit(Window window)
         {
@@ -84,6 +90,15 @@ namespace SmartLawyer.ViewModels.PersonsVMs
                         var commValueChange = DataAccess.InsertPersonCommunication(out var id, item);
                         AddedCommunication.Add(item);
                     }
+                    var addressChangeValue = DataAccess.DeletePersonAddress(peId);
+                    var address = new PersonsAddressModel()
+                    {
+                        PeAdCity = City,
+                        PeAdStreetName = Adress,
+                        PeAdPerIdFk = EditedPerson.PeId
+                    };
+                    DataAccess.InsertPersonAddress(out var adressId, address);
+                    AddedAddress.Add(address);
                 }
                 IsInProgress = false;
                 App.Current.Dispatcher.Invoke((Action)delegate
@@ -103,7 +118,7 @@ namespace SmartLawyer.ViewModels.PersonsVMs
 
         public void AddComm()
         {
-            CommunicationSource.Add(PersonsCommunicationModel.Create());
+            CommunicationSource.Add(CommModel.Create());
         }
         public void DeleteComm()
         {

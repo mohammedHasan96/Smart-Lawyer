@@ -51,10 +51,10 @@
                                       ItemsSource="{Binding PersonTypeSource}" />
                             <TextBox Width="250"
                                      Margin="5"
-                                     Text="{Binding FullName}" />
+                                     Text="{Binding City}" />
                             <TextBox Width="250"
                                      Margin="5"
-                                     Text="{Binding PersonalId}" />
+                                     Text="{Binding Adress}" />
                         </StackPanel>
                     </StackPanel>
                 </GroupBox>

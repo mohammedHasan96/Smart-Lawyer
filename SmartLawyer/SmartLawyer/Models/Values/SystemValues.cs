@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SmartLawyer.Models.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,5 +31,7 @@ namespace SmartLawyer.Models.Values
             public static String Mobile { get; set; } = "Mobile Number";
             public static String Emial { get; set; } = "Email Address";
         }
+        //public static List<CodesModel> CommTypes { get; set; } = new List<CodesModel>();
+        //public static List<CodesModel> PersonTypes { get; set; } = new List<CodesModel>();
     }
 }

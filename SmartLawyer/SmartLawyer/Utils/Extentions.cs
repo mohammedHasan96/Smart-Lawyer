@@ -57,7 +57,7 @@ namespace SmartLawyer.Utils
         public static GroupRolesModel ToGroupRoles(this RolesModel role, int groupId)
             => new GroupRolesModel()
             {
-                GrolrGIdFk= groupId,
+                GrolrGIdFk = groupId,
                 GrolrRoleIdFk = role.RoleId,
                 GroleAdd = role.GroleAdd,
                 GroleEdit = role.GroleEdit,
@@ -67,6 +67,15 @@ namespace SmartLawyer.Utils
                 GroleExport = role.GroleExport
             };
 
+        public static PersonsCommunicationModel ToPersonsCommunication(CommModel commModel)
+            => new PersonsCommunicationModel()
+            {
+                CoId = commModel.CoId,
+                CoIsMain = commModel.CoIsMain,
+                CoNameCfk = commModel.CoNameCfk.ToString(),
+                CoPeIdFk = commModel.CoPeIdFk,
+                CoValue = commModel.CoValue
+            };
 
         public static string MD5(this string value)
         {
