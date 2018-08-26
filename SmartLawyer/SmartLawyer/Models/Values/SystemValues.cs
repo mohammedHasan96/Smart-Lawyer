@@ -26,9 +26,9 @@ namespace SmartLawyer.Models.Values
         }
         public static class Communications
         {
-            public static String Phone { get; set; } = "PhoneNo";
-            public static String Mobile { get; set; } = "MobileNo";
-            public static String Emial { get; set; } = "EmailAddress";
+            public static String Phone { get; set; } = "Phone Number";
+            public static String Mobile { get; set; } = "Mobile Number";
+            public static String Emial { get; set; } = "Email Address";
         }
     }
 }

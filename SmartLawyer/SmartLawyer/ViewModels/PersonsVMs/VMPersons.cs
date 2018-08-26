@@ -33,7 +33,7 @@ namespace SmartLawyer.ViewModels.PersonVMs
         }
 
 
-        
+
 
 
         public virtual string Title { get; set; } = "PersonsTitle".GetDictionaryValue();
@@ -49,7 +49,9 @@ namespace SmartLawyer.ViewModels.PersonVMs
         public virtual bool DeletePopup { get; set; }
         public virtual Brush ViewModelButtonColor { get; set; } = (Brush)(new BrushConverter().ConvertFromString(SystemValues.MyColors.Default));
         public virtual object MainContentValue { get; set; } = new UCPersonsMain();
-        public bool IsInProgress { get; set; }
+        public virtual bool IsInProgress { get; set; } = false;
+        [BindableProperty(OnPropertyChangedMethodName = nameof(CheckAllChanged), OnPropertyChangingMethodName = nameof(CheckAllChanging))]
+        public virtual bool IsCheckAll { get; set; }
 
         List<PersonsModel> Persons = new List<PersonsModel>();
         List<PersonsAddressModel> PersonsAddress = new List<PersonsAddressModel>();
@@ -59,15 +61,22 @@ namespace SmartLawyer.ViewModels.PersonVMs
 
         public void Add()
         {
-            VPersonAdd add = new VPersonAdd(PersonsTypes);
+            VPersonAdd add = new VPersonAdd(PersonsTypes, CommTypes);
             if (add.ShowDialog() == true)
             {
                 var dataContext = (add.DataContext as VMPersonAdd);
-                foreach (var item in dataContext.AddedCommunication)
-                {
-                    PersonsCommunication.Add(item);
-                }
-                Persons.Add(dataContext.AddedPerson);
+                PersonsCommunication.AddRange(dataContext.AddedCommunication);
+                var AddedPerson = dataContext.AddedPerson;
+                var adress = PersonsAddress.Where(x => x.PeAdId == AddedPerson.PeId).FirstOrDefault();
+                if (adress != null)
+                    AddedPerson.PeAddress = $"{adress.PeAdCity} - {adress.PeAdStreetName}";
+                AddedPerson.Type = PersonsTypes.Where(x => x.CId == AddedPerson.PeType).FirstOrDefault().CName;
+                var communication = PersonsCommunication.Where(x => x.CoPeIdFk == AddedPerson.PeId);
+                AddedPerson.PhoneNo = communication.Where(x => x.CoNameCfk.Equals(SystemValues.Communications.Phone)).FirstOrDefault()?.CoValue;
+                AddedPerson.MobileNo = communication.Where(x => x.CoNameCfk.Equals(SystemValues.Communications.Mobile)).FirstOrDefault()?.CoValue;
+                AddedPerson.Email = communication.Where(x => x.CoNameCfk.Equals(SystemValues.Communications.Emial)).FirstOrDefault()?.CoValue;
+
+                Persons.Add(AddedPerson);
                 DataGridSource.Add(dataContext.AddedPerson);
             }
         }
@@ -87,6 +96,18 @@ namespace SmartLawyer.ViewModels.PersonVMs
         protected void SelectedConstantChanging(PersonsModel newValue)
         {
 
+        }
+
+        protected void CheckAllChanged(bool oldValue)
+        {
+
+        }
+        protected void CheckAllChanging(bool newValue)
+        {
+            foreach (var item in DataGridSource)
+            {
+                item.IsChecked = newValue;
+            }
         }
 
         public void Delete()
@@ -132,15 +153,15 @@ namespace SmartLawyer.ViewModels.PersonVMs
                 //PeType = SelectedDataItem.PeType,
                 //PhoneNo = SelectedDataItem.PhoneNo
             };
-            VPersonEdit edit = new VPersonEdit(person, PersonsTypes);
-            if (edit.ShowDialog() == true)
-            {
-                var dataContext = edit.DataContext as VMPersonEdit;
-                DataGridSource.Remove(SelectedDataItem);
-                DataGridSource.Add(dataContext.AddedPerson);
-                SelectedDataItem = dataContext.AddedPerson;
-                PersonsCommunication.AddRange(dataContext.AddedCommunication);
-            }
+            //VPersonEdit edit = new VPersonEdit(person, PersonsTypes, PersonsCommunication.Where(x => x.CoPeIdFk == person.PeId).ToList());
+            //if (edit.ShowDialog() == true)
+            //{
+            //    var dataContext = edit.DataContext as VMPersonEdit;
+            //    DataGridSource.Remove(SelectedDataItem);
+            //    DataGridSource.Add(dataContext.EditedPerson);
+            //    SelectedDataItem = dataContext.EditedPerson;
+            //    PersonsCommunication.AddRange(dataContext.AddedCommunication);
+            //}
 
         }
         public void Export()
@@ -156,6 +177,7 @@ namespace SmartLawyer.ViewModels.PersonVMs
             {
                 Thread inProgress = new Thread(() =>
                 {
+                    IsInProgress = true;
                     Persons = DataAccess.PersonsData();
                     PersonsAddress = DataAccess.PersonsAddressData();
                     PersonsCommunication = DataAccess.PersonsCommunicationData();
@@ -163,11 +185,14 @@ namespace SmartLawyer.ViewModels.PersonVMs
                     CommTypes = DataAccess.CodesData(SystemValues.MasterSystemConstants.CommunicationType);
                     foreach (var item in Persons)
                     {
-                        //item.Address = PersonsAddress.Where(x => x.PeAdId == item.PeId).FirstOrDefault()?.ToString();
+                        var adress = PersonsAddress.Where(x => x.PeAdId == item.PeId).FirstOrDefault();
+                        if (adress != null)
+                            item.PeAddress = $"{adress.PeAdCity} - {adress.PeAdStreetName}";
                         var communication = PersonsCommunication.Where(x => x.CoPeIdFk == item.PeId);
-                        //item.PhoneNo = communication.Where(x => x.CoName.Equals(SystemValues.Communications.Phone)).FirstOrDefault()?.CoValue;
-                        //item.MobileNo = communication.Where(x => x.CoName.Equals(SystemValues.Communications.Mobile)).FirstOrDefault()?.CoValue;
-                        //item.Email = communication.Where(x => x.CoName.Equals(SystemValues.Communications.Emial)).FirstOrDefault()?.CoValue;
+                        item.Type = PersonsTypes.Where(x => x.CId == item.PeType).FirstOrDefault()?.CName;
+                        item.PhoneNo = communication.Where(x => x.CoNameCfk.Equals(SystemValues.Communications.Phone)).FirstOrDefault()?.CoValue;
+                        item.MobileNo = communication.Where(x => x.CoNameCfk.Equals(SystemValues.Communications.Mobile)).FirstOrDefault()?.CoValue;
+                        item.Email = communication.Where(x => x.CoNameCfk.Equals(SystemValues.Communications.Emial)).FirstOrDefault()?.CoValue;
                     }
                 })
                 { IsBackground = true };
@@ -186,6 +211,7 @@ namespace SmartLawyer.ViewModels.PersonVMs
                 }
                 RotateAngle = 0;
                 DataGridSource.ReFill(Persons);
+                IsInProgress = false;
             })
             { IsBackground = true }.Start();
         }

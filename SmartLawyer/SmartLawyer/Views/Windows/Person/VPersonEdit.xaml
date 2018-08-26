@@ -5,83 +5,136 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SmartLawyer.Views.Person"
+        xmlns:conv="clr-namespace:SmartLawyer.Converters"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
         Title="VPersonEdit"
-        Height="260"
+        Height="300"
         Width="800"
         ResizeMode="NoResize"
         SizeToContent="WidthAndHeight">
-    <StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <GroupBox Header="Person Info"
-                      Margin="10"
-                      Padding="5">
-                <StackPanel Orientation="Horizontal">
-                    <StackPanel>
-                        <TextBlock Text="Full Name"
-                                   Margin="5,6" />
-                        <TextBlock Text="Personal ID"
-                                   Margin="5" />
-                        <TextBlock Text="Date Of Birth"
-                                   Margin="5,10,5,6" />
-                        <TextBlock Text="Person Type"
-                                   Margin="5,10,5,5" />
+    <Grid>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <GroupBox Header="Person Info"
+                          Margin="10"
+                          Padding="5">
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel>
+                            <TextBlock Text="Full Name"
+                                       Margin="5,6" />
+                            <TextBlock Text="Personal ID"
+                                       Margin="5" />
+                            <TextBlock Text="Date Of Birth"
+                                       Margin="5,10,5,6" />
+                            <TextBlock Text="Person Type"
+                                       Margin="5,10,5,5" />
+                            <TextBlock Text="City"
+                                       Margin="5,8" />
+                            <TextBlock Text="Adress"
+                                       Margin="5" />
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBox Width="250"
+                                     Margin="5"
+                                     Text="{Binding FullName}" />
+                            <TextBox Width="250"
+                                     Margin="5"
+                                     Text="{Binding PersonalId}" />
+                            <DatePicker Width="250"
+                                        Margin="5"
+                                        Text="{Binding DateOfBirth}"
+                                        DisplayDateStart="01/01/1970" />
+                            <ComboBox Width="250"
+                                      Margin="5"
+                                      SelectedItem="{Binding SelectedPersonType}"
+                                      ItemsSource="{Binding PersonTypeSource}" />
+                            <TextBox Width="250"
+                                     Margin="5"
+                                     Text="{Binding FullName}" />
+                            <TextBox Width="250"
+                                     Margin="5"
+                                     Text="{Binding PersonalId}" />
+                        </StackPanel>
                     </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Communication Info"
+                          Margin="10"
+                          Padding="5">
                     <StackPanel>
-                        <TextBox Width="250"
-                                 Margin="5"
-                                 Text="{Binding FullName}" />
-                        <TextBox Width="250"
-                                 Margin="5"
-                                 Text="{Binding PersonalId}" />
-                        <DatePicker Width="250"
-                                    Margin="5"
-                                    Text="{Binding DateOfBirth}" />
-                        <ComboBox Width="250"
-                                  Margin="5"
-                                  SelectedItem="{Binding SelectedPersonType}"
-                                  ItemsSource="{Binding PersonTypeSource}" />
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="0 2">
+                            <Grid Width="5" />
+                            <Button Width="25"
+                                    Height="25"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    Command="{Binding AddCommCommand}">
+                                <Image Height="20"
+                                       Width="20"
+                                       VerticalAlignment="Top"
+                                       Source="{conv:ImageSourceProvider Uri={conv:ResourcePath Path=add.png}}" />
+                            </Button>
+                            <Grid Width="5" />
+                            <Button Width="25"
+                                    Height="25"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    Command="{Binding DeleteCommCommand}">
+                                <Image Height="20"
+                                       Width="20"
+                                       VerticalAlignment="Top"
+                                       Source="{conv:ImageSourceProvider Uri={conv:ResourcePath Path=delete.png}}" />
+                            </Button>
+                        </StackPanel>
+                        <DataGrid ItemsSource="{Binding CommunicationSource}"
+                                  SelectedItem="{Binding SelectedCommItem}"
+                                  AutoGenerateColumns="False"
+                                  CanUserAddRows="False"
+                                  IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Header="Communication Type"
+                                                        Width="150">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <ComboBox ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                                                 AncestorType={x:Type Window}}, Path=DataContext.CommunicationCodeSource}"
+                                                      SelectedItem="{Binding CoNameCfk, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Value"
+                                                        Width="230">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Text="{Binding CoValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                     VerticalContentAlignment="Center" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
                     </StackPanel>
-                </StackPanel>
-            </GroupBox>
-            <GroupBox Header="Person Info"
-                      Margin="10"
-                      Padding="5">
-                <StackPanel Orientation="Horizontal">
-                    <StackPanel>
-                        <TextBlock Text="Email Adress"
-                                   Margin="5,6" />
-                        <TextBlock Text="phone No"
-                                   Margin="5" />
-                        <TextBlock Text="Mobile No"
-                                   Margin="5,6" />
-                    </StackPanel>
-                    <StackPanel>
-                        <TextBox Width="250"
-                                 Margin="5"
-                                 Text="{Binding EmailAdress}" />
-                        <TextBox Width="250"
-                                 Margin="5"
-                                 Text="{Binding PhoneNo}" />
-                        <TextBox Width="250"
-                                 Margin="5"
-                                 Text="{Binding MobileNo}" />
-                    </StackPanel>
-                </StackPanel>
-            </GroupBox>
+                </GroupBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+                <Button Content="Close"
+                        Margin="0,7,5,10"
+                        Padding="20 3"
+                        Command="{Binding CloseCommand}"
+                        CommandParameter="{Binding ElementName=Window}" />
+                <Button Content=" Edit "
+                        Margin="0,7,10,10"
+                        Padding="20 3"
+                        Command="{Binding EditCommand}"
+                        CommandParameter="{Binding ElementName=Window}" />
+            </StackPanel>
         </StackPanel>
-        <StackPanel Orientation="Horizontal"
-                    HorizontalAlignment="Right">
-            <Button Content="Close"
-                    Margin="0,7,5,10"
-                    Padding="20 3"
-                    Command="{Binding CloseCommand}"
-                    CommandParameter="{Binding ElementName=Window}" />
-            <Button Content=" Edit "
-                    Margin="0,7,10,10"
-                    Padding="20 3"
-                    Command="{Binding EditCommand}"
-                    CommandParameter="{Binding ElementName=Window}"/>
-        </StackPanel>
-    </StackPanel>
+        <DockPanel Background="#99ffffff"
+                   Visibility="{Binding IsInProgress, Converter={conv:BoolToVisibility}}">
+            <Controls:ProgressRing Foreground="Gray"
+                                   IsActive="{Binding IsInProgress}" />
+        </DockPanel>
+    </Grid>
 </Window>

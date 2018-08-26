@@ -9,5 +9,10 @@ namespace SmartLawyer.Models.Classes
         public int CMasterId { get; set; }
         public String CName { get; set; }
         public String CDesc { get; set; }
+
+        public override string ToString()
+        {
+            return CName;
+        }
     }
 }

@@ -35,7 +35,7 @@ namespace SmartLawyer.ViewModels.SystemConstantsVMs
         public virtual String ConstantValue { get; set; }
         public virtual String ConstantDesc { get; set; }
         public virtual List<CodesModel> SystemConstants { get; set; } = new List<CodesModel>();
-        public bool IsInProgress { get; set; }
+        public virtual bool IsInProgress { get; set; } = false;
 
         public void SelectIndexChanged()
         {
@@ -53,21 +53,24 @@ namespace SmartLawyer.ViewModels.SystemConstantsVMs
         }
         protected void SelectedConstantChanging(CodesModel newValue)
         {
+            IsInProgress = true;
             if (newValue != null)
                 DataGridSource.ReFill(SystemConstants.Where(x => x.CMasterId == newValue.CId));
+            IsInProgress = false;
         }
 
         public void Add()
         {
+            IsInProgress = true;
             var code = new CodesModel()
             {
                 CMasterId = (int)SelectedConstant.CId,
                 CName = ConstantValue,
                 CDesc = ConstantDesc
             };
-            DataAccess.InsertCode(out var id, code);
-            code.CId = id;
+            new Thread(() => { DataAccess.InsertCode(out var id, code); code.CId = id; }) { IsBackground = true }.Start();
             DataGridSource.Add(code);
+            IsInProgress = false;
         }
 
         public void AdvancedSearchTogel()
@@ -90,13 +93,17 @@ namespace SmartLawyer.ViewModels.SystemConstantsVMs
                 MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
                     IsInProgress = true;
-                    var deleteList = DataGridSource.Where(x => x.IsChecked).ToList();
-                    foreach (var item in deleteList)
+                    new Thread(() =>
                     {
-                        DataAccess.DeleteCode(item.CId);
-                        DataGridSource.Remove(item);
-                    }
-                    IsInProgress = false;
+                        var deleteList = DataGridSource.Where(x => x.IsChecked).ToList();
+                        foreach (var item in deleteList)
+                        {
+                            DataAccess.DeleteCode(item.CId);
+                            DataGridSource.Remove(item);
+                        }
+                        IsInProgress = false;
+                    })
+                    { IsBackground = true }.Start();
                 }
             }
         }
@@ -109,6 +116,7 @@ namespace SmartLawyer.ViewModels.SystemConstantsVMs
 
         public void Edit()
         {
+            IsInProgress = true;
             var id = SelectedDataItem.CId;
             var code = new CodesModel()
             {
@@ -117,8 +125,9 @@ namespace SmartLawyer.ViewModels.SystemConstantsVMs
                 CDesc = ConstantDesc
             };
             DataGridSource.Remove(SelectedDataItem);
-            DataAccess.UpdateCode(id, code);
+            new Thread(() => DataAccess.UpdateCode(id, code)) { IsBackground = true }.Start();
             DataGridSource.Add(code);
+            IsInProgress = false;
         }
 
         public void Export()
@@ -128,6 +137,7 @@ namespace SmartLawyer.ViewModels.SystemConstantsVMs
 
         public void Refresh()
         {
+            IsInProgress = true;
             new Thread(() =>
             {
                 Thread inProgress = new Thread(() =>
@@ -150,6 +160,7 @@ namespace SmartLawyer.ViewModels.SystemConstantsVMs
                 }
                 RotateAngle = 0;
                 ConstantsCollection.ReFill(SystemConstants.Where(x => x.CMasterId == 0));
+                IsInProgress = false;
             })
             { IsBackground = true }.Start();
         }

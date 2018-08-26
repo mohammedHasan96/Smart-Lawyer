@@ -25,9 +25,9 @@ namespace SmartLawyer.Views.Person
         {
             InitializeComponent();
         }
-        public VPersonEdit(PersonsModel person, List<CodesModel> PersonTypes)
+        public VPersonEdit(PersonsModel person, List<CodesModel> PersonTypes, List<CodesModel> CommTypes, List<PersonsCommunicationModel> PersonCommunications)
         {
-            DataContext = VMPersonEdit.Create(person,PersonTypes);
+            DataContext = VMPersonEdit.Create(person, PersonTypes, CommTypes, PersonCommunications);
             InitializeComponent();
         }
     }

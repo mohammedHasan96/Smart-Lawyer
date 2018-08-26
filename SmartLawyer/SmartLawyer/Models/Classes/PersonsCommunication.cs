@@ -1,3 +1,4 @@
+using DevExpress.Mvvm.POCO;
 using System;
 using System.Collections.Generic;
                                 
@@ -5,10 +6,13 @@ namespace SmartLawyer.Models.Classes
 {
     public class PersonsCommunicationModel
     {
-        public int CoId { get; set; }
-        public String CoNameCfk { get; set; }
-        public String CoValue { get; set; }
-        public long CoPeIdFk { get; set; }
-        public int CoIsMain { get; set; }
+        public static PersonsCommunicationModel Create()
+            => ViewModelSource.Create(() => new PersonsCommunicationModel());
+
+        public virtual int CoId { get; set; }
+        public virtual String CoNameCfk { get; set; }
+        public virtual String CoValue { get; set; }
+        public virtual long CoPeIdFk { get; set; }
+        public virtual int CoIsMain { get; set; }
     }
 }
