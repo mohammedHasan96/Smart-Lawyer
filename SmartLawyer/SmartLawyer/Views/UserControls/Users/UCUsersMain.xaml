@@ -231,20 +231,49 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Visibility="Collapsed"
-                                    Binding="{Binding PeId}"
+                                    Binding="{Binding UPIdFk}"
                                     Header="PeId"
                                     IsReadOnly="True" />
-                <DataGridTextColumn Binding="{Binding PeName}"
-                                    Header="Person Name"
+                <DataGridTextColumn Binding="{Binding UEmail}"
+                                    Header="Emial Address"
                                     IsReadOnly="True" />
-                <DataGridTextColumn Binding="{Binding PeType}"
-                                    Header="Person Type"
+                <DataGridTextColumn Binding="{Binding UUserName}"
+                                    Header="Username"
                                     IsReadOnly="True" />
-                <DataGridTextColumn Binding="{Binding PeAddress}"
-                                    Header="Person Adress"
+                <DataGridTemplateColumn Header="Active"
+                                        IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel VerticalAlignment="Center"
+                                        HorizontalAlignment="Center">
+                                <CheckBox IsChecked="{Binding UIsActive, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Has Login"
+                                        IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel VerticalAlignment="Center"
+                                        HorizontalAlignment="Center">
+                                <CheckBox IsChecked="{Binding UIsActive, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                          />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Created By"
+                                    Binding="{Binding CreatedBy}"
+                                    IsReadOnly="True"/>
+                <DataGridTextColumn Header="Created At"
+                                    Binding="{Binding CreatedAt}"
                                     IsReadOnly="True" />
-                <DataGridTextColumn Binding="{Binding PeIdentity}"
-                                    Header="Personal Identity"
+                <DataGridTextColumn Header="Updated At"
+                                    Binding="{Binding UpdatedAt}"
+                                    IsReadOnly="True" />
+                <DataGridTextColumn Header="Updated By"
+                                    Binding="{Binding UpdatedBy}"
                                     IsReadOnly="True" />
             </DataGrid.Columns>
         </DataGrid>

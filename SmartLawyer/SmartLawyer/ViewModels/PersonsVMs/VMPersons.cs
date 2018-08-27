@@ -191,11 +191,15 @@ namespace SmartLawyer.ViewModels.PersonVMs
                 Thread inProgress = new Thread(() =>
                 {
                     IsInProgress = true;
-                    Persons = DataAccess.PersonsData();
-                    PersonsAddress = DataAccess.PersonsAddressData();
-                    PersonsCommunication = DataAccess.PersonsCommunicationData();
-                    PersonsTypes = DataAccess.CodesData(SystemValues.MasterSystemConstants.PersonType);
-                    CommTypes = DataAccess.CodesData(SystemValues.MasterSystemConstants.CommunicationType);
+                    try
+                    {
+                        Persons = DataAccess.PersonsData();
+                        PersonsAddress = DataAccess.PersonsAddressData();
+                        PersonsCommunication = DataAccess.PersonsCommunicationData();
+                        PersonsTypes = DataAccess.CodesData(SystemValues.MasterSystemConstants.PersonType);
+                        CommTypes = DataAccess.CodesData(SystemValues.MasterSystemConstants.CommunicationType);
+                    }
+                    catch { MessageBox.Show("could not open connection whith the server!\nCheck your internet connection or server is connected"); }
                     foreach (var item in Persons)
                     {
                         var adress = PersonsAddress.Where(x => x.PeAdPerIdFk == item.PeId).FirstOrDefault();

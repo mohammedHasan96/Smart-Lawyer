@@ -54,7 +54,12 @@ namespace SmartLawyer.ViewModels.GroupsVMs
                     GDescription = GroupDescription
                 };
                 EditGroup.GId = Group.GId;
-                var groupChangeValue = DataAccess.UpdateGroup(Group.GId, EditGroup);
+                var groupChangeValue = 0;
+                try
+                {
+                    groupChangeValue = DataAccess.UpdateGroup(Group.GId, EditGroup);
+                }
+                catch { MessageBox.Show("Some Thing went Wrong!\nCould not Edit the group"); }
                 if (groupChangeValue == 1)
                 {
                     var r = DataAccess.DeleteGroupRoles(Group.GId);
@@ -62,17 +67,21 @@ namespace SmartLawyer.ViewModels.GroupsVMs
                     {
                         if (item.RoleSelected())
                         {
-                            DataAccess.InsertGroupeRole(out var id, new GroupRolesModel()
+                            try
                             {
-                                GrolrRoleIdFk = item.RoleId,
-                                GrolrGIdFk = Group.GId,
-                                GroleAdd = item.GroleAdd,
-                                GroleEdit = item.GroleEdit,
-                                GroleDelete = item.GroleDelete,
-                                GroleView = item.GroleView,
-                                GrolePrint = item.GrolePrint,
-                                GroleExport = item.GroleExport
-                            });
+                                DataAccess.InsertGroupeRole(out var id, new GroupRolesModel()
+                                {
+                                    GrolrRoleIdFk = item.RoleId,
+                                    GrolrGIdFk = Group.GId,
+                                    GroleAdd = item.GroleAdd,
+                                    GroleEdit = item.GroleEdit,
+                                    GroleDelete = item.GroleDelete,
+                                    GroleView = item.GroleView,
+                                    GrolePrint = item.GrolePrint,
+                                    GroleExport = item.GroleExport
+                                });
+                            }
+                            catch { MessageBox.Show($"some thing went wrong!\nFild to add {{{item.RoleName}}} to {{{EditGroup.GName}}}"); }
                         }
                     }
                     IsInProgress = false;

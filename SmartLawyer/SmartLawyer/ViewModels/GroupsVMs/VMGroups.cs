@@ -91,8 +91,13 @@ namespace SmartLawyer.ViewModels.GroupsVMs
                         {
                             if (item.IsChecked)
                             {
-                                DataAccess.DeleteGroup(item.GId);
-                                DataAccess.DeleteGroupRoles(item.GId);
+                                try
+                                {
+                                    DataAccess.DeleteGroup(item.GId);
+                                    DataAccess.DeleteGroupRoles(item.GId);
+                                }
+                                catch { MessageBox.Show("could not open connection whith the server!\nCheck your internet connection or server is connected"); }
+
                             }
                         }
                         DataGridSource.ReFill(DataGridSource.Where(x => !x.IsChecked).ToList());
@@ -169,9 +174,13 @@ namespace SmartLawyer.ViewModels.GroupsVMs
                 Thread inProgress = new Thread(() =>
                 {
                     IsInProgress = true;
-                    dataSource = DataAccess.GroupsData();
-                    GroupRoles = DataAccess.GroupRolesData();
-                    Roles = DataAccess.RolesData();
+                    try
+                    {
+                        dataSource = DataAccess.GroupsData();
+                        GroupRoles = DataAccess.GroupRolesData();
+                        Roles = DataAccess.RolesData();
+                    }
+                    catch { MessageBox.Show("could not open connection whith the server!\nCheck your internet connection or server is connected"); }
                 })
                 { IsBackground = true };
 

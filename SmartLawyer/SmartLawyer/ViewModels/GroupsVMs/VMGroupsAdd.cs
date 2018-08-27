@@ -33,7 +33,7 @@ namespace SmartLawyer.ViewModels.GroupsVMs
         public void Close(Window window)
         {
             window.DialogResult = false;
-            window.Close(); 
+            window.Close();
         }
 
         public void Add(Window window)
@@ -53,8 +53,14 @@ namespace SmartLawyer.ViewModels.GroupsVMs
                     GName = GroupName,
                     GDescription = GroupDescription
                 };
-                var groupChangeValue = DataAccess.InsertGroup(out var groupInsertId, AddedGroup);
-                AddedGroup.GId = (int)groupInsertId;
+                var groupChangeValue = 0;
+                var groupInsertId = default(long);
+                try
+                {
+                    groupChangeValue = DataAccess.InsertGroup(out groupInsertId, AddedGroup);
+                    AddedGroup.GId = (int)groupInsertId;
+                }
+                catch { MessageBox.Show("could not open connection whith the server!\nCheck your internet connection or server is connected"); }
                 if (groupChangeValue == 1)
                 {
                     foreach (var item in DataGridSource)
@@ -72,7 +78,8 @@ namespace SmartLawyer.ViewModels.GroupsVMs
                                 GrolePrint = item.GrolePrint,
                                 GroleExport = item.GroleExport
                             };
-                            DataAccess.InsertGroupeRole(out var id, groupRole);
+                            try { DataAccess.InsertGroupeRole(out var id, groupRole); }
+                            catch { MessageBox.Show($"some thing went wrong!\nFild to add {{{item.RoleName}}} to {{{AddedGroup.GName}}}"); }
                             AddedGroupRoles.Add(groupRole);
                         }
                     }
@@ -85,8 +92,9 @@ namespace SmartLawyer.ViewModels.GroupsVMs
                 }
                 else
                     MessageBox.Show("Field to add Group !!");
-            }) { IsBackground = true }.Start();
-            
+            })
+            { IsBackground = true }.Start();
+
         }
 
         public void CheckAll()
