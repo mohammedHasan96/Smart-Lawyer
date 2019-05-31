@@ -43,7 +43,7 @@ namespace SmartLawyer.ViewModels.GroupsVMs
             {
                 if (GroupName == null)
                 {
-                    MessageBox.Show("Group Name Cant be Empty !!");
+                    MessageBox.Show("Group Name Cant be Empty !!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
                 if (GroupDescription == null)
@@ -60,7 +60,7 @@ namespace SmartLawyer.ViewModels.GroupsVMs
                     groupChangeValue = DataAccess.InsertGroup(out groupInsertId, AddedGroup);
                     AddedGroup.GId = (int)groupInsertId;
                 }
-                catch { MessageBox.Show("could not open connection whith the server!\nCheck your internet connection or server is connected"); }
+                catch { MessageBox.Show("could not open connection with server!\nCheck your internet connection or server is connected", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning); }
                 if (groupChangeValue == 1)
                 {
                     foreach (var item in DataGridSource)
@@ -79,7 +79,7 @@ namespace SmartLawyer.ViewModels.GroupsVMs
                                 GroleExport = item.GroleExport
                             };
                             try { DataAccess.InsertGroupeRole(out var id, groupRole); }
-                            catch { MessageBox.Show($"some thing went wrong!\nFild to add {{{item.RoleName}}} to {{{AddedGroup.GName}}}"); }
+                            catch { MessageBox.Show($"some thing went wrong!\nFild to add {{{item.RoleName}}} to {{{AddedGroup.GName}}}", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning); }
                             AddedGroupRoles.Add(groupRole);
                         }
                     }
@@ -91,7 +91,7 @@ namespace SmartLawyer.ViewModels.GroupsVMs
                     });
                 }
                 else
-                    MessageBox.Show("Field to add Group !!");
+                    MessageBox.Show("Field to add Group !!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
             })
             { IsBackground = true }.Start();
 

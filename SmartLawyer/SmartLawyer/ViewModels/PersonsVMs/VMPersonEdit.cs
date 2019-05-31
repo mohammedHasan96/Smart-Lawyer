@@ -75,10 +75,6 @@ namespace SmartLawyer.ViewModels.PersonsVMs
                     PeIdentity = PersonalId,
                     PeType = (int)SelectedPersonType.CId,
                     PeAddress = ""
-                    //PhoneNo = PhoneNo,
-                    //MobileNo = MobileNo,
-                    //Email = EmailAdress,
-                    //Address = ""
                 };
                 var personValueChange = DataAccess.UpdatePerson(EditedPerson.PeId, EditedPerson);
                 if (personValueChange == 1)

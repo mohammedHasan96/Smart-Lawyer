@@ -59,7 +59,7 @@ namespace SmartLawyer.ViewModels.GroupsVMs
                 {
                     groupChangeValue = DataAccess.UpdateGroup(Group.GId, EditGroup);
                 }
-                catch { MessageBox.Show("Some Thing went Wrong!\nCould not Edit the group"); }
+                catch { MessageBox.Show("Some Thing went Wrong!\nCould not Edit the group\nCheack you internet or server connection", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning); }
                 if (groupChangeValue == 1)
                 {
                     var r = DataAccess.DeleteGroupRoles(Group.GId);
@@ -81,7 +81,7 @@ namespace SmartLawyer.ViewModels.GroupsVMs
                                     GroleExport = item.GroleExport
                                 });
                             }
-                            catch { MessageBox.Show($"some thing went wrong!\nFild to add {{{item.RoleName}}} to {{{EditGroup.GName}}}"); }
+                            catch { MessageBox.Show($"some thing went wrong!\nFild to add {{{item.RoleName}}} to {{{EditGroup.GName}}}", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning); }
                         }
                     }
                     IsInProgress = false;
@@ -92,7 +92,7 @@ namespace SmartLawyer.ViewModels.GroupsVMs
                     });
                 }
                 else
-                    MessageBox.Show("Field to Edit Group !!");
+                    MessageBox.Show("Field to Edit Group !!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
             })
             { IsBackground = true }.Start();
         }

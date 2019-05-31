@@ -21,13 +21,13 @@ namespace SmartLawyer.Views
     /// </summary>
     public partial class VUserAdd : Window
     {
-        public VUserAdd(List<RolesModel> Roles, List<GroupRolesModel> GroupRoles, List<CodesModel> SystemConstants)
+        public VUserAdd(List<GroupsModel> Groups,List<RolesModel> Roles, List<GroupRolesModel> GroupRoles, List<CodesModel> SystemConstants)
         {
+            DataContext = VMUserAdd.Create(Groups, Roles, GroupRoles, SystemConstants);
             InitializeComponent();
         }
         public VUserAdd(List<CodesModel> PersonTypes)
         {
-            DataContext = VMUserAdd.Create();
             InitializeComponent();
         }
     }

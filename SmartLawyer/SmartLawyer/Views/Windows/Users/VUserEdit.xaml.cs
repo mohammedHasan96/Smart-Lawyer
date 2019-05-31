@@ -27,9 +27,9 @@ namespace SmartLawyer.Views.Users
         {
             InitializeComponent();
         }
-        public VUserEdit(UsersModel user)
+        public VUserEdit(UsersModel user, PersonsModel person, List<PersonsCommunicationModel> PersonCommunications, List<GroupsModel> Groups, List<RolesModel> Roles, List<GroupRolesModel> GroupRoles, List<UserGroupModel> UserGroups, List<CodesModel> SystemConstants)
         {
-            DataContext = VMUserEdit.Create(user);
+            DataContext = VMUserEdit.Create(user, person, PersonCommunications, Groups, Roles, GroupRoles, UserGroups, SystemConstants);
             InitializeComponent();
         }
     }

@@ -23,13 +23,13 @@ namespace SmartLawyer.Models
             return SQLSelectAs<PersonsCommunicationModel>(query, typeof(PersonsCommunicationTable)).ToList();
         }
 
-        public static int InsertPersonCommunication(out long insertId, PersonsCommunicationModel personAddress)
+        public static int InsertPersonCommunication(out long insertId, PersonsCommunicationModel personComm)
         {
             var changedCount = Insert(out insertId, PersonsCommunicationTable.TableName, new ParamtersMap
             {
-                [PersonsCommunicationTable.CoNameCfk] = personAddress.CoNameCfk,
-                [PersonsCommunicationTable.CoPeIdFk] = personAddress.CoPeIdFk,
-                [PersonsCommunicationTable.CoValue] = personAddress.CoValue
+                [PersonsCommunicationTable.CoNameCfk] = personComm.CoNameCfk,
+                [PersonsCommunicationTable.CoPeIdFk] = personComm.CoPeIdFk,
+                [PersonsCommunicationTable.CoValue] = personComm.CoValue
             });
             return changedCount;
         }

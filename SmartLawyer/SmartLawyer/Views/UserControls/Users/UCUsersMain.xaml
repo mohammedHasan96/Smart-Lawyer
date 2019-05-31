@@ -257,7 +257,7 @@
                         <DataTemplate>
                             <StackPanel VerticalAlignment="Center"
                                         HorizontalAlignment="Center">
-                                <CheckBox IsChecked="{Binding UIsActive, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                <CheckBox IsChecked="{Binding UIsActive, Converter={conv:IntegerToBoolConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                           />
                             </StackPanel>
                         </DataTemplate>

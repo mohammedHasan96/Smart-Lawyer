@@ -23,6 +23,7 @@ namespace SmartLawyer.Models.Values
             public static int CourtLocation { get; set; } = 2;
             public static int CommunicationType { get; set; } = 22;
             public static int NotificationType { get; set; } = 25;
+            public static int UserType { get; set; } = 32;
 
         }
         public static class Communications

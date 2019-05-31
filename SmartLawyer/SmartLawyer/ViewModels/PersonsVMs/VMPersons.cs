@@ -115,7 +115,7 @@ namespace SmartLawyer.ViewModels.PersonVMs
         {
             if (SelectedDataItem != null)
             {
-                if (MessageBox.Show("Are you sure you want to delete all selected Groups??",
+                if (MessageBox.Show("Are you sure you want to delete all selected Persons??",
                 "Delete",
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Warning) == MessageBoxResult.Yes)
@@ -199,12 +199,12 @@ namespace SmartLawyer.ViewModels.PersonVMs
                         PersonsTypes = DataAccess.CodesData(SystemValues.MasterSystemConstants.PersonType);
                         CommTypes = DataAccess.CodesData(SystemValues.MasterSystemConstants.CommunicationType);
                     }
-                    catch { MessageBox.Show("could not open connection whith the server!\nCheck your internet connection or server is connected"); }
+                    catch { MessageBox.Show("could not open connection with server!\nCheck your internet connection or server is connected", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning); }
                     foreach (var item in Persons)
                     {
                         var adress = PersonsAddress.Where(x => x.PeAdPerIdFk == item.PeId).FirstOrDefault();
                         if (adress != null)
-                            item.PeAddress = $"{adress.PeAdCity} - {adress.PeAdStreetName}";
+                            item.PeAddress = $"{adress.PeAdCity.Trim()} - {adress.PeAdStreetName.Trim()}";
                         var communication = PersonsCommunication.Where(x => x.CoPeIdFk == item.PeId);
                         item.Type = PersonsTypes.Where(x => x.CId == item.PeType).FirstOrDefault()?.CName;
                         item.PhoneNo = communication.Where(x => x.CoNameCfk.Equals(SystemValues.Communications.Phone)).FirstOrDefault()?.CoValue;

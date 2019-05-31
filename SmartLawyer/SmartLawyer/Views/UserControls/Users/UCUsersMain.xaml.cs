@@ -1,4 +1,5 @@
 ﻿using SmartLawyer.ViewModels;
+using SmartLawyer.ViewModels.UsersVMs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,12 +30,12 @@ namespace SmartLawyer.Views.Controls.Users
 
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-
+            (DataContext as VMUsers).UncheckAll();
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-
+            (DataContext as VMUsers).CheckAll();
         }
     }
 }

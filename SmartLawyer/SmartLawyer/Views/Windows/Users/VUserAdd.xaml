@@ -6,187 +6,364 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SmartLawyer.Views"
         xmlns:conv="clr-namespace:SmartLawyer.Converters"
+        xmlns:ph="clr-namespace:SmartLawyer.Utils"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
         Title="VUserAdd"
         Height="570"
-        Width="800"
+        Width="900"
         SizeToContent="WidthAndHeight"
         ResizeMode="NoResize">
-    <StackPanel>
-        <Grid Height="10" />
-        <GroupBox Margin="10,0"
-                  Padding="10"
-                  Header="User Info">
-            <StackPanel Orientation="Horizontal">
-                <StackPanel Orientation="Vertical">
-                    <TextBlock Margin="10,3"
-                               Text="Username" />
-                    <TextBlock Margin="10,8"
-                               Text="Password" />
-                    <TextBlock Margin="10,3"
-                               Text="User State" />
-                </StackPanel>
-                <StackPanel Orientation="Vertical">
-                    <TextBox Margin="10,0"
-                             Width="250"
-                             TabIndex="0"
-                             Text="{Binding Username}" />
-                    <TextBox Margin="10,10"
-                             Width="250"
-                             TabIndex="2"
-                             Text="{Binding Password}" />
-                    <Border Margin="10,-2"
-                            BorderBrush="LightGray"
-                            BorderThickness="1"
-                            Padding="4"
-                            Width="126"
-                            HorizontalAlignment="Left">
-                        <StackPanel Orientation="Horizontal">
-                            <RadioButton Content="Active"
-                                         TabIndex="4"
-                                         IsChecked="{Binding UserState}" />
-                            <Grid Width="5" />
-                            <RadioButton Content="Inactive"
-                                         TabIndex="5"
-                                         IsChecked="{Binding UserState, Converter={conv:InversBool}}" />
-                        </StackPanel>
-                    </Border>
-                </StackPanel>
-                <StackPanel Orientation="Vertical">
-                    <TextBlock Margin="10,3"
-                               Text="User Type" />
-                    <TextBlock Margin="10,8"
-                               Text="Confirm Password" />
-                </StackPanel>
-                <StackPanel Orientation="Vertical">
-                    <ComboBox Margin="10,0"
-                              Width="250"
-                              TabIndex="1"
-                              Text="{Binding SelectedUserType}"
-                              ItemsSource="{Binding UserType}" />
-                    <TextBox Margin="10,10"
-                             Width="250"
-                             TabIndex="3"
-                             Text="{Binding ConfPass}" />
-                </StackPanel>
-            </StackPanel>
-        </GroupBox>
-        <StackPanel Orientation="Horizontal"
-                    Margin="0,8">
-            <GroupBox Margin="10,0,1,0"
-                      Padding="6"
-                      Header="Person Info"
-                      HorizontalAlignment="Left">
+    <Grid>
+        <StackPanel>
+            <Grid Height="10" />
+            <GroupBox Margin="10,0"
+                      Padding="10"
+                      Header="User Info"
+                      HorizontalAlignment="Center">
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Vertical">
                         <TextBlock Margin="10,3"
-                                   Text="Full Name" />
+                                   Text="Username" />
                         <TextBlock Margin="10,8"
-                                   Text="Personal ID" />
-                        <Grid Height="5" />
+                                   Text="Password" />
                         <TextBlock Margin="10,3"
-                                   Text="Date Of Birth" />
+                                   Text="User State" />
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
                         <TextBox Margin="10,0"
                                  Width="250"
-                                 TabIndex="6"
-                                 Text="{Binding FullName}" />
-                        <TextBox Margin="10,10"
-                                 Width="250"
-                                 TabIndex="7"
-                                 Text="{Binding PersonalId}" />
-                        <DatePicker Width="250"
-                                    TabIndex="8"
-                                    Text="{Binding DateOfBirth}" />
+                                 TabIndex="0"
+                                 Text="{Binding Username}" />
+                        <PasswordBox x:Name="password"
+                                     Margin="10,10"
+                                     Width="250" />
+                        <!--ph:PasswordHelper.Attach="True"
+                                 ph:PasswordHelper.Password="{Binding Password, ElementName=Window, Mode=TwoWay}" />-->
+                        <Border Margin="10,-2"
+                                BorderBrush="LightGray"
+                                BorderThickness="1"
+                                Padding="4"
+                                Width="126"
+                                HorizontalAlignment="Left">
+                            <StackPanel Orientation="Horizontal">
+                                <RadioButton Content="Active"
+                                             TabIndex="4"
+                                             IsChecked="{Binding UserState}" />
+                                <Grid Width="5" />
+                                <RadioButton Content="Inactive"
+                                             TabIndex="5"
+                                             IsChecked="{Binding UserState, Converter={conv:InversBool}}" />
+                            </StackPanel>
+                        </Border>
                     </StackPanel>
-                </StackPanel>
-            </GroupBox>
-            <GroupBox Margin="5,0,10,0"
-                      Padding="6"
-                      Header="Contact Info"
-                      HorizontalAlignment="Right">
-                <StackPanel Orientation="Horizontal">
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Margin="10,3"
-                                   Text="Email Address" />
-                        <TextBlock Margin="10,7"
-                                   Text="Phone No" />
-                        <Grid Height="5" />
-                        <TextBlock Margin="10,0"
-                                   Text="Mobile No" />
+                    <StackPanel Orientation="Vertical"
+                                Margin="40 0 0 0">
+                        <TextBlock Margin="10 0 10 10"
+                                   Text="User Email" />
+                        <TextBlock Margin="10 0 10 0"
+                                   Text="Confirm Password" />
+                        <TextBlock Margin="10 15 10 0"
+                                   Text="User Type" />
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
-                        <TextBox Margin="10,0"
+                        <TextBox Margin="10 0 10 10"
                                  Width="250"
-                                 TabIndex="9"
+                                 TabIndex="3"
                                  Text="{Binding EmailAdress}" />
-                        <TextBox Margin="10,10"
-                                 Width="250"
-                                 TabIndex="10"
-                                 Text="{Binding PhoneNo}" />
-                        <TextBox Width="250"
-                                 TabIndex="11"
-                                 Text="{Binding MobileNo}" />
+                        <PasswordBox x:Name="confPass"
+                                     Margin="10 0 10 10"
+                                     Width="250" />
+                        <!--ph:PasswordHelper.Attach="True"
+                                 ph:PasswordHelper.Password="{Binding ConfPass, ElementName=plain, Mode=TwoWay}" />-->
+                        <ComboBox Margin="10,0"
+                                  Width="250"
+                                  TabIndex="1"
+                                  SelectedItem="{Binding SelectedUserType}"
+                                  ItemsSource="{Binding UserTypeSource}" />
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
-        </StackPanel>
-        <Border BorderBrush="LightGray"
-                BorderThickness="1"
-                Padding="10"
-                Margin="10,0">
-            <StackPanel>
-                <TextBlock Text="Groups" />
-                <StackPanel Orientation="Horizontal">
-                    <ListBox Width="160"
-                             Height="170"
-                             Margin="0,10"
-                             ItemsSource="{Binding SuggestedGroups}" />
-                    <StackPanel VerticalAlignment="Center">
-                        <StackPanel Margin="8">
-                            <Image Width="25"
-                                   Height="25"
-                                   Source="{conv:ImageSourceProvider Uri={conv:ResourcePath Path=forward.png}}" />
-                            <Grid Height="10" />
-
-                            <Button Height="30"
-                                    Content="Add" />
-                            <Grid Height="10" />
-                            <Button Height="30"
-                                    Content="Remove"
-                                    Padding="4" />
-                            <Grid Height="10" />
-                            <Image Width="25"
-                                   Height="25"
-                                   Source="{conv:ImageSourceProvider Uri={conv:ResourcePath Path=backward.png}}" />
+            <StackPanel Orientation="Horizontal"
+                        Margin="0,8"
+                        HorizontalAlignment="Center">
+                <GroupBox Margin="10,0,1,0"
+                          Padding="6"
+                          Header="Person Info"
+                          HorizontalAlignment="Left">
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Margin="10,3"
+                                       Text="Full Name" />
+                            <TextBlock Margin="10,8"
+                                       Text="Personal ID" />
+                            <Grid Height="5" />
+                            <TextBlock Text="City"
+                                       Margin="10,0" />
+                            <TextBlock Text="Adress"
+                                       Margin="10 15 10 0" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <TextBox Margin="10,0"
+                                     Width="250"
+                                     TabIndex="6"
+                                     Text="{Binding FullName}" />
+                            <TextBox Margin="10,10"
+                                     Width="250"
+                                     TabIndex="7"
+                                     Text="{Binding PersonalId}" />
+                            <TextBox Width="250"
+                                     Margin="5"
+                                     Text="{Binding City}" />
+                            <TextBox Width="250"
+                                     Margin="5"
+                                     Text="{Binding Adress}" />
                         </StackPanel>
                     </StackPanel>
-                    <ListBox Width="160"
-                             Height="170"
-                             ItemsSource="{Binding AddedGroups}" />
-                    <Border Margin="10"
-                            Width="350">
-                        <DataGrid Margin="0,0,10,0"
-                                  ItemsSource="{Binding GroupRols}" />
-                    </Border>
-                </StackPanel>
+                </GroupBox>
+                <GroupBox Margin="10,0,10,0"
+                          Padding="6"
+                          Header="Contact Info"
+                          HorizontalAlignment="Right">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="0 2">
+                            <Grid Width="5" />
+                            <Button Width="25"
+                                    Height="25"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    Command="{Binding AddCommCommand}">
+                                <Image Height="20"
+                                       Width="20"
+                                       VerticalAlignment="Top"
+                                       Source="{conv:ImageSourceProvider Uri={conv:ResourcePath Path=add.png}}" />
+                            </Button>
+                            <Grid Width="5" />
+                            <Button Width="25"
+                                    Height="25"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    Command="{Binding DeleteCommCommand}">
+                                <Image Height="20"
+                                       Width="20"
+                                       VerticalAlignment="Top"
+                                       Source="{conv:ImageSourceProvider Uri={conv:ResourcePath Path=delete.png}}" />
+                            </Button>
+                        </StackPanel>
+                        <DataGrid ItemsSource="{Binding CommunicationSource}"
+                                  SelectedItem="{Binding SelectedCommItem}"
+                                  AutoGenerateColumns="False"
+                                  CanUserAddRows="False"
+                                  IsReadOnly="True"
+                                  MaxHeight="230">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Header="Communication Type"
+                                                        Width="150">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <ComboBox ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                                                 AncestorType={x:Type Window}}, Path=DataContext.CommunicationCodeSource}"
+                                                      SelectedItem="{Binding CoNameCfk, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Value"
+                                                        Width="230">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Text="{Binding CoValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                     VerticalContentAlignment="Center" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </GroupBox>
             </StackPanel>
-        </Border>
-        <StackPanel Orientation="Horizontal"
-                    HorizontalAlignment="Right"
-                    Margin="10">
-            <Button Content="Close"
-                    Padding="20,3"
-                    FontSize="14"
-                    Command="{Binding CloseCommand}"
-                    CommandParameter="{Binding ElementName=Window}" />
-            <Button Content=" Add "
-                    Padding="20,3"
-                    Margin="5,0,0,0"
-                    FontSize="14"
-                    Command="{Binding AddCommand}"
-                    CommandParameter="{Binding ElementName=Window}" />
+            <Border BorderBrush="LightGray"
+                    BorderThickness="1"
+                    Padding="10"
+                    Margin="10,0">
+                <StackPanel>
+                    <TextBlock Text="Groups" />
+                    <StackPanel Orientation="Horizontal">
+                        <ListBox Width="160"
+                                 Height="170"
+                                 Margin="0,10"
+                                 ItemsSource="{Binding SuggestedGroupsSource}"
+                                 SelectedItem="{Binding SelectedSuggestedItem}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding GName}"
+                                               FontSize="16" />
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <StackPanel VerticalAlignment="Center">
+                            <StackPanel Margin="8">
+                                <Image Width="25"
+                                       Height="25"
+                                       Source="{conv:ImageSourceProvider Uri={conv:ResourcePath Path=forward.png}}" />
+                                <Grid Height="10" />
+
+                                <Button Height="30"
+                                        Content="Add"
+                                        Command="{Binding AddGroupCommand}" />
+                                <Grid Height="10" />
+                                <Button Height="30"
+                                        Content="Remove"
+                                        Padding="4"
+                                        Command="{Binding RemoveGroupCommand}" />
+                                <Grid Height="10" />
+                                <Image Width="25"
+                                       Height="25"
+                                       Source="{conv:ImageSourceProvider Uri={conv:ResourcePath Path=backward.png}}" />
+                            </StackPanel>
+                        </StackPanel>
+                        <ListBox Width="160"
+                                 Height="170"
+                                 ItemsSource="{Binding AddedGroupsSource}"
+                                 SelectedItem="{Binding SelectedAddedItem}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding GName}"
+                                               FontSize="16" />
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <Border Margin="10"
+                                Width="450">
+                            <!--<DataGrid Margin="0,0,10,0"
+                                  ItemsSource="{Binding GroupRols}" />-->
+                            <DataGrid Margin="0,0,0,0"
+                                      Height="170"
+                                      DockPanel.Dock="Right"
+                                      ItemsSource="{Binding GroupRolesSource}"
+                                      CanUserAddRows="False"
+                                      CanUserDeleteRows="False"
+                                      IsReadOnly="True"
+                                      FontSize="15"
+                                      AutoGenerateColumns="False">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="RoleId"
+                                                        Binding="{Binding RoleId}"
+                                                        Visibility="Collapsed" />
+                                    <DataGridTextColumn Header="Role Name"
+                                                        Binding="{Binding RoleName}"
+                                                        Width="85*" />
+                                    <DataGridTemplateColumn Header="Add"
+                                                            Width="55"
+                                                            IsReadOnly="True">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel VerticalAlignment="Center"
+                                                            HorizontalAlignment="Center">
+                                                    <CheckBox IsHitTestVisible="False"
+                                                              IsChecked="{Binding GroleAdd, Converter={conv:IntegerToBoolConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Edit"
+                                                            Width="55"
+                                                            IsReadOnly="True">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel VerticalAlignment="Center"
+                                                            HorizontalAlignment="Center">
+                                                    <CheckBox IsHitTestVisible="False"
+                                                              IsChecked="{Binding GroleEdit, Converter={conv:IntegerToBoolConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Delete"
+                                                            Width="55"
+                                                            IsReadOnly="True">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel VerticalAlignment="Center"
+                                                            HorizontalAlignment="Center">
+                                                    <CheckBox IsHitTestVisible="False"
+                                                              IsChecked="{Binding GroleDelete, Converter={conv:IntegerToBoolConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="View"
+                                                            Width="55"
+                                                            IsReadOnly="True">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel VerticalAlignment="Center"
+                                                            HorizontalAlignment="Center">
+                                                    <CheckBox IsHitTestVisible="False"
+                                                              IsChecked="{Binding GroleView, Converter={conv:IntegerToBoolConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Export"
+                                                            Width="55"
+                                                            IsReadOnly="True">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel VerticalAlignment="Center"
+                                                            HorizontalAlignment="Center">
+                                                    <CheckBox IsHitTestVisible="False"
+                                                              IsChecked="{Binding GroleExport, Converter={conv:IntegerToBoolConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Print"
+                                                            Width="55"
+                                                            IsReadOnly="True">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel VerticalAlignment="Center"
+                                                            HorizontalAlignment="Center">
+                                                    <CheckBox IsHitTestVisible="False"
+                                                              IsChecked="{Binding GrolePrint, Converter={conv:IntegerToBoolConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Border>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        Margin="10">
+                <Button Content="Close"
+                        Padding="20,3"
+                        FontSize="14"
+                        Command="{Binding CloseCommand}"
+                        CommandParameter="{Binding ElementName=Window}" />
+                <Button Content=" Add "
+                        Padding="20,3"
+                        Margin="5,0,0,0"
+                        FontSize="14"
+                        Command="{Binding AddCommand}">
+                    <Button.CommandParameter>
+                        <MultiBinding Converter="{conv:MultiParameterCommandConverter}">
+                            <Binding ElementName="password" />
+                            <Binding ElementName="confPass" />
+                            <Binding ElementName="Window" />
+                        </MultiBinding>
+                    </Button.CommandParameter>
+                </Button>
+            </StackPanel>
         </StackPanel>
-    </StackPanel>
+        <DockPanel Background="#99ffffff"
+                   Visibility="{Binding IsInProgress, Converter={conv:BoolToVisibility}}">
+            <Controls:ProgressRing Foreground="Gray"
+                                   IsActive="{Binding IsInProgress}" />
+        </DockPanel>
+    </Grid>
 </Window>

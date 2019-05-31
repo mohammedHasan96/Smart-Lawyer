@@ -111,6 +111,7 @@
     <Compile Include="Converters\IntegerToBoolConverter.cs" />
     <Compile Include="Converters\InversBool.cs" />
     <Compile Include="Converters\ListBoxEventArgsConverter.cs" />
+    <Compile Include="Converters\MultiParameterCommandConverter.cs" />
     <Compile Include="Converters\NameToValue.cs" />
     <Compile Include="Converters\TabSizeConverter.cs" />
     <Compile Include="Models\Classes\AppealsSlander.cs" />
@@ -152,6 +153,7 @@
     <Compile Include="Models\DataAccess\PersonsAdressManagment.cs" />
     <Compile Include="Models\DataAccess\PersonsCommunicationManagment.cs" />
     <Compile Include="Models\DataAccess\RolsManagment.cs" />
+    <Compile Include="Models\DataAccess\UsersGroupsManagment.cs" />
     <Compile Include="Models\DataAccess\UsersManagement.cs" />
     <Compile Include="Models\Values\AppealsSlander.cs" />
     <Compile Include="Models\Values\Codes.cs" />
@@ -193,6 +195,7 @@
       <DependentUpon>En.resx</DependentUpon>
     </Compile>
     <Compile Include="Utils\Extentions.cs" />
+    <Compile Include="Utils\PasswordHelper.cs" />
     <Compile Include="Utils\ValueTuples.cs" />
     <Compile Include="ViewModels\GroupsVMs\VMGroups.cs" />
     <Compile Include="ViewModels\GroupsVMs\VMGroupsAdd.cs" />

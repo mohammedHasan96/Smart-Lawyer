@@ -12,6 +12,7 @@
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              d:DesignHeight="450"
              d:DesignWidth="1050"
+             MaxHeight="4000"
              d:DataContext="{vm:VMGroups}">
     <UserControl.Resources>
         <Style x:Key="DataGridContentCellCentering"
@@ -156,7 +157,8 @@
                             Height="55"
                             Background="Transparent"
                             BorderBrush="Transparent"
-                            Command="{Binding ExportCommand}">
+                            Command="{Binding ExportCommand}"
+                            CommandParameter="{Binding ElementName=GroupsGrid}">
                         <StackPanel>
                             <Grid Height="2" />
                             <Image Height="30"
@@ -316,7 +318,7 @@
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
-                <DataGrid Margin="5,5,5,5"
+                <DataGrid x:Name="GroupsGrid" Margin="5,5,5,5"
                           DockPanel.Dock="Left"
                           ItemsSource="{Binding DataGridSource}"
                           SelectedItem="{Binding SelectedDataItem}"

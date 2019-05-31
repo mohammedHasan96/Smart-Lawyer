@@ -96,7 +96,7 @@ namespace SmartLawyer.ViewModels.GroupsVMs
                                     DataAccess.DeleteGroup(item.GId);
                                     DataAccess.DeleteGroupRoles(item.GId);
                                 }
-                                catch { MessageBox.Show("could not open connection whith the server!\nCheck your internet connection or server is connected"); }
+                                catch { MessageBox.Show("could not open connection with server!\nCheck your internet connection or server is connected","Warning",MessageBoxButton.OK,MessageBoxImage.Warning); }
 
                             }
                         }
@@ -180,7 +180,7 @@ namespace SmartLawyer.ViewModels.GroupsVMs
                         GroupRoles = DataAccess.GroupRolesData();
                         Roles = DataAccess.RolesData();
                     }
-                    catch { MessageBox.Show("could not open connection whith the server!\nCheck your internet connection or server is connected"); }
+                    catch { MessageBox.Show("could not open connection with server!\nCheck your internet connection or server is connected", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning); }
                 })
                 { IsBackground = true };
 
